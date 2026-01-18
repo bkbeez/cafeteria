@@ -55,7 +55,7 @@ class App {
                                 $htmls .= '<div style="float:left;width:48px;height:48px;text-align:center;margin:0 0 0 0;">';
                                     $htmls .= '<i class="uil uil-airplay" style="font-size:36px;line-height:48px;"></i>';
                                 $htmls .= '</div>';
-                                $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Userlogin Monitor' : 'ตรวจสอบการเข้าสู่ระบบ' ).'</font>';
+                                $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Loging Monitor' : 'ตรวจสอบล็อก' ).'</font>';
                             $htmls .= '</div>';
                         $htmls .= '</div>';
                     }
