@@ -98,7 +98,7 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Date'                                     => array('th'=>'วันที่'
                                                                 ,'en'=>'Date'
                                                         )
-            ,'Datetime'                                 => array('th'=>'วันเวลา'
+            ,'DateTime'                                 => array('th'=>'วัน-เวลา'
                                                                 ,'en'=>'Date-Time'
                                                         )
             ,'DateEnd'                                  => array('th'=>'วันที่สิ้นสุด'
