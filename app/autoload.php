@@ -23,7 +23,7 @@
         error_reporting(0);
         define('APP_HOST', 'https://'.$_SERVER["HTTP_HOST"]);
     }
-    // App
+    // Application
     define('APP_PATH', '');
     define('APP_ROOT', $_SERVER["DOCUMENT_ROOT"].APP_PATH);
     define('APP_HOME', APP_HOST.APP_PATH);
