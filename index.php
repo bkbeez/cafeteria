@@ -70,7 +70,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1"></div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
-                <figure class="rounded"><img src="<?=THEME_IMG?>/slide/photo.png" srcset="<?=THEME_IMG?>/slide/photo.png 2x" alt="" /></figure>
+                <figure class="rounded"><img src="<?=THEME_IMG?>/cafeteria.jpg" srcset="<?=THEME_IMG?>/cafeteria.jpg 2x" alt="" /></figure>
                 <div class="row" data-cue="slideInUp">
                     <div class="col-xl-10 mx-auto">
                         <div class="card image-wrapper bg-full bg-overlay bg-overlay-400 bg-image text-white mt-n5 mt-lg-0 mt-lg-n50p mb-lg-n50p border-radius-lg-top" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
@@ -102,6 +102,7 @@
         </div>
     </div>
 </section>
+<?php /*
 <section class="wrapper">
     <div class="container py-1 pb-8 mt-lg-n10">
         <div class="mx-auto text-center">
@@ -216,4 +217,5 @@
         </div>
     </div>
 </section>
+*/ ?>
 <?php include(APP_FOOTER); ?>
