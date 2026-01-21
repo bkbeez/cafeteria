@@ -44,17 +44,5 @@ class User extends DB {
         return ( (isset($_SESSION['login'])&&isset($_SESSION['login']['user'])&&isset($_SESSION['login']['user'][$key])&&$_SESSION['login']['user'][$key]) ? $_SESSION['login']['user'][$key] : $default );
     }
 
-    /**
-     *  Get
-     *  @param  $parameters
-     *  @return void
-     */
-    static function log($parameters)
-    {
-        $logs = $parameters;
-        $logs['user_by'] = User::get('email');
-        DB::create("INSERT INTO `member_log` (`date_at`,`member_id`,`mode`,`title`,`remark`,`user_by`) VALUES (NOW(),:member_id,:mode,:title,:remark,:user_by);", $logs);
-    }
-
 }
 ?>
