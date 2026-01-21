@@ -27,7 +27,7 @@ class Auth {
             unset($_SESSION['login']['user']['date_update']);
             if( isset($account['picture_default'])&&$account['picture_default']!=$member['picture_default'] ){
                 $_SESSION['login']['user']['picture_default'] = $account['picture_default'];
-                DB::update("UPDATE `member` SET `picture_default`=:picture_default,`date_update`=NOW() WHERE id=:id AND email=:email;", array('id'=>$member['id'],'email'=>$member['email'],'picture_default'=>$account['picture_default']));
+                DB::update("UPDATE `member` SET `picture_default`=:picture_default,`date_lastlogin`=NOW(),`date_update`=NOW() WHERE id=:id AND email=:email;", array('id'=>$member['id'],'email'=>$member['email'],'picture_default'=>$account['picture_default']));
             }
             // Agent
             $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -96,7 +96,7 @@ class Auth {
                 $_SESSION['login']['user']['ip_client'] = $_SERVER['REMOTE_ADDR'];
             }
             // Log
-            Log::user( array('action'=>'login', 'status'=>200, 'message'=>'success') );
+            Log::login( array('action'=>'login', 'status'=>200, 'message'=>'success') );
 
             return true;
         }else if( isset($account['id'])&&$account['id'] ){
@@ -108,7 +108,7 @@ class Auth {
             $member['surname'] = ( (isset($account['surname'])&&$account['surname']) ? $account['surname'] : null );
             $member['picture_default'] = ( (isset($account['picture_default'])&&$account['picture_default']) ? $account['picture_default'] : null );
             $member['user_by'] = $email;
-            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`surname`,`picture_default`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,:surname,:picture_default,NOW(),:user_by);", $member) ){
+            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`surname`,`picture_default`,`date_active`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,:surname,:picture_default,NOW(),NOW(),:user_by);", $member) ){
                 return Auth::login($member['email']);
             }
         }
