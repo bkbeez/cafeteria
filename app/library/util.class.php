@@ -35,7 +35,7 @@ class Util {
         foreach(Util::memberRole() as $id ){
             if( $all ){
                 $htmls .= '<option value="'.$id.'">['.$id.'] '.Lang::get($id).'</option>';
-            }else if( $item['id']!='ADMIN' ){
+            }else if( $id!='ADMIN' ){
                 $htmls .= '<option value="'.$id.'">['.$id.'] '.Lang::get($id).'</option>';
             }   
         }
