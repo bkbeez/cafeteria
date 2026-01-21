@@ -180,10 +180,50 @@ function runLanguage(lang){
         }
     });
 }
+// Run Restart
+function runRestart(){
+    $.ajax({
+        url: ( $('head').attr('app-path') ? $('head').attr('app-path') : '' )+"/logout/restart.php",
+        type : 'POST',
+        data: { 'ajax':true },
+        dataType: "json",
+        beforeSend: function( xhr ) {
+            runStart();
+        }
+    }).done(function(data) {
+        runStop();
+        if( data.status=='success' ){
+            $("#offcanvas-profile").css({ 'width':0,'transition':'width 1s' }).fadeOut(function(){
+                $("body").fadeOut(1500, function(){
+                    if( data.url!=undefined ){
+                        document.location=data.url;
+                    }else{
+                        document.location.reload();
+                    }
+                });
+            });
+        }else{
+            swal({
+                'type': 'error',
+                'title': data.title,
+                'html': data.text,
+                'showConfirmButton': false,
+                'timer': 1500
+            }).then(
+                function () {},
+                function (dismiss) {
+                    if (dismiss === 'timer') {
+                        swal.close();
+                    }
+                }
+            );
+        }
+    });
+}
 // Run Logout
 function runLogout(){
     $.ajax({
-        url: "/logout/index.php",
+        url: ( $('head').attr('app-path') ? $('head').attr('app-path') : '' )+"/logout/index.php",
         type : 'POST',
         data: { 'ajax':true },
         dataType: "json",
