@@ -132,7 +132,7 @@
                     $htmls .= '<font>'.( $row['email_cmu'] ? $row['email_cmu'] : null ).'</font>';
                 $htmls .= '</td>';
                 $htmls .= '<td class="actions act-2">';
-                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
+                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
                     if( $admin_as||$row['role']!='ADMIN' ){
                         $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
                     }else{

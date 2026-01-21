@@ -58,7 +58,7 @@
         $logs['mode'] = "CREATE";
         $logs['title'] = "Create user";
         $logs['remark'] = $parameters['email'].( $parameters['email_cmu'] ? '|'.$parameters['email_cmu']: null );
-        User::log($logs);
+        //User::log($logs);
         Status::success( Lang::get('SuccessCreate') );
     }
     Status::error( Lang::get('ErrorAdd').', <em>'.Lang::get('PleaseTryAgain').'</em> !!!' );

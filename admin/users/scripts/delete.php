@@ -16,7 +16,7 @@
         $logs['mode'] = "DELETE";
         $logs['title'] = "Delete user";
         $logs['remark'] = $parameters['email'];
-        User::log($logs);
+        //User::log($logs);
         Status::success( Lang::get('SuccessDelete') );
     }
     Status::error( Lang::get('PleaseTryAgain').' !!!', array('title'=>Lang::get('ErrorDelete')) );

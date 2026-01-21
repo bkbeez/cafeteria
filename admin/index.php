@@ -26,38 +26,50 @@
 ?>
 <?php include(APP_HEADER);?>
 <?php if( isset($loadpage)&&$loadpage ){ include(APP_ROOT.'/'.$index['page'].'/'.$loadpage.'/index.php'); }else{ ?>
-<section class="wrapper bg-primary angled lower-start">
-    <div class="container pt-10 pb-12 pt-md-14 pb-md-17">
-        <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center">
-            <div class="col-md-10 offset-md-1 offset-lg-0 col-lg-5 mt-lg-n2 text-center text-lg-start order-2 order-lg-0" data-cues="slideInDown" data-group="page-title" data-delay="600">
-                <h1 class="display-1 mb-5 mx-md-10 mx-lg-0">User Management, Accounts and Permissions<br /><span class="typer text-primary text-nowrap" data-delay="100" data-words="Admin, Administrator, Administrator Only"></span><span class="cursor text-primary" data-owner="typer"></span></h1>
-                <p class="lead fs-lg mb-7">Dashboard of users and system logs.</p>
-                <div class="d-flex justify-content-center justify-content-lg-start" data-cues="slideInDown" data-group="page-title-buttons" data-delay="900">
-                    <span><a href="<?=$link.'/?users'?>" class="btn btn-lg btn-primary btn-icon btn-icon-start ounded me-2"><i class="uil uil-users-alt"></i> User Account</a></span>
-                    <span><a href="<?=$link.'/?logs'?>" class="btn btn-lg btn-soft-red btn-icon btn-icon-start rounded"><i class="uil uil-dashboard"></i> Logs</a></span>
-                </div>
+<style type="text/css">
+    .container-custome-header {
+        overflow:hidden;
+        -webkit-border-top-left-radius: 0.4rem;
+        -webkit-border-top-right-radius: 0.4rem;
+        -moz-border-radius-topleft: 0.4rem;
+        -moz-border-radius-topright: 0.4rem;
+        border-top-left-radius: 0.4rem;
+        border-top-right-radius: 0.4rem;
+    }
+    .container-custome-body {
+        overflow:hidden;
+        -webkit-border-bottom-right-radius: 0.4rem;
+        -webkit-border-bottom-left-radius: 0.4rem;
+        -moz-border-radius-bottomright: 0.4rem;
+        -moz-border-radius-bottomleft: 0.4rem;
+        border-bottom-right-radius: 0.4rem;
+        border-bottom-left-radius: 0.4rem;
+    }
+</style>
+<section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
+    <div class="container container-custome-header pt-2 pb-0 text-center bg-white">
+        <h1 class="text-primary pt-2 mb-5"><?=( (App::lang()=='en') ? 'Sessions' : 'เซสซั่น' )?></h1>
+    </div>
+</section>
+<section class="wrapper">
+    <div class="container container-custome-body pt-1 pb-1 bg-white">
+        <div class="card mb-2">
+            <div class="card-body p-1">
+                <a class="collapse-link stretched-link collapsed" data-bs-toggle="collapse" href="#collapse-1" aria-expanded="false">All Sessions</a>
             </div>
-            <div class="col-lg-7">
-                <div class="row">
-                    <div class="col-3 offset-1 offset-lg-0 col-lg-4 d-flex flex-column" data-cues="zoomIn" data-group="col-start" data-delay="300">
-                        <div class="ms-auto mt-auto"><img class="img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa20.jpg" srcset="<?=THEME_IMG?>/photos/sa20@2x.jpg 2x" alt="" /></div>
-                        <div class="ms-auto mt-5 mb-10"><img class="img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa18.jpg" srcset="<?=THEME_IMG?>/photos/sa18@2x.jpg 2x" alt="" /></div>
-                    </div>
-                    <div class="col-4 col-lg-5" data-cue="zoomIn">
-                        <div><img class="w-100 img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa16.jpg" srcset="<?=THEME_IMG?>/photos/sa16@2x.jpg 2x" alt="" /></div>
-                    </div>
-                    <div class="col-3 d-flex flex-column" data-cues="zoomIn" data-group="col-end" data-delay="300">
-                        <div class="mt-auto"><img class="img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa21.jpg" srcset="<?=THEME_IMG?>/photos/sa21@2x.jpg 2x" alt="" /></div>
-                        <div class="mt-5"><img class="img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa19.jpg" srcset="<?=THEME_IMG?>/photos/sa19@2x.jpg 2x" alt="" /></div>
-                        <div class="mt-5 mb-10"><img class="img-fluid rounded shadow-lg" src="<?=THEME_IMG?>/photos/sa17.jpg" srcset="<?=THEME_IMG?>/photos/sa17@2x.jpg 2x" alt="" /></div>
-                    </div>
-                </div>
+            <div id="collapse-1" class="card-footer bg-dark p-5 accordion-collapse collapse">
+                <div class="text-white"><?=Helper::debug($_SESSION);?></div>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <div class="card-body p-1">
+                <a class="collapse-link stretched-link" data-bs-toggle="collapse" href="#collapse-2" aria-expanded="false">User Sessions</a>
+            </div>
+            <div id="collapse-2" class="card-footer bg-dark p-5 accordion-collapse collapse show">
+                <div class="text-white"><?=Helper::debug($_SESSION['login']['user']);?></div>
             </div>
         </div>
     </div>
-</section>
-<section class="wrapper bg-light angled upper-end lower-start">
-    <div class="container py-1 position-relative">&nbsp;</div>
 </section>
 <?php } ?>
 <?php include(APP_FOOTER);?>

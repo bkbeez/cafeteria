@@ -3,23 +3,18 @@
 <?php
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
     $rolehtmls = '';
-    if( isset($_POST['id'])&&$_POST['id'] ){
+    if( (isset($_POST['id'])&&$_POST['id'])&&(isset($_POST['email'])&&$_POST['email']) ){
         $data = DB::one("SELECT member.*
-                        , IF(member.role='ADMIN', '[ADMIN] ผู้ดูแลระบบ'
-                            ,IF(member.role='STAFF', '[STAFF] เจ้าหน้าที่', NULL)
-                        ) AS user_role
                         FROM member
-                        WHERE member.id=:id
+                        WHERE member.id=:id AND member.email=:email
                         LIMIT 1;"
-                        , array('id'=>$_POST['id'])
+                        , array('id'=>$_POST['id'], 'email'=>$_POST['email'])
         );
     }
-    if( Auth::admin() ){
+    if( 0&&Auth::admin() ){
         $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
             $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
-                $rolehtmls .= '<option value="ADMIN"'.((isset($data['role'])&&$data['role']=='ADMIN')?' selected':null).'>[ADMIN] '.( (App::lang()=='en') ? 'Administrator' : 'ผู้ดูแลระบบ' ).'</option>';
-                $rolehtmls .= '<option value="STAFF"'.((isset($data['role'])&&$data['role']=='STAFF')?' selected':null).'>[STAFF] '.( (App::lang()=='en') ? 'Officer' : 'เจ้าหน้าที่' ).'</option>';
-                $rolehtmls .= '<option value="USER"'.((isset($data['role'])&&$data['role']=='USER')?' selected':null).'>[USER] '.( (App::lang()=='en') ? 'User' : 'ผู้ใช้ทั่วไป' ).'</option>';
+                $rolehtmls .= Util::memberRoleOption(true, ((isset($data['role'])&&$data['role'])?$data['role']:null));
             $rolehtmls .= '</select>';
             $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
         $rolehtmls .= '</div>';
@@ -27,20 +22,13 @@
         if(isset($data['role'])&&$data['role']=='ADMIN'){
             $rolehtmls .= '<div class="form-floating mb-1">';
                 $rolehtmls .= '<input type="hidden" name="role" value="'.((isset($data['role'])&&$data['role'])?$data['role']:null).'"/>';
-                if(isset($data['role'])&&$data['role']=='ADMIN'){
-                    $rolehtmls .= '<input id="role" value="[ADMIN] '.( (App::lang()=='en') ? 'Administrator' : 'ผู้ดูแลระบบ' ).'" type="text" class="form-control" placeholder="..." disabled>';
-                }else if(isset($data['role'])&&$data['role']=='STAFF'){
-                    $rolehtmls .= '<input id="role" value="[STAFF] '.( (App::lang()=='en') ? 'Officer' : 'เจ้าหน้าที่' ).'" type="text" class="form-control" placeholder="..." disabled>';
-                }else{
-                    $rolehtmls .= '<input id="role" value="[USER] '.( (App::lang()=='en') ? 'User' : 'ผู้ใช้ทั่วไป' ).'" type="text" class="form-control" placeholder="..." disabled>';
-                }
+                $rolehtmls .= '<input id="role" value="'.Util::memberRoleName($data['role']).'" type="text" class="form-control" placeholder="..." disabled>';
                 $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
             $rolehtmls .= '</div>';
         }else{
             $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
                 $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
-                    $rolehtmls .= '<option value="STAFF"'.((isset($data['role'])&&$data['role']=='STAFF')?' selected':null).'>[STAFF] '.( (App::lang()=='en') ? 'Officer' : 'เจ้าหน้าที่' ).'</option>';
-                    $rolehtmls .= '<option value="USER"'.((isset($data['role'])&&$data['role']=='USER')?' selected':null).'>[USER] '.( (App::lang()=='en') ? 'User' : 'ผู้ใช้ทั่วไป' ).'</option>';
+                    $rolehtmls .= Util::memberRoleOption(false, ((isset($data['role'])&&$data['role'])?$data['role']:null));
                 $rolehtmls .= '</select>';
                 $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
             $rolehtmls .= '</div>';
@@ -80,7 +68,7 @@
                     <?=$rolehtmls?>
                     <div class="form-floating mb-1">
                         <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
-                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
+                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*<?=((isset($data['id'])&&$data['id'])?' <sup>( '.$data['id'].' )</sup>':null)?></span></label>
                     </div>
                 </div>
                 <div class="alert alert-primary alert-icon mb-2">
@@ -121,13 +109,13 @@
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="status_1" class="form-check-input" type="radio" name="status" value="1"<?=((isset($data['status'])&&$data['status']==1)?' checked':null)?>>
+                                <input id="status_1" class="form-check-input" type="radio" name="status_id" value="1"<?=((isset($data['status_id'])&&$data['status_id']==1)?' checked':null)?>>
                                 <label for="status_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Available' : 'พร้อมใช้งาน' )?></label>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="status_2" class="form-check-input" type="radio" name="status" value="2"<?=((isset($data['status'])&&$data['status']==2)?' checked':null)?>>
+                                <input id="status_2" class="form-check-input" type="radio" name="status_id" value="2"<?=((isset($data['status_id'])&&$data['status_id']==2)?' checked':null)?>>
                                 <label for="status_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<span class="underline-3 style-3 text-red red">Not</span> available' : '<span class="underline-3 style-3 text-red red">ระงับ</span>ใช้งาน' )?></label>
                             </div>
                         </div>

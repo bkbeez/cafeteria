@@ -104,21 +104,29 @@
                             <div class="mc-field-group input-group form-floating mb-1">
                                 <input id="keyword" name="keyword" type="text" value="<?=((isset($filter['keyword'])&&$filter['keyword'])?$filter['keyword']:null)?>" class="form-control" placeholder="...">
                                 <label for="keyword"><?=Lang::get('Keyword')?></label>
-                                <button type="submit" class="btn btn-soft-violet btn-search" title="<?=Lang::get('Search')?>"><i class="uil uil-search"></i></button>
-                                <button type="button" class="btn btn-soft-primary btn-clear" title="<?=Lang::get('Clear')?>"><i class="uil uil-filter-slash"></i></button>
+                                <button type="submit" class="btn btn-soft-sky btn-search" title="<?=Lang::get('Search')?>"><i class="uil uil-search"></i></button>
+                                <button type="button" class="btn btn-soft-red text-red btn-clear"><?=Lang::get('Clear')?></button>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-floating mb-1">
-                                <input name="condition[start_date]" type="text" value="<?=((isset($filter['condition']['start_date'])&&$filter['condition']['start_date'])?$filter['condition']['start_date']:null)?>" class="form-control" data-provide="datepicker" data-date-language="th-th" pattern="\d{1,2}/\d{1,2}/\d{4}" autocomplete="off" placeholder="..." minlength="10" maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9/:]/g,'');"/>
+                                <?php if( App::lang()=='en' ){ ?>
+                                <input name="condition[start_date]" type="date" value="<?=((isset($filter['condition']['start_date'])&&$filter['condition']['start_date'])?Helper::date($filter['condition']['start_date']):null)?>" class="form-control" placeholder="...">
+                                <?php }else{ ?>
+                                <input name="condition[start_date]" type="text" value="<?=((isset($filter['condition']['start_date'])&&$filter['condition']['start_date'])?Helper::date($filter['condition']['start_date']):null)?>" class="form-control" data-provide="datepicker" data-date-language="th-th" pattern="\d{1,2}/\d{1,2}/\d{4}" autocomplete="off" placeholder="..." minlength="10" maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9/:]/g,'');"/>
+                                <?php } ?>
                                 <label><?=Lang::get('DateStart')?></label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-floating mb-1">
-                                <input name="condition[end_date]" type="text" value="<?=((isset($filter['condition']['end_date'])&&$filter['condition']['end_date'])?$filter['condition']['end_date']:null)?>" class="form-control" data-provide="datepicker" data-date-language="th-th" pattern="\d{1,2}/\d{1,2}/\d{4}" autocomplete="off" placeholder="..." minlength="10" maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9/:]/g,'');"/>
+                                <?php if( App::lang()=='en' ){ ?>
+                                <input name="condition[end_date]" type="date" value="<?=((isset($filter['condition']['end_date'])&&$filter['condition']['end_date'])?Helper::date($filter['condition']['end_date']):null)?>" class="form-control" placeholder="...">
+                                <?php }else{ ?>
+                                <input name="condition[end_date]" type="text" value="<?=((isset($filter['condition']['end_date'])&&$filter['condition']['end_date'])?Helper::date($filter['condition']['end_date']):null)?>" class="form-control" data-provide="datepicker" data-date-language="th-th" pattern="\d{1,2}/\d{1,2}/\d{4}" autocomplete="off" placeholder="..." minlength="10" maxlength="10" onkeyup="this.value=this.value.replace(/[^0-9/:]/g,'');"/>
+                                <?php } ?>
                                 <label><?=Lang::get('DateEnd')?></label>
                             </div>
                         </div>

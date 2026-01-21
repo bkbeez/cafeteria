@@ -58,22 +58,23 @@ class Helper {
 
     /**
      * Date
-     * @param date
+     * @param date, $is_lang
      * @return string
      */
-    static function date($date, $is_be=true)
+    static function date($date, $is_lang=null)
     {
         if( $date instanceof DateTime ){
             // This is date
         }else{
             $date = new datetime($date);
         }
-        $year = intval($date->format("Y"));
-        if( $is_be ){
-            $year += 543;
+        if( $is_lang=='en' ){
+            return $date->format("Y-m-d");
+        }else if( $is_lang=='th' ){
+            return $date->format("d/m/").(intval($date->format("Y"))+543);
+        }else{
+            return Helper::date($date, App::lang());
         }
-
-        return ($date->format("d")."/".$date->format("m")."/".$year);
     }
 
     /**
@@ -81,20 +82,18 @@ class Helper {
      * @param date
      * @return string
      */
-    static function dateSave($date, $is_be=true)
+    static function dateSave($date)
     {
-        $results = null;
+        $results = "";
         $dates = explode(" ", $date);
         if( isset($dates[0])&&$dates[0] ){
-            $date = explode("/", $dates[0]);
-            $year = intval($date[2]);
-            if( $is_be ){
-                $year -= 543;
+            if( strpos($dates[0], '/') ){
+                $date_0 = explode("/", $dates[0]);
+                $year = intval($date_0[2])-543;
+                $results = $year."-".$date_0[1]."-".$date_0[0];
+            }else{
+                $results = $dates[0];
             }
-            $results = $year."-".$date[1]."-".$date[0];
-        }
-        if( isset($dates[1])&&$dates[1] ){
-            $results .= $dates[1];
         }
 
         return $results;

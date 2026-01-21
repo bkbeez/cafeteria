@@ -2,6 +2,7 @@
 <?php Auth::ajax(APP_PATH.'/admin/?logs'); ?>
 <?php
     // Init
+    $lang = App::lang();
     $result = array('status'=>'success', 'title'=>Lang::get('Success') );
     $page = ((isset($_POST['page'])&&$_POST['page'])?intval($_POST['page']):1);
     $limit = ((isset($_POST['limit'])&&$_POST['limit'])?intval($_POST['limit']):50);
@@ -29,13 +30,13 @@
         foreach($_POST['condition'] as $key => $value ){
             if($value){
                 if($key=="start_date"){
-                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
-                    $parameters[$key] = Helper::dateSave($value).' 00:00:00';
+                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = Helper::dateSave($value);
+                    $parameters[$key] = $_SESSION['login']['filter'][$filter_as]['condition'][$key].' 00:00:00';
                     $condition .= " AND xlg_login.date_at>=:".$key;
                 }else if($key=="end_date"){
-                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
-                    $parameters[$key] = Helper::dateSave($value).' 23:59:59';
-                    $condition .= " AND xlg_login.date_at<=:".$key;
+                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = Helper::dateSave($value);
+                    $parameters[$key] = $_SESSION['login']['filter'][$filter_as]['condition'][$key].' 23:59:59';
+                    $condition .= " AND xlg_login.date_at>=:".$key;
                 }else{
                     $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
                     $parameters[$key] = $value;
@@ -92,7 +93,6 @@
     $htmls = '';
     $lists = DB::sql($sql, $parameters);
     if( isset($lists)&&count($lists)>0 ){
-        $lang = App::lang();
         $lang_data = Lang::get('Data');
         foreach($lists as $no => $row){
             $htmls .= '<tr class="'.$row['status'].'">';

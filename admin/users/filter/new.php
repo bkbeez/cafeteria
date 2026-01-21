@@ -2,15 +2,6 @@
 <?php Auth::ajax(APP_PATH.'/admin/?users'); ?>
 <?php
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
-    $rolehtmls = '';
-    $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
-        $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
-            if( Auth::admin() ){ $rolehtmls .= '<option value="ADMIN">[ADMIN] '.( (App::lang()=='en') ? 'Administrator' : 'ผู้ดูแลระบบ' ).'</option>'; }
-            $rolehtmls .= '<option value="STAFF">[STAFF] '.( (App::lang()=='en') ? 'Officer' : 'เจ้าหน้าที่' ).'</option>';
-            $rolehtmls .= '<option value="USER" selected>[USER] '.( (App::lang()=='en') ? 'User' : 'ผู้ใช้ทั่วไป' ).'</option>';
-        $rolehtmls .= '</select>';
-        $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
-    $rolehtmls .= '</div>';
 ?>
 <style type="text/css">
     .modal-dialog .modal-header {
@@ -41,7 +32,10 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-secondary alert-icon mb-2">
-                    <?=$rolehtmls?>
+                    <div class="form-floating form-select-wrapper mb-1">
+                        <select id="role" name="role" class="form-select" aria-label="..." required><?=Util::memberRoleOption((Auth::admin()?true:false) )?></select>
+                        <label for="role"><?=Lang::get('UserAccount')?> <span class="text-red">*</span></label>
+                    </div>
                     <div class="form-floating mb-1">
                         <input id="email" name="email" value="" type="email" class="form-control" placeholder="...">
                         <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
