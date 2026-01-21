@@ -107,7 +107,7 @@
                                 <input id="keyword" name="keyword" type="text" value="<?=((isset($filter['keyword'])&&$filter['keyword'])?$filter['keyword']:null)?>" class="form-control" placeholder="...">
                                 <label for="keyword"><?=Lang::get('Keyword')?></label>
                                 <button type="submit" class="btn btn-soft-sky btn-search" title="<?=Lang::get('Search')?>"><i class="uil uil-search"></i></button>
-                                <button type="button" class="btn btn-soft-red text-red btn-clear"><?=Lang::get('Clear')?></button>
+                                <button type="button" class="btn btn-soft-red text-red btn-clear"><i class="uil uil-filter-slash"></i><sup class="fs-10"><?=Lang::get('Clear')?></sup></button>
                                 <button type="button" class="btn btn-primary btn-adding" onclick="manage_events('new', { 'link':'<?=$link?>' });"><i class="uil uil-plus"></i><span> <?=( (App::lang()=='en') ? 'New User' : 'ผู้ใช้ใหม่' )?></span></button>
                             </div>
                         </div>
