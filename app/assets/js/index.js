@@ -15,36 +15,6 @@ jQuery.fn.tablefilter = function(option) {
     $(itable).find("select[name='limit']").change(function(){
         $(itable).find("form").find("button[type='submit']").click();
     });
-    $(itable).find("select[name='page']").change(function(){
-        $(itable).find("form").find("button[type='submit']").click();
-    });
-    $(itable).find(".filter-prev button").click(function(){
-        var page = parseInt($(itable).find("select[name='page']").val())-1;
-        if(page>0){
-            $(itable).find("select[name='page']").val(page);
-            if(page==1){
-                $(this).attr("class", "btn btn-icon btn-icon-start btn-white");
-            }
-            if((page<parseInt($(itable).find("input[name='pages']").val()))&&$(itable).find(".filter-next button").hasClass("btn-white")){
-                $(itable).find(".filter-next button").attr("class", "btn btn-icon btn-icon-end btn-white btn-primary");
-            }
-            $(itable).find("form").find("button[type='submit']").click();
-        }
-    });
-    $(itable).find(".filter-next button").click(function(){
-        var page = parseInt($(itable).find("select[name='page']").val())+1;
-        var total = parseInt($(itable).find("input[name='pages']").val());
-        if(page<=total){
-            $(itable).find("select[name='page']").val(page);
-            if(page==total){
-                $(this).removeClass("btn-primary").addClass("btn-white");
-            }
-            if((page>1)&&$(itable).find(".filter-prev button").hasClass("btn-white")){
-                $(itable).find(".filter-prev button").attr("class", "btn btn-icon btn-icon-start btn-white btn-primary");
-            }
-            $(itable).find("form").find("button[type='submit']").click();
-        }
-    });
     if(option!=undefined&&option.keyword=="auto"){
         $(itable).find("input[name='keyword']").keyup(function(){
             $(itable).find("form").find("input[name='state']").val(null);
@@ -53,6 +23,69 @@ jQuery.fn.tablefilter = function(option) {
     }else{
         $(itable).find("input[name='keyword']").change(function(){
             $(itable).find("form").find("button[type='submit']").click();
+        });
+    }
+    if(option!=undefined&&option.footer!=undefined){
+        $(option.footer).find("select[name='page']").change(function(){
+            $(itable).find("form").find("button[type='submit']").click();
+        });
+        $(option.footer).find(".filter-prev button").click(function(){
+            var page = parseInt($(option.footer).find("select[name='page']").val())-1;
+            if(page>0){
+                $(option.footer).find("select[name='page']").val(page);
+                if(page==1){
+                    $(this).attr("class", "btn btn-icon btn-icon-start btn-white");
+                }
+                if((page<parseInt($(itable).find("input[name='pages']").val()))&&$(option.footer).find(".filter-next button").hasClass("btn-white")){
+                    $(option.footer).find(".filter-next button").attr("class", "btn btn-icon btn-icon-end btn-white btn-primary");
+                }
+                $(itable).find("form").find("button[type='submit']").click();
+            }
+        });
+        $(option.footer).find(".filter-next button").click(function(){
+            var page = parseInt($(option.footer).find("select[name='page']").val())+1;
+            var total = parseInt($(itable).find("input[name='pages']").val());
+            if(page<=total){
+                $(option.footer).find("select[name='page']").val(page);
+                if(page==total){
+                    $(this).removeClass("btn-primary").addClass("btn-white");
+                }
+                if((page>1)&&$(option.footer).find(".filter-prev button").hasClass("btn-white")){
+                    $(option.footer).find(".filter-prev button").attr("class", "btn btn-icon btn-icon-start btn-white btn-primary");
+                }
+                $(itable).find("form").find("button[type='submit']").click();
+            }
+        });
+    }else{
+        $(itable).find("select[name='page']").change(function(){
+            $(itable).find("form").find("button[type='submit']").click();
+        });
+        $(itable).find(".filter-prev button").click(function(){
+            var page = parseInt($(itable).find("select[name='page']").val())-1;
+            if(page>0){
+                $(itable).find("select[name='page']").val(page);
+                if(page==1){
+                    $(this).attr("class", "btn btn-icon btn-icon-start btn-white");
+                }
+                if((page<parseInt($(itable).find("input[name='pages']").val()))&&$(itable).find(".filter-next button").hasClass("btn-white")){
+                    $(itable).find(".filter-next button").attr("class", "btn btn-icon btn-icon-end btn-white btn-primary");
+                }
+                $(itable).find("form").find("button[type='submit']").click();
+            }
+        });
+        $(itable).find(".filter-next button").click(function(){
+            var page = parseInt($(itable).find("select[name='page']").val())+1;
+            var total = parseInt($(itable).find("input[name='pages']").val());
+            if(page<=total){
+                $(itable).find("select[name='page']").val(page);
+                if(page==total){
+                    $(this).removeClass("btn-primary").addClass("btn-white");
+                }
+                if((page>1)&&$(itable).find(".filter-prev button").hasClass("btn-white")){
+                    $(itable).find(".filter-prev button").attr("class", "btn btn-icon btn-icon-start btn-white btn-primary");
+                }
+                $(itable).find("form").find("button[type='submit']").click();
+            }
         });
     }
     if(option==undefined||option.debug==undefined){
@@ -75,24 +108,44 @@ jQuery.fn.tablefilter = function(option) {
                     document.location='/login';
                 }else{
                     if(data.status=='success'){
-                        $(itable).find("input[name='pages']").val(data.pages);
                         $(itable).find("table tbody").html(data.htmls);
-                        if(data.pagination!=undefined){
-                            $(itable).find("select[name='page']").html(data.pagination).change(function(){
-                                $(itable).find("form").find("button[type='submit']").click();
-                            });
-                        }
-                        $(itable).find(".filter-display").html(data.text);
-                        $(itable).find(".filter-pagination .page-total>span").html(data.display);
-                        $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-soft-ash");
-                        $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-soft-ash");
-                        if( parseInt(data.page)==1&&parseInt(data.page)<parseInt(data.pages) ){
-                            $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
-                        }else if( parseInt(data.page)>1&&parseInt(data.page)<parseInt(data.pages) ){
-                            $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
-                            $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
-                        }else if( parseInt(data.page)>1&&parseInt(data.page)==parseInt(data.pages) ){
-                            $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
+                        $(itable).find("input[name='pages']").val(data.pages);
+                        if(option!=undefined&&option.footer!=undefined){
+                            if(data.pagination!=undefined){
+                                $(option.footer).find("select[name='page']").html(data.pagination).change(function(){
+                                    $(itable).find("form").find("button[type='submit']").click();
+                                });
+                            }
+                            $(option.footer).find(".filter-display").html(data.text);
+                            $(option.footer).find(".filter-pagination .page-total>span").html(data.display);
+                            $(option.footer).find(".filter-prev button").attr("class", "btn btn-sm btn-soft-ash");
+                            $(option.footer).find(".filter-next button").attr("class", "btn btn-sm btn-soft-ash");
+                            if( parseInt(data.page)==1&&parseInt(data.page)<parseInt(data.pages) ){
+                                $(option.footer).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
+                            }else if( parseInt(data.page)>1&&parseInt(data.page)<parseInt(data.pages) ){
+                                $(option.footer).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
+                                $(option.footer).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
+                            }else if( parseInt(data.page)>1&&parseInt(data.page)==parseInt(data.pages) ){
+                                $(option.footer).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
+                            }
+                        }else{
+                            if(data.pagination!=undefined){
+                                $(itable).find("select[name='page']").html(data.pagination).change(function(){
+                                    $(itable).find("form").find("button[type='submit']").click();
+                                });
+                            }
+                            $(itable).find(".filter-display").html(data.text);
+                            $(itable).find(".filter-pagination .page-total>span").html(data.display);
+                            $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-soft-ash");
+                            $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-soft-ash");
+                            if( parseInt(data.page)==1&&parseInt(data.page)<parseInt(data.pages) ){
+                                $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
+                            }else if( parseInt(data.page)>1&&parseInt(data.page)<parseInt(data.pages) ){
+                                $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
+                                $(itable).find(".filter-next button").attr("class", "btn btn-sm btn-primary");
+                            }else if( parseInt(data.page)>1&&parseInt(data.page)==parseInt(data.pages) ){
+                                $(itable).find(".filter-prev button").attr("class", "btn btn-sm btn-primary");
+                            }
                         }
                         $(itable).find("form").find("button[type='submit']").removeAttr('disabled');
                     }else{
