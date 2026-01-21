@@ -44,10 +44,10 @@ class App {
                     $htmls .= '</div>';
                     if( Auth::admin() ){
                         $htmls .= '<div class="position-relative lift mt-2" onclick="document.location=\''.APP_HOME.'/admin/?users\'" style="cursor:pointer;">';
-                            $htmls .= '<div class="shape rounded bg-pale-blue rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
+                            $htmls .= '<div class="shape rounded bg-pale-green rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
                             $htmls .= '<div class="card">';
-                                $htmls .= '<div class="card-body text-blue" style="height:72px;padding:12px 0 0 12px;">';
-                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#3f78e0;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
+                                $htmls .= '<div class="card-body text-green" style="height:72px;padding:12px 0 0 12px;">';
+                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#45c4a0;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
                                         $htmls .= '<i class="uil uil-users-alt" style="font-size:36px;line-height:48px;"></i>';
                                     $htmls .= '</div>';
                                     $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'User Accounts' : 'บัญชีผู้ใช้ระบบ' ).'</font>';
@@ -66,13 +66,13 @@ class App {
                             $htmls .= '</div>';
                         $htmls .= '</div>';
                         $htmls .= '<div class="position-relative lift mt-2" onclick="document.location=\''.APP_HOME.'/admin\'" style="cursor:pointer;">';
-                            $htmls .= '<div class="shape rounded bg-pale-navy rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
+                            $htmls .= '<div class="shape rounded bg-pale-yellow rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
                             $htmls .= '<div class="card">';
-                                $htmls .= '<div class="card-body text-navy" style="height:72px;padding:12px 0 0 12px;">';
-                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#343f52;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
-                                        $htmls .= '<i class="uil uil-airplay" style="font-size:36px;line-height:48px;"></i>';
+                                $htmls .= '<div class="card-body text-yellow" style="height:72px;padding:12px 0 0 12px;">';
+                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#fab758;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
+                                        $htmls .= '<i class="uil uil-document-layout-left" style="font-size:36px;line-height:48px;"></i>';
                                     $htmls .= '</div>';
-                                    $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Sessions' : 'เซสซั่น' ).'</font>';
+                                    $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Sessions' : 'รายการเซสซั่น' ).'</font>';
                                 $htmls .= '</div>';
                             $htmls .= '</div>';
                         $htmls .= '</div>';
