@@ -17,7 +17,7 @@ Shop 's Faculty of Education, Chiang Mai University
 ```
 DB_DRIVER=mysql
 DB_HOST=localhost
-DB_NAME=eshop
+DB_NAME=cafeteria
 DB_USER=root
 DB_PASS=
 MAIL_HOST=
