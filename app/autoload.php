@@ -47,6 +47,7 @@
     require_once(APP_ROOT.'/app/library/auth.class.php');
     require_once(APP_ROOT.'/app/library/lang.class.php');
     require_once(APP_ROOT.'/app/library/mail.class.php');
+    require_once(APP_ROOT.'/app/library/util.class.php');
     require_once(APP_ROOT.'/app/library/helper.class.php');
     require_once(APP_ROOT.'/app/library/status.class.php');
     // Model
