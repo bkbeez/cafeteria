@@ -25,9 +25,9 @@
             $member['id'] = (new datetime())->format("YmdHis").Helper::randomNumber(7);
             $member['role'] = 'ADMIN';
             $member['email'] = $admin_email;
-            $member['name'] = Lang::get('Administrator');
+            $member['name'] = 'Administrator';
             $member['user_by'] = $admin_email;
-            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,NOW(),:user_by);", $member) ){
+            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`date_active`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,NOW(),NOW(),:user_by);", $member) ){
                 if( Auth::login($member['email']) ){
                     $redirect = APP_HOME;
                     if( isset($_SESSION['login_redirect']) ){
