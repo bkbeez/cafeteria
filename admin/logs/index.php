@@ -1,9 +1,55 @@
-<?php if(!isset($index['page'])||$index['page']!='admin'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
+<?php include($_SERVER["DOCUMENT_ROOT"].'/app/autoload.php'); ?>
 <?php
-    $formby = $form.'/logs';
+    $index['customheader'] = true;
+    $index['page'] = 'admin';
+    $index['view'] = 'logs';
+    $link = APP_PATH.'/'.$index['page'];
+    $form = APP_PATH.'/'.$index['page'].'/'.$index['view'];
+    if( !Auth::check() ){
+        $_SESSION['login_redirect'] = APP_HOME.'/'.$index['page']; 
+        header('Location: '.APP_HOME.'/login');
+        exit;
+    }
+    if( !Auth::admin() ){
+        $_SESSION['deny'] = array();
+        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For administrator only' : 'ขออภัย! สำหรับผู้ดูแลระบบเท่านั้น' );
+        header('Location: '.APP_HOME.'/deny');
+        exit;
+    }
+    // Filter
     $filter_as = strtolower($index['page'].'_log_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
+    // Footer
+    $filterfooter = '<div class="table-footer">';
+        $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
+        $filterfooter .= '<div class="filter-pagination">';
+            $filterfooter .= '<div class="row">';
+                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">';
+                    $filterfooter .= '<button type="button" class="btn btn-sm'.((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary').'"><i class="uil uil-angle-left-b"></i><span> '.Lang::get('Prev').'</span></button>';
+                $filterfooter .= '</div>';
+                $filterfooter .= '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">';
+                    $filterfooter .= '<center>';
+                        $filterfooter .= '<select name="page" class="page-on form-select">';
+                        if(isset($filter['pages'])&&$filter['pages']){
+                            for($page=1;$page<=intval($filter['pages']);$page++){
+                                $filterfooter .= '<option value="'.$page.'"'.((isset($filter['page'])&&intval($filter['page'])==$page)?' selected':null).'>'.$page.'</option>';
+                            }
+                        }else{
+                            $filterfooter .= '<option value="1">1</option>';
+                        }
+                        $filterfooter .= '</select>';
+                        $filterfooter .= '<div class="page-total gb">/<span>1</span></div>';
+                    $filterfooter .= '</center>';
+                $filterfooter .= '</div>';
+                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">';
+                    $filterfooter .= '<button type="button" class="btn btn-sm btn-icon btn-icon-end'.((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary').'"><span>'.Lang::get('Next').' </span><i class="uil uil-angle-right-b"></i></button>';
+                $filterfooter .= '</div>';
+            $filterfooter .= '</div>';
+        $filterfooter .= '</div>';
+    $filterfooter .= '</div>';
+    $index['filterfooter'] = $filterfooter;
 ?>
+<?php include(APP_HEADER);?>
 <style type="text/css">
     .table-filter .filter-result {
         background: white;
@@ -83,7 +129,7 @@
     }
 </style>
 <section class="table-filter">
-    <form name="filter" action="<?=$formby?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
+    <form name="filter" action="<?=$form?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="state" value="loading" />
         <input type="hidden" name="filter_as" value="<?=$filter_as?>" />
         <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
@@ -150,20 +196,7 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- <?=Lang::get('NotFoundResult')?> -</span></div>
-                <div class="filter-pagination">
-                    <div class="row">
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">
-                            <button type="button" class="btn btn-sm<?=((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary')?>"><i class="uil uil-angle-left-b"></i><span> <?=Lang::get('Prev')?></span></button>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">
-                            <center><select name="page" class="page-on form-select"><?php if(isset($filter['pages'])&&$filter['pages']){ ?><?php for($page=1;$page<=intval($filter['pages']);$page++){ ?><option value="<?=$page?>" <?=((isset($filter['page'])&&intval($filter['page'])==$page)?'selected':null)?>><?=$page?></option><?php } ?><?php }else{ ?><option value="1">1</option><?php } ?></select><div class="page-total gb">/<span>1</span></div></center>
-                        </div>
-                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">
-                            <button type="button" class="btn btn-sm btn-icon btn-icon-end<?=((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary')?>"><span><?=Lang::get('Next')?> </span><i class="uil uil-angle-right-b"></i></button>
-                        </div>
-                    </div>
-                </div>
+                <?=$filterfooter?>
             </div>
         </section>
         <input type="hidden" name="pages" value="<?=((isset($filter['pages'])&&$filter['pages'])?$filter['pages']:0)?>" />
@@ -173,8 +206,8 @@
 <script type="text/javascript">
     function manage_events(action, params){
         if(action=='detail'){
-            params['form_as'] = '<?=$formby?>';
-            $("#ManageDialog").load("<?=$formby?>/filter/detail.php", params, function(response, status, xhr){
+            params['form_as'] = '<?=$form?>';
+            $("#ManageDialog").load("<?=$form?>/filter/detail.php", params, function(response, status, xhr){
                 if(status=="error"){
                     $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
                 }else{
@@ -201,3 +234,4 @@
         $(".table-filter").tablefilter({'keyword':'auto'});
     });
 </script>
+<?php include(APP_FOOTER);?>
