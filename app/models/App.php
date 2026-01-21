@@ -26,41 +26,65 @@ class App {
     static function profile()
     {
         if( Auth::check() ){
-            $htmls = '<div class="offcanvas offcanvas-end bg-light iceahe-profile on-font-primary" id="offcanvas-info" data-bs-scroll="true" style="background:url(\''.THEME_IMG.'/map.png\') repeat-y top center;">';
+            $htmls = '<div id="offcanvas-profile" class="offcanvas offcanvas-end bg-light on-font-primary" data-bs-scroll="true" style="background:url(\''.THEME_IMG.'/map.png\') repeat-y top center;">';
                 $htmls .= '<div class="offcanvas-header">';
-                    $htmls .= '<h3 class="fs-30 mb-0 text-primary">'.Lang::get('Profile').'</h3>';
+                    $htmls .= '<h3 class="fs-24 mb-0 text-primary on-text-oneline">'.Lang::get('Profile').'</h3>';
                     $htmls .= '<button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>';
                 $htmls .= '</div>';
                 $htmls .= '<div class="offcanvas-body d-flex flex-column">';
-                    $htmls .= '<div class="shopping-cart">';
-                        $htmls .= '<div class="set-profile-picture" style="width:64px;height:64px;float:left;overflow:hidden;margin-right:10px;border:1px solid #e8ecf2;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
-                            $htmls .= '<img src="'.User::get('picture').'" onerror="this.onerror=null;this.src=\''.THEME_IMG.'/avatar.png\';" style="width:100%;" />';
-                        $htmls .= '</div>';
-                        $htmls .= '<div class="w-100 ms-4">';
-                            $htmls .= '<h3 class="post-title fs-18 lh-xs mt-2 on-text-oneline" style="font-weight:normal;">'.trim(User::get('name').' '.User::get('surname')).'</h3>';
-                            $htmls .= '<p class="price fs-sm" style="margin-top:-10px;">'.User::get('email').'</p>';
-                        $htmls .= '</div>';
+                    $htmls .= '<div class="offcanvas-box profile">';
+                        $htmls .= '<a href="/?profile">';
+                            $htmls .= '<div class="edit-box"><i class="uil uil-pen"></i></div>';
+                            $htmls .= '<div class="img-box"><img src="'.User::get('image').'" onerror="this.onerror=null;this.src=\''.THEME_IMG.'/avatar.png\';" alt="Avatar"/></div>';
+                            $htmls .= '<div class="info-box">';
+                                $htmls .= '<font class="text-primary">'.User::get('name').'</font>';
+                                $htmls .= '<div><i class="uil uil-envelopes"></i> '.User::get('email').'</div>';
+                            $htmls .= '</div>';
+                        $htmls .= '</a>';
                     $htmls .= '</div>';
                     if( Auth::admin() ){
-                        $htmls .= '<div class="card lift mt-2" onclick="document.location=\''.APP_HOME.'/admin/?users\'" style="cursor:pointer;">';
-                            $htmls .= '<div class="card-body" style="padding:8px 0 8px 8px;">';
-                                $htmls .= '<div style="float:left;width:48px;height:48px;text-align:center;margin:0 0 0 0;">';
-                                    $htmls .= '<i class="uil uil-users-alt" style="font-size:36px;line-height:48px;"></i>';
+                        $htmls .= '<div class="position-relative lift mt-2" onclick="document.location=\''.APP_HOME.'/admin/?users\'" style="cursor:pointer;">';
+                            $htmls .= '<div class="shape rounded bg-pale-blue rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
+                            $htmls .= '<div class="card">';
+                                $htmls .= '<div class="card-body text-blue" style="height:72px;padding:12px 0 0 12px;">';
+                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#3f78e0;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
+                                        $htmls .= '<i class="uil uil-users-alt" style="font-size:36px;line-height:48px;"></i>';
+                                    $htmls .= '</div>';
+                                    $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'User Accounts' : 'บัญชีผู้ใช้ระบบ' ).'</font>';
                                 $htmls .= '</div>';
-                                $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'User Management' : 'จัดการบัญชีผู้ใช้ระบบ' ).'</font>';
                             $htmls .= '</div>';
                         $htmls .= '</div>';
-                         $htmls .= '<div class="card lift mt-2" onclick="document.location=\''.APP_HOME.'/admin/?logs\'" style="cursor:pointer;">';
-                            $htmls .= '<div class="card-body" style="padding:8px 0 8px 8px;">';
-                                $htmls .= '<div style="float:left;width:48px;height:48px;text-align:center;margin:0 0 0 0;">';
-                                    $htmls .= '<i class="uil uil-airplay" style="font-size:36px;line-height:48px;"></i>';
+                        $htmls .= '<div class="position-relative lift mt-2" onclick="document.location=\''.APP_HOME.'/admin/?logs\'" style="cursor:pointer;">';
+                            $htmls .= '<div class="shape rounded bg-pale-red rellax d-md-block" data-rellax-speed="0" style="bottom:-0.3rem;right:-0.3rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>';
+                            $htmls .= '<div class="card">';
+                                $htmls .= '<div class="card-body text-red" style="height:72px;padding:12px 0 0 12px;">';
+                                    $htmls .= '<div style="color:white;float:left;width:48px;height:48px;text-align:center;margin:0 10px 0 0;background:#e2626b;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;">';
+                                        $htmls .= '<i class="uil uil-credit-card-search" style="font-size:36px;line-height:48px;"></i>';
+                                    $htmls .= '</div>';
+                                    $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Monitor Logs' : 'ตรวจสอบล็อก' ).'</font>';
                                 $htmls .= '</div>';
-                                $htmls .= '<font style="line-height:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">'.( (App::lang()=='en') ? 'Loging Monitor' : 'ตรวจสอบล็อก' ).'</font>';
                             $htmls .= '</div>';
                         $htmls .= '</div>';
                     }
-                    $htmls .= '<div class="offcanvas-footer flex-column text-center pt-1 pb-1">';
-                        $htmls .= '<button type="button" class="btn btn-danger rounded w-100 mb-0" onclick="runLogout();"><i class="uil uil-sign-out-alt" style="float:left;font-size:36px;line-height:32px;margin-right:3px;"></i> '.Lang::get('Logout').'</button>';
+                    $htmls .= '<div class="offcanvas-footer flex-column" style="padding:9px 0 2px 0;">';
+                        $htmls .= '<div class="restart-box">';
+                            $htmls .= '<div class="offcanvas-box restart">';
+                                $htmls .= '<a href="javascript:void(0);" onclick="runRestart();">';
+                                    $htmls .= '<div class="icon-box"><i class="uil uil-refresh"></i></div>';
+                                $htmls .= '</a>';
+                            $htmls .= '</div>';
+                        $htmls .= '</div>';
+                        $htmls .= '<div class="logout-box">';
+                            $htmls .= '<div class="offcanvas-box logout">';
+                                $htmls .= '<a href="javascript:void(0);" onclick="runLogout();">';
+                                    $htmls .= '<div class="icon-box"><i class="uil uil-power"></i></div>';
+                                    $htmls .= '<div class="info-box">';
+                                        $htmls .= '<font class="text-primary">Logout</font>';
+                                        $htmls .= '<div>ออกจากระบบ<span class="underline-3 style-3 red">โรงอาหาร</span></div>';
+                                    $htmls .= '</div>';
+                                $htmls .= '</a>';
+                            $htmls .= '</div>';
+                        $htmls .= '</div>';
                     $htmls .= '</div>';
                 $htmls .= '</div>';
             $htmls .= '</div>';
@@ -90,9 +114,9 @@ class App {
                             $htmls .= '<img class="on-color" src="'.THEME_IMG.'/logo/logo.png" srcset="'.THEME_IMG.'/logo/logo@2x.png 2x" alt=""/>';
                         $htmls .= '</a>';
                     $htmls .= '</div>';
-                    $htmls .= '<div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start bg-primary">';
+                    $htmls .= '<div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">';
                         $htmls .= '<div class="offcanvas-header d-lg-none">';
-                            $htmls .= '<img src="'.THEME_IMG.'/logo/logo-light.png" srcset="'.THEME_IMG.'/logo/logo-light@2x.png 2x" alt="" style="height:72px;"/>';
+                            $htmls .= '<img src="'.THEME_IMG.'/logo/logo-light.png" srcset="'.THEME_IMG.'/logo/logo-light@2x.png 2x" alt=""/>';
                             $htmls .= '<button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>';
                         $htmls .= '</div>';
                         $htmls .= '<div id="mainsite-navbar" class="offcanvas-body ms-lg-auto d-flex flex-column h-100">';
@@ -120,7 +144,7 @@ class App {
                                 $htmls .= '</li>';
                             }
                             $htmls .= '</ul>';
-                            $htmls .= '<div class="offcanvas-footer d-lg-none">';
+                            $htmls .= '<div class="offcanvas-footer d-lg-none" style="padding:9px 0 2px 0;">';
                                 $htmls .= '<div>';
                                     $htmls .= '<i class="uil uil-envelopes"></i> '.APP_EMAIL.'<br/>';
                                     $htmls .= '<i class="uil uil-phone-volume"></i> '.APP_PHONE.'<br/>';
@@ -142,7 +166,7 @@ class App {
                                 $htmls .= '</a>';
                             $htmls .= '</li>';*/
                             $htmls .= '<li class="nav-item">';
-                                $htmls .= '<a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info">';
+                                $htmls .= '<a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-profile">';
                                     $htmls .= '<div class="nav-link-icon user-picture"><img src="'.User::get('picture').'" onerror="this.onerror=null;this.src=\''.THEME_IMG.'/avatar.png\';" /></div>';
                                 $htmls .= '</a>';
                             $htmls .= '</li>';
