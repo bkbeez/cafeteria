@@ -4,7 +4,7 @@
     // Init
     $result = array('status'=>'success', 'title'=>Lang::get('Success') );
     $page = ((isset($_POST['page'])&&$_POST['page'])?intval($_POST['page']):1);
-    $limit = ((isset($_POST['limit'])&&$_POST['limit'])?intval($_POST['limit']):5);
+    $limit = ((isset($_POST['limit'])&&$_POST['limit'])?intval($_POST['limit']):50);
     $keyword = ((isset($_POST['keyword'])&&$_POST['keyword'])?$_POST['keyword']:null);
     $filter_as = ((isset($_POST['filter_as'])&&$_POST['filter_as'])?$_POST['filter_as']:'search_as');
     if( !isset($_SESSION['login']['filter'][$filter_as]['limit'])||$_SESSION['login']['filter'][$filter_as]['limit']!=$limit ){
