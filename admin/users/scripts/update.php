@@ -1,5 +1,5 @@
 <?php include($_SERVER["DOCUMENT_ROOT"].'/app/autoload.php'); ?>
-<?php Auth::ajax(APP_PATH.'/admin/?users'); ?>
+<?php Auth::ajax(APP_PATH.'/admin'); ?>
 <?php
     if(!isset($_POST['id'])||!$_POST['id']){
         Status::error( Lang::get('NotFound').Lang::get('Id').' !!!' );

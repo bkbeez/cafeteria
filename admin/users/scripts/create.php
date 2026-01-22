@@ -1,5 +1,5 @@
 <?php include($_SERVER["DOCUMENT_ROOT"].'/app/autoload.php'); ?>
-<?php Auth::ajax(APP_PATH.'/admin/?users'); ?>
+<?php Auth::ajax(APP_PATH.'/admin'); ?>
 <?php
     if( !isset($_POST['role'])||!$_POST['role'] ){
         Status::error( Lang::get('Require').' !!!', array('onfocus'=>"role") );

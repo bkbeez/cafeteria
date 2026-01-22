@@ -6,7 +6,7 @@
     $link = APP_PATH.'/'.$index['page'];
     $form = APP_PATH.'/'.$index['page'].'/'.$index['view'];
     if( !Auth::check() ){
-        $_SESSION['login_redirect'] = APP_HOME.'/'.$index['page']; 
+        $_SESSION['login_redirect'] = APP_HOME.'/'.$index['page'].'/'.$index['view']; 
         header('Location: '.APP_HOME.'/login');
         exit;
     }
