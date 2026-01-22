@@ -20,29 +20,31 @@
     $filter_as = strtolower($index['page'].'_log_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
     // Footer
-    $filterfooter = '<div class="table-footer">';
-        $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
-        $filterfooter .= '<div class="filter-pagination">';
-            $filterfooter .= '<div class="row">';
-                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">';
-                    $filterfooter .= '<button type="button" class="btn btn-sm'.((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary').'"><i class="uil uil-angle-left-b"></i><span> '.Lang::get('Prev').'</span></button>';
-                $filterfooter .= '</div>';
-                $filterfooter .= '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">';
-                    $filterfooter .= '<center>';
-                        $filterfooter .= '<select name="page" class="page-on form-select">';
-                        if(isset($filter['pages'])&&$filter['pages']){
-                            for($page=1;$page<=intval($filter['pages']);$page++){
-                                $filterfooter .= '<option value="'.$page.'"'.((isset($filter['page'])&&intval($filter['page'])==$page)?' selected':null).'>'.$page.'</option>';
+    $filterfooter = '<div class="container table-container pb-6">';
+        $filterfooter .= '<div id="footer-log" class="table-footer">';
+            $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
+            $filterfooter .= '<div class="filter-pagination">';
+                $filterfooter .= '<div class="row">';
+                    $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">';
+                        $filterfooter .= '<button type="button" class="btn btn-sm'.((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary').'"><i class="uil uil-angle-left-b"></i><span> '.Lang::get('Prev').'</span></button>';
+                    $filterfooter .= '</div>';
+                    $filterfooter .= '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">';
+                        $filterfooter .= '<center>';
+                            $filterfooter .= '<select name="page" class="page-on form-select">';
+                            if(isset($filter['pages'])&&$filter['pages']){
+                                for($page=1;$page<=intval($filter['pages']);$page++){
+                                    $filterfooter .= '<option value="'.$page.'"'.((isset($filter['page'])&&intval($filter['page'])==$page)?' selected':null).'>'.$page.'</option>';
+                                }
+                            }else{
+                                $filterfooter .= '<option value="1">1</option>';
                             }
-                        }else{
-                            $filterfooter .= '<option value="1">1</option>';
-                        }
-                        $filterfooter .= '</select>';
-                        $filterfooter .= '<div class="page-total gb">/<span>1</span></div>';
-                    $filterfooter .= '</center>';
-                $filterfooter .= '</div>';
-                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">';
-                    $filterfooter .= '<button type="button" class="btn btn-sm btn-icon btn-icon-end'.((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary').'"><span>'.Lang::get('Next').' </span><i class="uil uil-angle-right-b"></i></button>';
+                            $filterfooter .= '</select>';
+                            $filterfooter .= '<div class="page-total gb">/<span>1</span></div>';
+                        $filterfooter .= '</center>';
+                    $filterfooter .= '</div>';
+                    $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">';
+                        $filterfooter .= '<button type="button" class="btn btn-sm btn-icon btn-icon-end'.((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary').'"><span>'.Lang::get('Next').' </span><i class="uil uil-angle-right-b"></i></button>';
+                    $filterfooter .= '</div>';
                 $filterfooter .= '</div>';
             $filterfooter .= '</div>';
         $filterfooter .= '</div>';
@@ -196,10 +198,10 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <?=$filterfooter?>
             </div>
         </section>
         <input type="hidden" name="pages" value="<?=((isset($filter['pages'])&&$filter['pages'])?$filter['pages']:0)?>" />
+        <input type="hidden" name="page" value="<?=((isset($filter['page'])&&$filter['page'])?$filter['page']:1)?>" />
     </form>
 </section>
 <div id="ManageDialog" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="false" aria-modal="true"></div>
@@ -224,14 +226,15 @@
             $("form[name='filter'] button[type='submit']").click();
         });
         $("form[name='filter'] .filter-search .btn-clear").click(function(){
+            $("#footer-log .filter-pagination select").val(1);
+            $("form[name='filter'] input[name='page']").val(1);
             $("form[name='filter'] input[name='pages']").val(0);
             $("form[name='filter'] input[name='keyword']").val(null);
             $("form[name='filter'] .filter-search select").val('ALL');
             $("form[name='filter'] .filter-search .form-control").val(null);
-            $("form[name='filter'] .filter-pagination select").val(1);
             $("form[name='filter'] button[type='submit']").click();
         });
-        $(".table-filter").tablefilter({'keyword':'auto'});
+        $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#footer-log'});
     });
 </script>
 <?php include(APP_FOOTER);?>

@@ -20,29 +20,31 @@
     $filter_as = strtolower($index['page'].'_user_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
     // Footer
-    $filterfooter = '<div id="footer-user" class="table-footer">';
-        $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
-        $filterfooter .= '<div class="filter-pagination">';
-            $filterfooter .= '<div class="row">';
-                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">';
-                    $filterfooter .= '<button type="button" class="btn btn-sm'.((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary').'"><i class="uil uil-angle-left-b"></i><span> '.Lang::get('Prev').'</span></button>';
-                $filterfooter .= '</div>';
-                $filterfooter .= '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">';
-                    $filterfooter .= '<center>';
-                        $filterfooter .= '<select name="page" class="page-on form-select">';
-                        if(isset($filter['pages'])&&$filter['pages']){
-                            for($page=1;$page<=intval($filter['pages']);$page++){
-                                $filterfooter .= '<option value="'.$page.'"'.((isset($filter['page'])&&intval($filter['page'])==$page)?' selected':null).'>'.$page.'</option>';
+    $filterfooter = '<div class="container table-container pb-6">';
+        $filterfooter .= '<div id="footer-user" class="table-footer">';
+            $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
+            $filterfooter .= '<div class="filter-pagination">';
+                $filterfooter .= '<div class="row">';
+                    $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-prev">';
+                        $filterfooter .= '<button type="button" class="btn btn-sm'.((isset($filter['page'])&&$filter['page']==1)?' btn-soft-ash':' btn-primary').'"><i class="uil uil-angle-left-b"></i><span> '.Lang::get('Prev').'</span></button>';
+                    $filterfooter .= '</div>';
+                    $filterfooter .= '<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 filter-page">';
+                        $filterfooter .= '<center>';
+                            $filterfooter .= '<select name="page" class="page-on form-select">';
+                            if(isset($filter['pages'])&&$filter['pages']){
+                                for($page=1;$page<=intval($filter['pages']);$page++){
+                                    $filterfooter .= '<option value="'.$page.'"'.((isset($filter['page'])&&intval($filter['page'])==$page)?' selected':null).'>'.$page.'</option>';
+                                }
+                            }else{
+                                $filterfooter .= '<option value="1">1</option>';
                             }
-                        }else{
-                            $filterfooter .= '<option value="1">1</option>';
-                        }
-                        $filterfooter .= '</select>';
-                        $filterfooter .= '<div class="page-total gb">/<span>1</span></div>';
-                    $filterfooter .= '</center>';
-                $filterfooter .= '</div>';
-                $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">';
-                    $filterfooter .= '<button type="button" class="btn btn-sm btn-icon btn-icon-end'.((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary').'"><span>'.Lang::get('Next').' </span><i class="uil uil-angle-right-b"></i></button>';
+                            $filterfooter .= '</select>';
+                            $filterfooter .= '<div class="page-total gb">/<span>1</span></div>';
+                        $filterfooter .= '</center>';
+                    $filterfooter .= '</div>';
+                    $filterfooter .= '<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 filter-next">';
+                        $filterfooter .= '<button type="button" class="btn btn-sm btn-icon btn-icon-end'.((isset($filter['page'])&&isset($filter['pages'])&&$filter['page']==$filter['pages'])?' btn-soft-ash':' btn-primary').'"><span>'.Lang::get('Next').' </span><i class="uil uil-angle-right-b"></i></button>';
+                    $filterfooter .= '</div>';
                 $filterfooter .= '</div>';
             $filterfooter .= '</div>';
         $filterfooter .= '</div>';
@@ -140,7 +142,7 @@
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-6 filter-pageby">
                             <select name="limit" class="form-select mb-1">
-                                <option value="5"<?=((!isset($filter['limit'])||intval($filter['limit'])==5)?' selected':null)?>>5</option>
+                                <option value="50"<?=((!isset($filter['limit'])||intval($filter['limit'])==50)?' selected':null)?>>50</option>
                                 <option value="100"<?=((isset($filter['limit'])&&intval($filter['limit'])==100)?' selected':null)?>>100</option>
                                 <option value="250"<?=((isset($filter['limit'])&&intval($filter['limit'])==250)?' selected':null)?>>250</option>
                                 <option value="500"<?=((isset($filter['limit'])&&intval($filter['limit'])==500)?' selected':null)?>>500</option>
@@ -195,7 +197,7 @@
             </div>
         </section>
         <section class="wrapper">
-            <div class="container">
+            <div class="container pb-4">
                 <div class="filter-result">
                     <table class="table table-hover">
                         <thead>
@@ -211,10 +213,10 @@
                         <tbody></tbody>
                     </table>
                 </div>
-                <? //$filterfooter?>
             </div>
         </section>
         <input type="hidden" name="pages" value="<?=((isset($filter['pages'])&&$filter['pages'])?$filter['pages']:0)?>" />
+        <input type="hidden" name="page" value="<?=((isset($filter['page'])&&$filter['page'])?$filter['page']:1)?>" />
     </form>
 </section>
 <div id="ManageDialog" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="false" aria-modal="true"></div>
@@ -319,11 +321,12 @@
             $("form[name='filter'] button[type='submit']").click();
         });
         $("form[name='filter'] .filter-search .btn-clear").click(function(){
+            $("#footer-user .filter-pagination select").val(1);
+            $("form[name='filter'] input[name='page']").val(1);
             $("form[name='filter'] input[name='pages']").val(0);
             $("form[name='filter'] input[name='keyword']").val(null);
             $("form[name='filter'] .filter-search select").val('ALL');
             $("form[name='filter'] .filter-search .form-control").val(null);
-            $("form[name='filter'] .filter-pagination select").val(1);
             $("form[name='filter'] button[type='submit']").click();
         });
         $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#footer-user'});
