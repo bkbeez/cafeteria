@@ -141,7 +141,20 @@
 .table-filter .filter-result table tbody {
     border-top:none !important;
 }
+.table-container {
+    margin-top: -40px;
+}
+.table-footer {
+    background-color: white;
+    -webkit-border-bottom-right-radius: 0.4rem;
+    -webkit-border-bottom-left-radius: 0.4rem;
+    -moz-border-radius-bottomright: 0.4rem;
+    -moz-border-radius-bottomleft: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
+}
 .table-footer .filter-display {
+    color: black;
     font-size: 14px;
     line-height: 20px;
     text-align: center;
@@ -154,7 +167,7 @@
 .table-footer .filter-pagination {
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 5px;
+    padding-bottom: 1px;
 }
 .table-footer .filter-pagination .row>div {
     float:none;
