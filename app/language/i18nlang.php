@@ -335,6 +335,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'OurServices'                              => array('th'=>'บริการของเรา'
                                                                 ,'en'=>'Our Services'
                                                         )
+            ,'Owner'                                    => array('th'=>'เจ้าของ'
+                                                                ,'en'=>'Owner'
+                                                        )
             ,'Paid'                                     => array('th'=>'ชำระแล้ว'
                                                                 ,'en'=>'Paid'
                                                         )
@@ -437,17 +440,11 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Shop'                                     => array('th'=>'ร้าน'
                                                                 ,'en'=>'Shop'
                                                         )
-            ,'ShopDrink'                                => array('th'=>'ร้านเครื่องดื่ม'
-                                                                ,'en'=>'Drink Shop'
+            ,'ShopName'                                 => array('th'=>'ชื่อร้าน'
+                                                                ,'en'=>'Shop Name'
                                                         )
-            ,'ShopFood'                                 => array('th'=>'ร้านข้าวแกง'
-                                                                ,'en'=>'Food Shop'
-                                                        )
-            ,'ShopNoodle'                               => array('th'=>'ร้านก๋วยเตี๋ยว'
-                                                                ,'en'=>'Noodle Shop'
-                                                        )
-            ,'ShopOther'                                => array('th'=>'ร้านอาหารอื่นๆ'
-                                                                ,'en'=>'Other Shop'
+            ,'ShopOwner'                                => array('th'=>'เจ้าของร้าน'
+                                                                ,'en'=>'Shop Owner'
                                                         )
             ,'Status'                                   => array('th'=>'สถานะ'
                                                                 ,'en'=>'Status'
