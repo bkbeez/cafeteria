@@ -17,11 +17,12 @@
         exit;
     }
     // Filter
-    $filter_as = strtolower($index['page'].'_log_as');
+    $filter_as = strtolower($index['page'].'_'.$index['view'].'_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
     // Footer
+    $filterfooter_as = 'footer-'.$index['view'];
     $filterfooter = '<div class="container table-container pb-6">';
-        $filterfooter .= '<div id="footer-log" class="table-footer">';
+        $filterfooter .= '<div id="'.$filterfooter_as.'" class="table-footer">';
             $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
             $filterfooter .= '<div class="filter-pagination">';
                 $filterfooter .= '<div class="row">';
@@ -226,7 +227,7 @@
             $("form[name='filter'] button[type='submit']").click();
         });
         $("form[name='filter'] .filter-search .btn-clear").click(function(){
-            $("#footer-log .filter-pagination select").val(1);
+            $("#<?=$filterfooter_as?> .filter-pagination select").val(1);
             $("form[name='filter'] input[name='page']").val(1);
             $("form[name='filter'] input[name='pages']").val(0);
             $("form[name='filter'] input[name='keyword']").val(null);
@@ -234,7 +235,7 @@
             $("form[name='filter'] .filter-search .form-control").val(null);
             $("form[name='filter'] button[type='submit']").click();
         });
-        $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#footer-log'});
+        $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#<?=$filterfooter_as?>});
     });
 </script>
 <?php include(APP_FOOTER);?>
