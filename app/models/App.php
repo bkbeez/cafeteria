@@ -132,7 +132,7 @@ class App {
                         $htmls .= '</div>';
                         $htmls .= '<div id="mainsite-navbar" class="offcanvas-body ms-lg-auto d-flex flex-column h-100">';
                             $htmls .= '<ul class="navbar-nav">';
-                            if( Auth::check() ){
+                            if( Auth::staff() ){
                                 $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='manage') ? ' active':null).' dropdown">';
                                     $htmls .= '<a class="nav-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown"><span class="nav-name"><div class="m-box-top"><i class="uil uil-apps"></i></div><div class="m-box"><i class="uil uil-apps"></i></div>'.( (App::lang()=='en') ? 'Management' : 'จัดการข้อมูล' ).'</span></a>';
                                     $htmls .= '<ul class="dropdown-menu mainsite-dropdown'.((isset($index['page'])&&$index['page']=='manage') ? ' show':null).'">';
