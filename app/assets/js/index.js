@@ -15,24 +15,16 @@ jQuery.fn.tablefilter = function(option) {
     $(itable).find("select[name='limit']").change(function(){
         $(itable).find("form").find("button[type='submit']").click();
     });
-    if(option!=undefined&&option.keyword=="auto"){
-        $(itable).find("input[name='keyword']").keyup(function(){
-            $(itable).find("form").find("input[name='state']").val(null);
-            $(itable).find("form").find("button[type='submit']").click();
-        });
-    }else{
-        $(itable).find("input[name='keyword']").change(function(){
-            $(itable).find("form").find("button[type='submit']").click();
-        });
-    }
     if(option!=undefined&&option.footer!=undefined){
-        $(option.footer).find("select[name='page']").change(function(){
+        $(option.footer).find("select").change(function(){
+            $(itable).find("input[name='page']").val(this.value);
             $(itable).find("form").find("button[type='submit']").click();
         });
         $(option.footer).find(".filter-prev button").click(function(){
-            var page = parseInt($(option.footer).find("select[name='page']").val())-1;
+            var page = parseInt($(option.footer).find("select").val())-1;
             if(page>0){
-                $(option.footer).find("select[name='page']").val(page);
+                $(option.footer).find("select").val(page);
+                $(itable).find("input[name='page']").val(page);
                 if(page==1){
                     $(this).attr("class", "btn btn-icon btn-icon-start btn-white");
                 }
@@ -43,10 +35,11 @@ jQuery.fn.tablefilter = function(option) {
             }
         });
         $(option.footer).find(".filter-next button").click(function(){
-            var page = parseInt($(option.footer).find("select[name='page']").val())+1;
+            var page = parseInt($(option.footer).find("select").val())+1;
             var total = parseInt($(itable).find("input[name='pages']").val());
             if(page<=total){
-                $(option.footer).find("select[name='page']").val(page);
+                $(option.footer).find("select").val(page);
+                $(itable).find("input[name='page']").val(page);
                 if(page==total){
                     $(this).removeClass("btn-primary").addClass("btn-white");
                 }
@@ -88,6 +81,16 @@ jQuery.fn.tablefilter = function(option) {
             }
         });
     }
+    if(option!=undefined&&option.keyword=="auto"){
+        $(itable).find("input[name='keyword']").keyup(function(){
+            $(itable).find("form").find("input[name='state']").val(null);
+            $(itable).find("form").find("button[type='submit']").click();
+        });
+    }else{
+        $(itable).find("input[name='keyword']").change(function(){
+            $(itable).find("form").find("button[type='submit']").click();
+        });
+    }
     if(option==undefined||option.debug==undefined){
         $(itable).find("form").ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -112,7 +115,9 @@ jQuery.fn.tablefilter = function(option) {
                         $(itable).find("input[name='pages']").val(data.pages);
                         if(option!=undefined&&option.footer!=undefined){
                             if(data.pagination!=undefined){
+                                $(itable).find("input[name='page']").val(data.page);
                                 $(option.footer).find("select[name='page']").html(data.pagination).change(function(){
+                                    $(itable).find("input[name='page']").val(this.value);
                                     $(itable).find("form").find("button[type='submit']").click();
                                 });
                             }
