@@ -21,6 +21,8 @@ class Auth {
         if( isset($member['id'])&&$member['id'] ){
             if( $member['role']=='ADMIN' ){
                 $_SESSION['login']['admin'] = 1;
+            }elseif( $member['role']=='STAFF' ){
+                $_SESSION['login']['staff'] = 1;
             }
             $_SESSION['login']['user'] = $member;
             unset($_SESSION['login']['user']['date_create']);
@@ -124,6 +126,22 @@ class Auth {
     static function admin()
     {
         if( isset($_SESSION['login'])&&isset($_SESSION['login']['admin'])&&isset($_SESSION['login']['admin']) ){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Staff
+     * @param  void
+     * @return true/false
+     */
+    static function staff()
+    {
+        if( Auth::admin() ){
+            return true;
+        }else if( isset($_SESSION['login'])&&isset($_SESSION['login']['staff'])&&isset($_SESSION['login']['staff']) ){
             return true;
         }
 
