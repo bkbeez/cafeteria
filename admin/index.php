@@ -15,17 +15,8 @@
         header('Location: '.APP_HOME.'/deny');
         exit;
     }
-    $loadpage = null;
-    if( isset($_GET['users']) ){
-        $loadpage = 'users';
-        $index['view'] = $loadpage;
-    }else if( isset($_GET['logs']) ){
-        $loadpage = 'logs';
-        $index['view'] = $loadpage;
-    }
 ?>
 <?php include(APP_HEADER);?>
-<?php if( isset($loadpage)&&$loadpage ){ include(APP_ROOT.'/'.$index['page'].'/'.$loadpage.'/index.php'); }else{ ?>
 <style type="text/css">
     .container-custome-header {
         overflow:hidden;
@@ -66,5 +57,4 @@
         </div>
     </div>
 </section>
-<?php } ?>
 <?php include(APP_FOOTER);?>
