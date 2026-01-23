@@ -2,6 +2,7 @@
 <?php Auth::ajax(APP_PATH.'/admin'); ?>
 <?php
     // Init
+    $lang = App::lang();
     $result = array('status'=>'success', 'title'=>Lang::get('Success') );
     $page = ((isset($_POST['page'])&&$_POST['page'])?intval($_POST['page']):1);
     $limit = ((isset($_POST['limit'])&&$_POST['limit'])?intval($_POST['limit']):50);
@@ -111,7 +112,6 @@
     $htmls = '';
     $lists = DB::sql($sql, $parameters);
     if( isset($lists)&&count($lists)>0 ){
-        $lang = App::lang();
         $lang_edit = Lang::get('Edit');
         $lang_delete = Lang::get('Del');
         foreach($lists as $no => $row){
@@ -124,8 +124,8 @@
                     $htmls .= '<font class="type-o">'.$row['user_icon'].'</font>';
                     $htmls .= '<font class="mail-o">'.$row['email'].'</font>';
                     $htmls .= '<font>'.$row['fullname'].'</font>';
-                    $htmls .= '<span class="name-o"><i class="uil uil-user"></i> '.$row['fullname'].'</span>';
-                    $htmls .= ( $row['cmu_icon'] ? '<span class="remark-o">'.$row['cmu_icon'].( $row['email_cmu'] ? $row['email_cmu'] : '<em class="fs-sm text-muted">ไม่มีบัญชี CMU Mail</em>' ).'</span>' : null );
+                    $htmls .= '<span class="fs-sm name-o"><i class="uil uil-user"></i> '.$row['fullname'].'</span>';
+                    $htmls .= ( $row['cmu_icon'] ? '<span class="fs-sm remark-o">'.$row['cmu_icon'].( $row['email_cmu'] ? $row['email_cmu'] : null ).'</span>' : null );
                 $htmls .= '</td>';
                 $htmls .= '<td class="remark">';
                     $htmls .= $row['cmu_icon'];

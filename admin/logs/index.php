@@ -235,7 +235,7 @@
             $("form[name='filter'] .filter-search .form-control").val(null);
             $("form[name='filter'] button[type='submit']").click();
         });
-        $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#<?=$filterfooter_as?>});
+        $(".table-filter").tablefilter({'keyword':'auto', 'footer':'#<?=$filterfooter_as?>'});
     });
 </script>
 <?php include(APP_FOOTER);?>

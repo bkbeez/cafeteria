@@ -102,8 +102,8 @@
                     $htmls .= '<font class="date-o"><i class="uil uil-calendar-alt"></i> '.$row['date_display'].'</font>';
                     $htmls .= '<font class="mail-o"><i class="uil uil-envelopes"></i> '.$row['email'].'</font>';
                     $htmls .= ( $row['fullname'] ? '<font>'.$row['fullname'].'</font>' : '<font class=text-muted><em>Unknown...</em></font>' );
-                    $htmls .= '<span class="name-o"><i class="uil uil-user"></i> '.( $row['fullname'] ? $row['fullname'] : '<em>Unknown...</em>' ).'</span>';
-                    $htmls .= ( $row['remark'] ? '<div class="remark-o">'.$row['remark'].'</div>' : null );
+                    $htmls .= '<span class="fs-sm name-o"><i class="uil uil-user"></i> '.( $row['fullname'] ? $row['fullname'] : '<em>Unknown...</em>' ).'</span>';
+                    $htmls .= ( $row['remark'] ? '<div class="fs-sm remark-o">'.$row['remark'].'</div>' : null );
                 $htmls .= '</td>';
                 $htmls .= '<td class="remark autoline">'.$row['remark'].'</td>';
                 $htmls .= '<td class="actions">';
