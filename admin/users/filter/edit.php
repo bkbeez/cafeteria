@@ -11,7 +11,7 @@
                         , array('id'=>$_POST['id'], 'email'=>$_POST['email'])
         );
     }
-    if( 0&&Auth::admin() ){
+    if( Auth::admin() ){
         $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
             $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
                 $rolehtmls .= Util::memberRoleOption(true, ((isset($data['role'])&&$data['role'])?$data['role']:null));
