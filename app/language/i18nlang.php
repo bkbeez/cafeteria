@@ -17,6 +17,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Address'                                  => array('th'=>'ที่อยู่'
                                                                 ,'en'=>'Address'
                                                         )
+            ,'AddressBilling'                           => array('th'=>'ที่อยู่ใบเสร็จรับเงิน'
+                                                                ,'en'=>'Billing Address'
+                                                        )
             ,'Administrator'                            => array('th'=>'ผู้ดูแลระบบ'
                                                                 ,'en'=>'Administrator'
                                                         )
