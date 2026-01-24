@@ -62,6 +62,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Change'                                   => array('th'=>'เปลี่ยน'
                                                                 ,'en'=>'Change'
                                                         )
+            ,'Charge'                                   => array('th'=>'ค่าใช้จ่าย'
+                                                                ,'en'=>'Charge'
+                                                        )
             ,'Choose'                                   => array('th'=>'เลือก'
                                                                 ,'en'=>'Choose'
                                                         )
@@ -169,6 +172,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'Exist'                                    => array('th'=>'มีอยู่แล้ว'
                                                                 ,'en'=>'Exist'
+                                                        )
+            ,'Fail'                                     => array('th'=>'ล้มเหลว'
+                                                                ,'en'=>'Fail'
                                                         )
             ,'File'                                     => array('th'=>'ไฟล์'
                                                                 ,'en'=>'File'
@@ -400,6 +406,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'Print'                                    => array('th'=>'พิมพ์'
                                                                 ,'en'=>'Print'
+                                                        )
+            ,'Processing'                               => array('th'=>'กำลังประมวลผล'
+                                                                ,'en'=>'Processing'
                                                         )
             ,'Profile'                                  => array('th'=>'บัญชีผู้ใช้'
                                                                 ,'en'=>'Profile'
