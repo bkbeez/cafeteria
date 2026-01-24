@@ -461,6 +461,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'System'                                   => array('th'=>'ระบบ'
                                                                 ,'en'=>'System'
                                                         )
+            ,'TaxNumber'                                => array('th'=>'เลขประจำตัวผูู้เสียภาษีอากร'
+                                                                ,'en'=>'Tax Identification Number'
+                                                        )
             ,'Telephone'                                => array('th'=>'โทรศัพท์'
                                                                 ,'en'=>'Telephone'
                                                         )
