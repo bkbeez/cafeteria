@@ -46,93 +46,24 @@ class Util {
     }
 
     /**
-     * Get Organization
-     * @param string
-     * @return string
+     *  Province Option
+     *  @param  key
+     *  @return value
      */
-    static function getOrganization()
+    static function provinceOption($selected=null, $addon=null)
     {
-        return array('คณะมนุษยศาสตร์'
-                    ,'คณะศึกษาศาสตร์'
-                    ,'คณะวิจิตรศิลป์'
-                    ,'คณะสังคมศาสตร์'
-                    ,'คณะวิทยาศาสตร์'
-                    ,'คณะวิศวกรรมศาสตร์'
-                    ,'คณะแพทยศาสตร์'
-                    ,'คณะเกษตรศาสตร์'
-                    ,'คณะทันตแพทยศาสตร์'
-                    ,'คณะเภสัชศาสตร์'
-                    ,'คณะเทคนิคการแพทย์'
-                    ,'คณะพยาบาลศาสตร์'
-                    ,'คณะอุตสาหกรรมเกษตร'
-                    ,'คณะสัตวแพทยศาสตร์'
-                    ,'คณะบริหารธุรกิจ'
-                    ,'คณะเศรษฐศาสตร์'
-                    ,'คณะสถาปัตยกรรมศาสตร์'
-                    ,'คณะการสื่อสารมวลชน'
-                    ,'คณะรัฐศาสตร์และรัฐประศาสนศาสตร์'
-                    ,'คณะนิติศาสตร์'
-                    ,'วิทยาลัยศิลปะ สื่อ และเทคโนโลยี'
-                    ,'คณะสาธารณสุขศาสตร์'
-                    ,'วิทยาลัยการศึกษาและการจัดการทางทะเล'
-                    ,'วิทยาลัยนานาชาตินวัตกรรมดิจิทัล'
-                    ,'สถาบันนโยบายสาธารณะ'
-                    ,'สถาบันวิศวกรรมชีวการแพทย์'
-                    ,'สถาบันวิจัยวิทยาศาสตร์สุขภาพ'
-                    ,'วิทยาลัยพหุวิทยาการและสหวิทยาการ'
-                    ,'วิทยาลัยการศึกษาตลอดชีวิต'
-                    ,'วิทยาลัยนานาชาติ'
-                    ,'วิทยาลัยบัณฑิตวิทยาลัย'
-        );
-    }
+        $lang = App::lang();
+        $htmls = ( $addon ? $addon : '' );
+        $lists = DB::sql("SELECT IF(code<>'10',CONCAT('จ.',name_th),name_th) AS name_th, name_en FROM tbl_province ORDER BY IF(code='10',0,1), CONVERT(name_".$lang." USING tis620) ASC;");
+        if( isset($lists)&&count($lists)>0 ){
+            foreach($lists as $item){
+                $htmls .= '<option value="'.$item['name_'.$lang].'">'.$item['name_'.$lang].'</option>';
+            }
+            if( $selected ){
+                $htmls = str_replace('value="'.$selected.'"', 'value="'.$selected.'" selected', $htmls);
+            }
+        }
 
-    /**
-     * Organization Html
-     * @param string
-     * @return string
-     */
-    static function organizationOption($selected=null)
-    {
-        $htmls = '';
-        foreach( Util::getOrganization() as $name ){
-            $htmls .= '<option value="'.$name.'">'.$name.'</option>';
-        }
-        if( $selected ){
-            return str_replace('value="'.$selected.'"', 'value="'.$selected.'" selected', $htmls);
-        }
-        return $htmls;
-    }
-
-    /**
-     * Get Department
-     * @param string
-     * @return string
-     */
-    static function getDepartment()
-    {
-        return array('ภาควิชาพื้นฐานและการพัฒนาการศึกษา'
-                    ,'ภาควิชาหลักสูตร การสอนและการเรียนรู้'
-                    ,'ภาควิชาอาชีวศึกษาและการส่งเสริมสุขภาวะ'
-                    ,'สำนักงานคณะศึกษาศาสตร์'
-                    ,'โรงเรียนสาธิตมหาวิทยาลัยเชียงใหม่ (ระดับมัธยมศึกษา)'
-                    ,'โรงเรียนสาธิตมหาวิทยาลัยเชียงใหม่ (ระดับอนุบาลและประถมศึกษา)'
-        );
-    }
-
-    /**
-     * Department Html
-     * @param string
-     * @return string
-     */
-    static function departmentOption($selected=null)
-    {
-        $htmls = '';
-        foreach( Util::getDepartment() as $name ){
-            $htmls .= '<option value="'.$name.'">'.$name.'</option>';
-        }
-        if( $selected ){
-            return str_replace('value="'.$selected.'"', 'value="'.$selected.'" selected', $htmls);
-        }
         return $htmls;
     }
 
