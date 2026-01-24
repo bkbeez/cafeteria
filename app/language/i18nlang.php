@@ -35,6 +35,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Baht'                                     => array('th'=>'บาท'
                                                                 ,'en'=>'Baht'
                                                         )
+            ,'Balance'                                  => array('th'=>'คงเหลือ'
+                                                                ,'en'=>'Balance'
+                                                        )
             ,'Bank'                                     => array('th'=>'ธนาคาร'
                                                                 ,'en'=>'Bank'
                                                         )
@@ -404,6 +407,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Province'                                 => array('th'=>'จังหวัด'
                                                                 ,'en'=>'Province'
                                                         )
+            ,'Quantity'                                 => array('th'=>'จำนวน'
+                                                                ,'en'=>'Quantity'
+                                                        )
             ,'Read'                                     => array('th'=>'อ่าน'
                                                                 ,'en'=>'Read'
                                                         )
@@ -479,11 +485,17 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Time'                                     => array('th'=>'เวลา'
                                                                 ,'en'=>'Time'
                                                         )
+            ,'Total'                                    => array('th'=>'จำนวนสุทธิ'
+                                                                ,'en'=>'Total'
+                                                        )
             ,'Type'                                     => array('th'=>'ประเภท'
                                                                 ,'en'=>'Type'
                                                         )
             ,'Understand'                               => array('th'=>'รับทราบ'
                                                                 ,'en'=>'Understand'
+                                                        )
+            ,'Unit'                                     => array('th'=>'หน่วย'
+                                                                ,'en'=>'Unit'
                                                         )
             ,'Upload'                                   => array('th'=>'อัปโหลด'
                                                                 ,'en'=>'Upload'
@@ -514,6 +526,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'WelcomeTo'                                => array('th'=>'ยินดีต้อนรับเข้าสู่'
                                                                 ,'en'=>'Welcome to'
+                                                        )
+            ,'Withdraw'                                 => array('th'=>'ยอดเบิก'
+                                                                ,'en'=>'Withdraw'
                                                         )
             ,'Year'                                     => array('th'=>'ปี'
                                                                 ,'en'=>'Year'
@@ -546,6 +561,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'ConfirmToChange'                          => array('th'=>'ยืนยันเปลี่ยนข้อมูลนี้ ใช่ หรือ ไม่ ?'
                                                                 ,'en'=>'Confirm to change this ?'
+                                                        )
+            ,'ConfirmToChangeStatus'                    => array('th'=>'ยืนยันเปลี่ยนสถานะนี้ ใช่ หรือ ไม่ ?'
+                                                                ,'en'=>'Confirm to change status ?'
                                                         )
             ,'ConfirmToCreate'                          => array('th'=>'ยืนยันสร้างข้อมูลนี้ ใช่ หรือ ไม่ ?'
                                                                 ,'en'=>'Confirm to create this ?'
