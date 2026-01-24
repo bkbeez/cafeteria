@@ -31,7 +31,7 @@
                 <h2 class="mb-0 text-primary text-start on-text-oneline"><i class="uil uil-plus-square" style="float:left;font-size:36px;line-height:36px;margin-right:3px;"></i><?=( (App::lang()=='en') ? 'New Shop' : 'ร้านใหม่' )?></h2>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary alert-icon mb-2">
+                <div class="alert alert-secondary alert-icon mb-2">
                     <div class="form-floating form-select-wrapper mb-1">
                         <select name="type_id" class="form-select"><?=Shop::typeOption();?></select>
                         <label><?=Lang::get('Type')?></label>
@@ -41,7 +41,7 @@
                         <label for="shop_name"><?=Lang::get('ShopName')?> <span class="text-red">*</span></label>
                     </div>
                 </div>
-                <div class="alert alert-primary alert-icon mb-2">
+                <div class="alert alert-secondary alert-icon mb-2">
                     <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('ShopOwner')?></p>
                     <div class="row gx-1">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2">
@@ -68,7 +68,7 @@
                         <label for="phone"><?=Lang::get('Phone')?></label>
                     </div>
                 </div>
-                <div class="alert alert-primary alert-icon mb-2">
+                <div class="alert alert-secondary alert-icon mb-2">
                     <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('Status')?></p>
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
