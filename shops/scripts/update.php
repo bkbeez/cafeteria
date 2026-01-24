@@ -33,7 +33,7 @@
     $parameters['phone'] = ( (isset($_POST['phone'])&&$_POST['phone']) ? Helper::stringSave($_POST['phone']) : null );
     $datas .= ',`status_id`';
     $datas .= "=:status_id";
-    $parameters['status_id'] = ( (isset($_POST['status_id'])&&$_POST['status_id']) ? $_POST['status_id'] : 0 );
+    $parameters['status_id'] = ( (isset($_POST['status'])&&$_POST['status']=='Y') ? 1 : 0 );
     $datas .= ',`date_update`';
     $datas .= "=NOW()";
     $datas .= ',`user_update`';

@@ -93,7 +93,7 @@
                 ,TRIM(CONCAT(shop.address,' ',COALESCE(shop.zipcode,'')))
                 ,NULL
             ) AS fulladdress
-            , IF(shop.status_id>1, 'not-available', 'available') AS status
+            , IF(shop.status_id<0, 'not-available', 'available') AS status
             FROM shop
             INNER JOIN shop_type ON shop.type_id=shop_type.id
             WHERE shop.id IS NOT NULL";

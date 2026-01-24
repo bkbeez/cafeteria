@@ -84,13 +84,13 @@
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="status_1" class="form-check-input" type="radio" name="status_id" value="1"<?=((isset($data['status_id'])&&$data['status_id']==1)?' checked':null)?>>
+                                <input id="status_1" class="form-check-input" type="radio" name="status" value="Y"<?=((isset($data['status_id'])&&$data['status_id']>0)?' checked':null)?>>
                                 <label for="status_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Available' : 'พร้อมใช้งาน' )?></label>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="status_2" class="form-check-input" type="radio" name="status_id" value="2"<?=((isset($data['status_id'])&&$data['status_id']==2)?' checked':null)?>>
+                                <input id="status_2" class="form-check-input" type="radio" name="status" value="N"<?=((isset($data['status_id'])&&$data['status_id']<=0)?' checked':null)?>>
                                 <label for="status_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> available' : '<u class="text-red">ระงับ</u>ใช้งาน' )?></label>
                             </div>
                         </div>
