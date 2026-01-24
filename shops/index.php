@@ -11,7 +11,7 @@
     }
     if( !Auth::staff() ){
         $_SESSION['deny'] = array();
-        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For administrator only' : 'ขออภัย! สำหรับผู้ดูแลระบบเท่านั้น' );
+        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For officer only' : 'ขออภัย! สำหรับเจ้าหน้าที่เท่านั้น' );
         header('Location: '.APP_HOME.'/deny');
         exit;
     }
