@@ -134,10 +134,10 @@ class App {
                             $htmls .= '<ul class="navbar-nav">';
                             if( Auth::staff() ){
                                 $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='shops') ? ' active':null).' dropdown">';
-                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/shops"><span class="nav-name"><div class="m-box-top"><i class="uil uil-shop"></i></div><div class="m-box"><i class="uil uil-shop"></i></div>'.( (App::lang()=='en') ? 'Shop Lists' : 'ข้อมูลร้านค้า' ).'</span></a>';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/shops"><span class="nav-name"><div class="m-box-top"><i class="uil uil-shop"></i></div><div class="m-box"><i class="uil uil-shop"></i></div>'.( (App::lang()=='en') ? 'Shop' : 'ร้านค้า' ).'</span></a>';
                                 $htmls .= '</li>';
-                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='warehouse') ? ' active':null).' dropdown">';
-                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/warehouse"><span class="nav-name"><div class="m-box-top"><i class="uil uil-money-bill-stack"></i></div><div class="m-box"><i class="uil uil-money-bill-stack"></i></div>'.( (App::lang()=='en') ? 'Warehouse' : 'สินค้าคงคลัง' ).'</span></a>';
+                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='stock') ? ' active':null).' dropdown">';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/stock"><span class="nav-name"><div class="m-box-top"><i class="uil uil-money-bill-stack"></i></div><div class="m-box"><i class="uil uil-money-bill-stack"></i></div>'.( (App::lang()=='en') ? 'Stock' : 'คลังสินค้า' ).'</span></a>';
                                 $htmls .= '</li>';
                             }
                             $htmls .= '</ul>';
