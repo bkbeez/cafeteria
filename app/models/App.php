@@ -133,25 +133,11 @@ class App {
                         $htmls .= '<div id="mainsite-navbar" class="offcanvas-body ms-lg-auto d-flex flex-column h-100">';
                             $htmls .= '<ul class="navbar-nav">';
                             if( Auth::staff() ){
-                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='manage') ? ' active':null).' dropdown">';
-                                    $htmls .= '<a class="nav-link dropdown-toggle" href="javascript:void(0);" data-bs-toggle="dropdown"><span class="nav-name"><div class="m-box-top"><i class="uil uil-apps"></i></div><div class="m-box"><i class="uil uil-apps"></i></div>'.( (App::lang()=='en') ? 'Management' : 'จัดการข้อมูล' ).'</span></a>';
-                                    $htmls .= '<ul class="dropdown-menu mainsite-dropdown'.((isset($index['page'])&&$index['page']=='manage') ? ' show':null).'">';
-                                        $htmls .= '<li class="nav-item'.((isset($index['view'])&&$index['view']=='shops') ? ' active':null).'">';
-                                            $htmls .= '<a class="dropdown-item" href="'.APP_HOME.'/manage/shops">';
-                                                $htmls .= '<span class="nav-name"><div class="m-box"><i class="uil uil-shop"></i></div>'.( (App::lang()=='en') ? 'Shops' : 'ข้อมูลร้านค้า' ).'</span>';
-                                            $htmls .= '</a>';
-                                        $htmls .= '</li>';
-                                        $htmls .= '<li class="nav-item'.((isset($index['view'])&&$index['view']=='plates') ? ' active':null).'">';
-                                            $htmls .= '<a class="dropdown-item" href="'.APP_HOME.'/manage/plates">';
-                                                $htmls .= '<span class="nav-name"><div class="m-box"><i class="uil uil-record-audio"></i></div>'.( (App::lang()=='en') ? 'Plates' : 'รายการจาน' ).'</span>';
-                                            $htmls .= '</a>';
-                                        $htmls .= '</li>';
-                                        $htmls .= '<li class="nav-item'.((isset($index['view'])&&$index['view']=='bowls') ? ' active':null).'">';
-                                            $htmls .= '<a class="dropdown-item" href="'.APP_HOME.'/manage/bowls">';
-                                                $htmls .= '<span class="nav-name"><div class="m-box"><i class="uil uil-shutter-alt"></i></div>'.( (App::lang()=='en') ? 'Bowls' : 'รายการถ้วย' ).'</span>';
-                                            $htmls .= '</a>';
-                                        $htmls .= '</li>';
-                                    $htmls .= '</ul>';
+                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='shops') ? ' active':null).' dropdown">';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/shops"><span class="nav-name"><div class="m-box-top"><i class="uil uil-shop"></i></div><div class="m-box"><i class="uil uil-shop"></i></div>'.( (App::lang()=='en') ? 'Shop Lists' : 'ข้อมูลร้านค้า' ).'</span></a>';
+                                $htmls .= '</li>';
+                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='warehouse') ? ' active':null).' dropdown">';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/warehouse"><span class="nav-name"><div class="m-box-top"><i class="uil uil-money-bill-stack"></i></div><div class="m-box"><i class="uil uil-money-bill-stack"></i></div>'.( (App::lang()=='en') ? 'Warehouse' : 'สินค้าคงคลัง' ).'</span></a>';
                                 $htmls .= '</li>';
                             }
                             $htmls .= '</ul>';
