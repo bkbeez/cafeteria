@@ -3,7 +3,6 @@
 <?php
     $lang = App::lang();
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
-    $rolehtmls = '';
     if( isset($_POST['id'])&&$_POST['id'] ){
         $data = Shop::one("SELECT shop.*
                         FROM shop
