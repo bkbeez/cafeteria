@@ -433,58 +433,6 @@ header.custom-wrapper:before {
     cursor: default;
     opacity: 1;
 }
-.run-start {
-    width: 50% !important;
-    height: 50% !important;
-    background: url('../img/wait-loading.gif') no-repeat center center !important;
-    background-size: contain !important;
-}
-.on-btn-black {
-    color: white !important;
-}
-.on-btn-black:hover {
-    color: black !important;
-}
-.on-btn-white,
-.on-btn-white:hover {
-    color: white !important;
-}
-.on-text-oneline {
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-}
-.on-text-display {
-    height: auto !important;
-    min-height: 52px;
-}
-.on-text-display.readonly {
-    background-color: #f6f7f9;
-}
-.on-text-normal {
-    font-weight: normal;
-}
-.on-text-normal-i {
-    font-style: italic;
-    font-weight: normal;
-}
-.on-text-i {
-    font-style: italic;
-}
-.on-blink {
-    animation: blink-animation 1s steps(5, start) infinite;
-    -webkit-animation: blink-animation 1s steps(5, start) infinite;
-}
-@keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
-@-webkit-keyframes blink-animation {
-  to {
-    visibility: hidden;
-  }
-}
 .modal-manage .modal-header {
     display: block;
     min-height: 75px;
@@ -586,6 +534,121 @@ header.custom-wrapper:before {
     -webkit-border-bottom-left-radius: 0;
     -moz-border-radius-bottomleft: 0;
     border-bottom-left-radius: 0;
+}
+.run-start {
+    width: 50% !important;
+    height: 50% !important;
+    background: url('../img/wait-loading.gif') no-repeat center center !important;
+    background-size: contain !important;
+}
+.on-btn-black {
+    color: white !important;
+}
+.on-btn-black:hover {
+    color: black !important;
+}
+.on-btn-white,
+.on-btn-white:hover {
+    color: white !important;
+}
+.on-text-oneline {
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.on-text-display {
+    height: auto !important;
+    min-height: 52px;
+}
+.on-text-display.readonly {
+    background-color: #f6f7f9;
+}
+.on-text-normal {
+    font-weight: normal;
+}
+.on-text-normal-i {
+    font-style: italic;
+    font-weight: normal;
+}
+.on-text-i {
+    font-style: italic;
+}
+.on-blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+.on-state-loading {
+    display: inline-block;
+    position: relative;
+    width: 128px;
+    height: 128px;
+    padding-left: 1px;
+}
+.on-state-loading div {
+    display: inline-block;
+    position: absolute;
+    top:32px;
+    left: 2px;
+    width: 18px;
+    height: 64px;
+    background: #3f78e0;
+    animation: state-loading  1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.on-state-loading div:nth-child(1) {
+    top: 32px;
+    left: 2px;
+    height: 64px;
+    animation-delay: -0.60s;
+}
+.on-state-loading div:nth-child(2) {
+    top: 32px;
+    left: 23px;
+    height: 64px;
+    animation-delay: -0.48s;
+}
+.on-state-loading div:nth-child(3) {
+    top: 32px;
+    left: 44px;
+    height: 64px;
+    animation-delay: -0.36s;
+}
+.on-state-loading div:nth-child(4) {
+    top: 32px;
+    left: 65px;
+    height: 64px;
+    animation-delay: -0.24s;
+}
+.on-state-loading div:nth-child(5) {
+    top: 32px;
+    left: 86px;
+    height: 64px;
+    animation-delay: -0.12s;
+}
+.on-state-loading div:nth-child(6) {
+    top: 0px;
+    left: 107px;
+    height: 128px;
+    animation-delay: 0;
+}
+@keyframes state-loading {
+    0% {
+        top: 0px;
+        height: 128px;
+    }
+    50%, 100% {
+        top: 32px;
+        height: 64px;
+    }
 }
 footer {
     font-family: 'CMU Light';
