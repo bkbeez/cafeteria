@@ -25,8 +25,13 @@ class Auth {
                 $_SESSION['login']['staff'] = 1;
             }
             $_SESSION['login']['user'] = $member;
+            unset($_SESSION['login']['user']['is_pass']);
+            unset($_SESSION['login']['user']['password']);
+            unset($_SESSION['login']['user']['password_default']);
             unset($_SESSION['login']['user']['date_create']);
+            unset($_SESSION['login']['user']['user_create']);
             unset($_SESSION['login']['user']['date_update']);
+            unset($_SESSION['login']['user']['user_update']);
             if( isset($account['picture_default'])&&$account['picture_default']!=$member['picture_default'] ){
                 $_SESSION['login']['user']['picture_default'] = $account['picture_default'];
                 DB::update("UPDATE `member` SET `picture_default`=:picture_default,`date_lastlogin`=NOW(),`date_update`=NOW() WHERE id=:id AND email=:email;", array('id'=>$member['id'],'email'=>$member['email'],'picture_default'=>$account['picture_default']));
