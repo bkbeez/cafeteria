@@ -494,7 +494,7 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Time'                                     => array('th'=>'เวลา'
                                                                 ,'en'=>'Time'
                                                         )
-            ,'Total'                                    => array('th'=>'จำนวนสุทธิ'
+            ,'Total'                                    => array('th'=>'จำนวน'
                                                                 ,'en'=>'Total'
                                                         )
             ,'Type'                                     => array('th'=>'ประเภท'
@@ -536,7 +536,7 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'WelcomeTo'                                => array('th'=>'ยินดีต้อนรับเข้าสู่'
                                                                 ,'en'=>'Welcome to'
                                                         )
-            ,'Withdraw'                                 => array('th'=>'ยอดเบิก'
+            ,'Withdraw'                                 => array('th'=>'เบิกแล้ว'
                                                                 ,'en'=>'Withdraw'
                                                         )
             ,'Year'                                     => array('th'=>'ปี'
