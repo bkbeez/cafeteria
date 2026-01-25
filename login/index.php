@@ -16,6 +16,13 @@
             exit;
         }
     }
+/*<div class="text-center mb-3">
+    <button type="submit" class="btn btn-primary rounded w-100">เข้าสู่ระบบ &rarr;</button>
+</div>
+<div class="text-center">
+    <div class="divider-icon my-4">หรือ</div>
+    <button type="button" class="btn btn-grape rounded w-100">สำหรับเจ้าหน้าที่</button>
+</div>*/
 ?>
 <!DOCTYPE html>
 <html lang="<?=App::lang()?>">
