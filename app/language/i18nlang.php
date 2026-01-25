@@ -323,6 +323,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'NotFoundResult'                           => array('th'=>'ไม่พบรายการ'
                                                                 ,'en'=>'Not found result'
                                                         )
+            ,'Number'                                   => array('th'=>'หมายเลข'
+                                                                ,'en'=>'Number'
+                                                        )
             ,'Objectivity'                              => array('th'=>'วัตถุประสงค์'
                                                                 ,'en'=>'Objectivity'
                                                         )
