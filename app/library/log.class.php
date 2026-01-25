@@ -41,5 +41,21 @@ class Log {
         }
     }
 
+    /**
+     * Shop
+     * @param  $logs
+     * @return void
+     */
+    static function shop($parameters){
+        if( User::get('email') ){
+            $logs = $parameters;
+            if( !isset($logs['id'])||!$logs['id'] ){
+                $logs['id'] = (new datetime())->format("YmdHis").Helper::randomNumber(12);
+            }
+            $logs['email'] = User::get('email');
+            DB::create("INSERT INTO `xlg_shop` (`id`,`email`,`mode`,`shop_id`,`date_at`,`title`,`value`,`remark`) VALUES (:id,:email,:mode,:shop_id,NOW(),:title,:value,:remark);", $logs);
+        }
+    }
+
 }
 ?>
