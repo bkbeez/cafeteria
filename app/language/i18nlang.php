@@ -173,6 +173,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Exist'                                    => array('th'=>'มีอยู่แล้ว'
                                                                 ,'en'=>'Exist'
                                                         )
+            ,'Expose'                                   => array('th'=>'เบิกออก'
+                                                                ,'en'=>'Expose'
+                                                        )
             ,'Fail'                                     => array('th'=>'ล้มเหลว'
                                                                 ,'en'=>'Fail'
                                                         )
@@ -235,6 +238,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'Invalid'                                  => array('th'=>'ไม่ถูกต้อง'
                                                                 ,'en'=>'Invalid'
+                                                        )
+            ,'Inventory'                                => array('th'=>'คงคลัง'
+                                                                ,'en'=>'Total'
                                                         )
             ,'Keyword'                                  => array('th'=>'คำค้น'
                                                                 ,'en'=>'Keyword'
