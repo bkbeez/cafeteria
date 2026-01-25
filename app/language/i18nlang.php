@@ -392,6 +392,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Password'                                 => array('th'=>'รหัสผ่าน'
                                                                 ,'en'=>'Password'
                                                         )
+            ,'PasswordDefault'                          => array('th'=>'รหัสผ่านเริ่มต้น'
+                                                                ,'en'=>'Default Password'
+                                                        )
             ,'PasswordConfirm'                          => array('th'=>'ยืนยันรหัสผ่านใหม่'
                                                                 ,'en'=>'Confirm Password'
                                                         )
