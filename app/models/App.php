@@ -33,7 +33,7 @@ class App {
                 $htmls .= '</div>';
                 $htmls .= '<div class="offcanvas-body d-flex flex-column">';
                     $htmls .= '<div class="offcanvas-box profile">';
-                        $htmls .= '<a href="/?profile">';
+                        $htmls .= '<a href="'.APP_HOME.'/profile">';
                             $htmls .= '<div class="edit-box"><i class="uil uil-pen"></i></div>';
                             $htmls .= '<div class="img-box"><img src="'.User::get('image').'" onerror="this.onerror=null;this.src=\''.THEME_IMG.'/avatar.png\';" alt="Avatar"/></div>';
                             $htmls .= '<div class="info-box">';
