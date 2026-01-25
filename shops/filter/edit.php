@@ -113,13 +113,7 @@
 <script type="text/javascript">
     function record_events(action, params){
         $("form[name='RecordForm'] label>em").remove();
-        if(action=='cmu'){
-            if( params.self.value=='Y' ){
-                $("form[name='RecordForm'] input[name='email_cmu']").removeAttr('disabled');
-            }else{
-                $("form[name='RecordForm'] input[name='email_cmu']").val(null).attr('disabled', true);
-            }
-        }else if(action=="confirm"){
+        if(action=="confirm"){
             if( params!=undefined ){
                 $("form[name='RecordForm'] .confirm-box").html('').css('margin-top','0');
                 $("form[name='RecordForm'] .row-button").show();
