@@ -29,6 +29,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'AutoReplyMsg'                             => array('th'=>'ข้อความอัตโนมัติ'
                                                                 ,'en'=>'Automatic mail'
                                                         )
+            ,'Available'                                => array('th'=>'พร้อมใช้งาน'
+                                                                ,'en'=>'Available'
+                                                        )
             ,'Back'                                     => array('th'=>'กลับ'
                                                                 ,'en'=>'Back'
                                                         )
@@ -307,6 +310,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'NoPaid'                                   => array('th'=>'ยังไม่ได้ชำระ'
                                                                 ,'en'=>'No paid'
+                                                        )
+            ,'NotAvailable'                             => array('th'=>'ระงับใช้งาน'
+                                                                ,'en'=>'Not Available'
                                                         )
             ,'Notes'                                    => array('th'=>'หมายเหตุ'
                                                                 ,'en'=>'Notes'
