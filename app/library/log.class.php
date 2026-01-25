@@ -37,7 +37,7 @@ class Log {
                 $logs['id'] = (new datetime())->format("YmdHis").Helper::randomNumber(12);
             }
             $logs['email'] = User::get('email');
-            DB::create("INSERT INTO `xlg_member` (`id`,`email`,`mode`,`date_at`,`value`,`remark`) VALUES (:id,:email,:mode,NOW(),:value,:remark);", $logs);
+            DB::create("INSERT INTO `xlg_member` (`id`,`email`,`mode`,`member_id`,`date_at`,`title`,`value`,`remark`) VALUES (:id,:email,:mode,:member_id,NOW(),:title,:value,:remark);", $logs);
         }
     }
 
