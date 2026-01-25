@@ -55,88 +55,45 @@
         margin-right: 3px;
     }
 </style>
-<div class="modal-dialog modal-dialog-centered modal-lg">
+<div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-manage">
-        <form name="RecordForm" action="<?=$form?>/scripts/update.php" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
+        <form name="RecordForm" action="<?=$form?>/scripts/setlogin.php" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
             <input type="hidden" name="id" value="<?=((isset($data['id'])&&$data['id'])?$data['id']:null)?>"/>
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h2 class="mb-0 text-primary text-start on-text-oneline"><i class="uil uil-edit" style="float:left;font-size:36px;line-height:36px;margin-right:3px;"></i><?=( (App::lang()=='en') ? 'Edit User' : 'แก้ไขผู้ใช้' )?></h2>
+                <h2 class="mb-0 text-primary text-start on-text-oneline"><i class="uil uil-lock-alt" style="float:left;font-size:36px;line-height:36px;margin-right:3px;"></i><?=( (App::lang()=='en') ? 'User and Password' : 'ผู้ใช้และรหัสผ่าน' )?></h2>
             </div>
             <div class="modal-body">
                 <div class="alert alert-primary alert-icon mb-2">
-                    <div class="row gx-1">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <?=$rolehtmls?>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <div class="form-floating mb-1">
-                                <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
-                                <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
-                            </div>
-                        </div>
+                    <div class="form-floating mb-1">
+                        <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
+                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
                     </div>
+                </div>
+                <div class="alert alert-danger alert-icon mb-2 pt-3">
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="is_cmu_y" class="form-check-input" type="radio" name="is_cmu" value="Y"<?=((isset($data['is_cmu'])&&$data['is_cmu']=='Y')?' checked':null)?> onchange="record_events('cmu', { 'self':this });">
-                                <label for="is_cmu_y" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'CMU Account' : 'บัญชี CMU' )?></label>
+                                <input id="pass_1" class="form-check-input" type="radio" name="is_pass" value="A" checked onchange="record_events('password', { 'self':this });">
+                                <label for="pass_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Login with normally' : 'เข้าสู่ระบบด้วยวิธีปกติ' )?></label>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
-                                <input id="is_cmu_n" class="form-check-input" type="radio" name="is_cmu" value="N"<?=((isset($data['is_cmu'])&&$data['is_cmu']=='N')?' checked':null)?> onchange="record_events('cmu', { 'self':this });">
-                                <label for="is_cmu_n" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> CMU Account' : '<u class="text-red">ไม่ใช่</u>บัญชี CMU' )?></label>
+                                <input id="pass_2" class="form-check-input" type="radio" name="is_pass" value="N" onchange="record_events('password', { 'self':this });">
+                                <label for="pass_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Reset the password.' : 'รีเซตรหัสที่กำหนดไว้' )?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                            <div class="form-check mb-2">
+                                <input id="pass_3" class="form-check-input" type="radio" name="is_pass" value="Y" onchange="record_events('password', { 'self':this });">
+                                <label for="pass_3" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Login with this password' : 'กำหนดให้บัญชีนี้เข้าสู่ระบบด้วยรหัสผ่าน &darr;' )?></label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating mb-1">
-                        <input id="email_cmu" name="email_cmu" value="<?=((isset($data['email_cmu'])&&$data['email_cmu'])?$data['email_cmu']:null)?>" type="email" class="form-control" placeholder="..."<?=((isset($data['is_cmu'])&&$data['is_cmu']=='Y')?null:' disabled')?>>
-                        <label for="email_cmu">CMU Mail <span class="text-red">*</span></label>
-                    </div>
-                </div>
-                <div class="alert alert-primary alert-icon mb-2">
-                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=( (App::lang()=='en') ? 'Information' : 'ข้อมูล' )?></p>
-                    <div class="row gx-1">
-                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2">
-                            <div class="form-floating mb-1">
-                                <input id="title" name="title" value="<?=((isset($data['title'])&&$data['title'])?$data['title']:null)?>" type="text" class="form-control" placeholder="...">
-                                <label for="title"><?=Lang::get('NameTitle')?></label>
-                            </div>
-                        </div>
-                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-4">
-                            <div class="form-floating mb-1">
-                                <input id="name" name="name" value="<?=((isset($data['name'])&&$data['name'])?$data['name']:null)?>" type="text" class="form-control" placeholder="...">
-                                <label for="name"><?=Lang::get('NameFirst')?> <span class="text-red">*</span></label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <div class="form-floating mb-1">
-                                <input id="surname" name="surname" value="<?=((isset($data['surname'])&&$data['surname'])?$data['surname']:null)?>" type="text" class="form-control" placeholder="...">
-                                <label for="surname"><?=Lang::get('NameLast')?></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-floating form-select-wrapper mb-1">
-                        <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption(((isset($data['shop_id'])&&$data['shop_id'])?$data['shop_id']:null), '<option value="">'.Lang::get('Empty').'...</option>')?></select>
-                        <label for="shop_id"><?=Lang::get('Shop')?></label>
-                    </div>
-                </div>
-                <div class="alert alert-danger alert-icon mb-2">
-                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('Status')?></p>
-                    <div class="row gx-1">
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
-                            <div class="form-check mb-2">
-                                <input id="status_1" class="form-check-input" type="radio" name="status" value="Y"<?=((isset($data['status_id'])&&$data['status_id']>0)?' checked':null)?>>
-                                <label for="status_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Available' : 'พร้อมใช้งาน' )?></label>
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
-                            <div class="form-check mb-2">
-                                <input id="status_2" class="form-check-input" type="radio" name="status" value="N"<?=((isset($data['status_id'])&&$data['status_id']<1)?' checked':null)?>>
-                                <label for="status_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> available' : '<u class="text-red">ระงับ</u>ใช้งาน' )?></label>
-                            </div>
-                        </div>
+                        <input id="password_default" name="password_default" value="" type="text" class="form-control" placeholder="..." disabled>
+                        <label for="password_default"><?=Lang::get('PasswordDefault')?></label>
                     </div>
                 </div>
             </div>
@@ -157,11 +114,11 @@
 <script type="text/javascript">
     function record_events(action, params){
         $("form[name='RecordForm'] label>em").remove();
-        if(action=='cmu'){
+        if(action=='password'){
             if( params.self.value=='Y' ){
-                $("form[name='RecordForm'] input[name='email_cmu']").removeAttr('disabled');
+                $("form[name='RecordForm'] input[name='password_default']").removeAttr('disabled').focus();
             }else{
-                $("form[name='RecordForm'] input[name='email_cmu']").val(null).attr('disabled', true);
+                $("form[name='RecordForm'] input[name='password_default']").val(null).attr('disabled', true);
             }
         }else if(action=="confirm"){
             if( params!=undefined ){

@@ -99,11 +99,19 @@
                     ,'<span class=\"badge badge-sm bg-pale-yellow text-yellow rounded me-1 align-self-start\"><i class=\"uil uil-shield\"></i>USER</span>'
                 )
             ) AS user_icon
+            , IF(member.is_pass='Y'
+                ,'<span class=\"badge badge-sm bg-red text-white rounded me-1 align-self-start\"><i class=\"uil uil-lock-alt\"></i>LOGIN</span>'
+                ,NULL
+            ) AS login_icon
+            , IF(member.shop_id IS NOT NULL
+                ,'<span class=\"badge badge-sm bg-pale-blue text-blue rounded me-1 align-self-start\"><i class=\"uil uil-check-circle\"></i>SHOP</span>'
+                ,NULL
+            ) AS shop_icon
             , IF(member.is_cmu='Y'
                 ,'<span class=\"badge badge-sm bg-pale-grape text-grape rounded me-1 align-self-start\"><i class=\"uil uil-check-circle\"></i>CMU</span>'
-                ,'<span class=\"badge badge-sm bg-pale-ash text-muted rounded me-1 align-self-start\"><i class=\"uil uil-circle\"></i>CMU</span>'
+                ,NULL
             ) AS cmu_icon
-            , 'NORM' AS status
+            , IF(member.status_id<0, 'not-available', 'available') AS status
             FROM member
             WHERE member.id IS NOT NULL";
     $sql .= $condition;
@@ -113,6 +121,7 @@
     $lists = DB::sql($sql, $parameters);
     if( isset($lists)&&count($lists)>0 ){
         $lang_edit = Lang::get('Edit');
+        $lang_login = Lang::get('Login');
         $lang_delete = Lang::get('Del');
         foreach($lists as $no => $row){
             $row_no = (($start+1)+$no);
@@ -125,14 +134,25 @@
                     $htmls .= '<font class="mail-o">'.$row['email'].'</font>';
                     $htmls .= '<font>'.$row['fullname'].'</font>';
                     $htmls .= '<span class="fs-sm name-o"><i class="uil uil-user"></i> '.$row['fullname'].'</span>';
-                    $htmls .= ( $row['cmu_icon'] ? '<span class="fs-sm remark-o">'.$row['cmu_icon'].( $row['email_cmu'] ? $row['email_cmu'] : null ).'</span>' : null );
+                    $htmls .= '<span class="fs-sm remark-o">';
+                        $htmls .= ( $row['login_icon'] ? $row['login_icon'] : null );
+                        $htmls .= ( $row['shop_icon'] ? $row['shop_icon'] : null );
+                        $htmls .= ( $row['cmu_icon'] ? $row['cmu_icon'].( $row['email_cmu'] ? $row['email_cmu'] : null ) : null );
+                    $htmls .= '</span>';
                 $htmls .= '</td>';
                 $htmls .= '<td class="remark">';
-                    $htmls .= $row['cmu_icon'];
+                    $htmls .= ( $row['login_icon'] ? $row['login_icon'] : null );
+                    $htmls .= ( $row['shop_icon'] ? $row['shop_icon'] : null );
+                    $htmls .= ( $row['cmu_icon'] ? $row['cmu_icon'] : null );
                     $htmls .= '<font>'.( $row['email_cmu'] ? $row['email_cmu'] : null ).'</font>';
                 $htmls .= '</td>';
-                $htmls .= '<td class="actions act-2">';
+                $htmls .= '<td class="actions act-3">';
                     $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
+                    if( $row['shop_id'] ){
+                        $htmls .= '<div class="btn-box"><button onclick="manage_events(\'login\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-lock-alt"></i></button><small class=b-tip>'.$lang_login.'</small></div>';
+                    }else{
+                        $htmls .= '<div class="btn-box disabled"><button type="button" class="btn btn-sm btn-circle btn-soft-ash text-ash" style="cursor:default;"><i class="uil uil-lock-alt"></i></button><small class=b-tip>'.$lang_login.'</small></div>';
+                    }
                     if( $admin_as||$row['role']!='ADMIN' ){
                         $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
                     }else{

@@ -92,6 +92,10 @@
         line-height: 12px;
         margin:0 2px 0 -2px;
     }
+    .table-filter .filter-result .not-available {
+        color: #CCC!important;
+        font-style: italic !important;
+    }
     @media only all and (max-width: 991px) {
         .table-filter .filter-result .mail {
             width: 35%;
@@ -208,7 +212,7 @@
                                 <th scope="col" class="mail"><?=Lang::get('Email')?></th>
                                 <th scope="col" class="name"><?=Lang::get('NameFull')?></th>
                                 <th scope="col" class="remark">&nbsp;</th>
-                                <th scope="col" class="actions act-2 col-last">&nbsp;</th>
+                                <th scope="col" class="actions act-3 col-last">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -235,6 +239,15 @@
         }else if(action=='edit'){
             params['form_as'] = '<?=$form?>';
             $("#ManageDialog").load("<?=$form?>/filter/edit.php", params, function(response, status, xhr){
+                if(status=="error"){
+                    $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
+                }else{
+                    $("#ManageDialog").modal('show');
+                }
+            });
+        }else if(action=='login'){
+            params['form_as'] = '<?=$form?>';
+            $("#ManageDialog").load("<?=$form?>/filter/login.php", params, function(response, status, xhr){
                 if(status=="error"){
                     $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
                 }else{
