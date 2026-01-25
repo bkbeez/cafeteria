@@ -90,7 +90,7 @@
             , shop_type.name_en AS type_en
             , TRIM(CONCAT(COALESCE(shop.title,''),shop.name,' ',COALESCE(shop.surname,''))) AS owner_name
             , IF(shop.address IS NOT NULL
-                ,TRIM(CONCAT(shop.address,' ',COALESCE(shop.zipcode,'')))
+                ,TRIM(CONCAT(shop.address,' ',COALESCE(shop.province,''),' ',COALESCE(shop.zipcode,'')))
                 ,NULL
             ) AS fulladdress
             , IF(shop.status_id<0, 'not-available', 'available') AS status
