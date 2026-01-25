@@ -132,7 +132,7 @@
             margin-right: 3px;
         }
     }
-    @media only all and (max-width: 677px) {
+    @media only all and (max-width: 667px) {
         .table-filter .filter-result .remark {
             display: none;
         }
