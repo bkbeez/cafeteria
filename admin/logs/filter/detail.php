@@ -23,7 +23,7 @@
 <style type="text/css">
     .modal-dialog .modal-header {
         min-height:100px;
-        background: #eeeef6;
+        background: #f5f5f7;
     }
     .modal-dialog .modal-body {
         margin-top: -30px;
@@ -31,40 +31,42 @@
         padding-right: 35px;
     }
     .modal-dialog .modal-body>.alert {
-        padding: 5px 15px;
+        padding: 10px 15px 5px 15px;
     }
 </style>
-<div class="modal-dialog modal-dialog-centered">
+<div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content modal-manage">
         <div class="form-manage">
             <input type="hidden" name="id" value="<?=((isset($data['id'])&&$data['id'])?$data['id']:null)?>"/>
             <div class="modal-header">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h2 class="mb-0 text-primary text-start on-text-oneline"><i class="uil uil-info-circle" style="float:left;font-size:36px;line-height:36px;margin-right:3px;"></i><?=Lang::get('User')?></h2>
+                <h2 class="mb-0 text-dark text-start on-text-oneline"><i class="uil uil-clock" style="float:left;font-size:36px;line-height:36px;margin-right:3px;"></i><?=((isset($data['date_display'])&&$data['date_display'])?$data['date_display']:Lang::get('User'))?></h2>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary alert-icon mb-2">
-                    <div class="form-floating mb-1">
-                        <div class="form-control on-text-display"><?=((isset($data['date_display'])&&$data['date_display'])?$data['date_display']:'-')?></div>
-                        <label><?=Lang::get('DateTime')?></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <div class="form-control on-text-display"><?=((isset($data['email'])&&$data['email'])?$data['email']:'-')?></div>
-                        <label><?=Lang::get('Email')?></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <div class="form-control on-text-display"><?=((isset($data['fullname'])&&$data['fullname'])?$data['fullname']:'-')?></div>
-                        <label><?=Lang::get('NameFull')?></label>
+                <div class="alert alert-secondary alert-icon mb-2">
+                    <div class="row gx-1">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <div class="form-control on-text-display"><?=((isset($data['email'])&&$data['email'])?$data['email']:'-')?></div>
+                                <label><?=Lang::get('Email')?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <div class="form-control on-text-display"><?=((isset($data['fullname'])&&$data['fullname'])?$data['fullname']:'-')?></div>
+                                <label><?=Lang::get('NameFull')?></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="alert alert-primary alert-icon mb-4" style="padding:5px 15px;">
+                <div class="alert alert-secondary alert-icon mb-4">
                     <div class="mb-1">
                         <div class="form-control on-text-display">
-                            <div style="right:20px;float:right;position:absolute;margin-top:-2px;"><a href="javascript:void(0);" class="btn btn-soft-primary btn-sm rounded-pill" onclick="record_events('display', { 'self':this });" display="N" style="padding:1px 7px 1px 5px;"><span class="uil uil-plus"></span><font class="on-text-normal"><?=Lang::get('Data')?></font></a></div>
+                            <div style="right:20px;float:right;position:absolute;margin-top:-2px;"><a href="javascript:void(0);" class="btn btn-soft-primary btn-sm rounded-pill" onclick="record_events('display', { 'self':this });" display="Y" style="padding:1px 7px 1px 5px;"><span class="uil uil-minus"></span><font class="on-text-normal"><?=Lang::get('Data')?></font></a></div>
                             <b class="fs-16"><?=Lang::get('Detail')?></b>
                         </div>
                     </div>
-                    <div class="on-display" style="display:none;">
+                    <div class="on-display">
                         <div class="row gx-1">
                             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                                 <div class="form-floating mb-1">

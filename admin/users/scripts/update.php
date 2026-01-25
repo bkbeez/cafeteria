@@ -16,8 +16,6 @@
     $parameters = array();
     $parameters['id'] = $_POST['id'];
     $parameters['email'] = $_POST['email'];
-    // Check
-    $check = User::one("SELECT * FROM member WHERE id=:id AND email=:email LIMIT 1;", $parameters);
     $datas  = '`role`';
     $datas .= "=:role";
     $parameters['role'] = $_POST['role'];    
@@ -43,6 +41,9 @@
             Status::error( Lang::get('Exist').' !!!', array('onfocus'=>"email_cmu") );
         }
     }
+    $datas .= ',`shop_id`';
+    $datas .= "=:shop_id";
+    $parameters['shop_id'] = ( (isset($_POST['shop_id'])&&$_POST['shop_id']) ? $_POST['shop_id'] : null );
     $datas .= ',`status_id`';
     $datas .= "=:status_id";
     $parameters['status_id'] = ( (isset($_POST['status_id'])&&$_POST['status_id']) ? $_POST['status_id'] : 0 );
@@ -52,32 +53,6 @@
     $datas .= "=:user_update";
     $parameters['user_update'] = User::get('email');
     if( User::update("UPDATE `member` SET $datas WHERE id=:id AND email=:email;", $parameters) ){
-        if( $check['role']!=$parameters['role'] ){
-            $logs = array();
-            $logs['member_id'] = $parameters['id'];
-            $logs['mode'] = "CHROLE";
-            $logs['title'] = "Change role";
-            $logs['remark'] = $check['role'].' &rang; '.$parameters['role'];
-            //User::log($logs);
-        }
-        if( $check['email_cmu']!=$parameters['email_cmu'] ){
-            $logs = array();
-            $logs['member_id'] = $parameters['id'];
-            $logs['mode'] = "CHMAIL";
-            $logs['title'] = "Change CMU Mail";
-            $logs['remark'] = ( $check['email_cmu'] ? $check['email_cmu'] : 'EMPTY' );
-            $logs['remark'] .= ' &rang; '.( $parameters['email_cmu'] ? $parameters['email_cmu'] : 'EMPTY' );
-            //User::log($logs);
-        }
-        if( $check['status_id']!=$parameters['status_id'] ){
-            $logs = array();
-            $logs['member_id'] = $parameters['id'];
-            $logs['mode'] = "STATUS";
-            $logs['title'] = "Change status";
-            $logs['remark'] = ( $check['status_id']>1 ? 'ระงับใช้งาน' : 'พร้อมใช้งาน' );
-            $logs['remark'] .= ' &rang; '.( $check['parameters']>1 ? 'ระงับใช้งาน' : 'พร้อมใช้งาน' );
-            //User::log($logs);
-        }
         if( $parameters['email']==User::get('email') ){
             Auth::login(User::get('email'));
         }

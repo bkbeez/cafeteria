@@ -23,7 +23,7 @@
         margin-right: 3px;
     }
 </style>
-<div class="modal-dialog modal-dialog-centered">
+<div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content modal-manage">
         <form name="RecordForm" action="<?=$form?>/scripts/create.php" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
             <div class="modal-header">
@@ -32,28 +32,19 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-secondary alert-icon mb-2">
-                    <div class="form-floating form-select-wrapper mb-1">
-                        <select id="role" name="role" class="form-select" aria-label="..." required><?=Util::memberRoleOption((Auth::admin()?true:false) )?></select>
-                        <label for="role"><?=Lang::get('UserAccount')?> <span class="text-red">*</span></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input id="email" name="email" value="" type="email" class="form-control" placeholder="...">
-                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
-                    </div>
-                </div>
-                <div class="alert alert-secondary alert-icon mb-2">
-                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('Data')?></p>
-                    <div class="form-floating mb-1">
-                        <input id="title" name="title" value="" type="text" class="form-control" placeholder="...">
-                        <label for="title"><?=Lang::get('NameTitle')?></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input id="name" name="name" value="" type="text" class="form-control" placeholder="...">
-                        <label for="name"><?=Lang::get('NameFirst')?> <span class="text-red">*</span></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input id="surname" name="surname" value="" type="text" class="form-control" placeholder="...">
-                        <label for="surname"><?=Lang::get('NameLast')?></label>
+                    <div class="row gx-1">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating form-select-wrapper mb-1">
+                                <select id="role" name="role" class="form-select" aria-label="..." required><?=Util::memberRoleOption((Auth::admin()?true:false))?></select>
+                                <label for="role"><?=Lang::get('UserAccount')?> <span class="text-red">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input id="email" name="email" value="" type="email" class="form-control" placeholder="...">
+                                <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
+                            </div>
+                        </div>
                     </div>
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
@@ -65,13 +56,40 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="is_cmu_n" class="form-check-input" type="radio" name="is_cmu" value="N" onchange="record_events('cmu', { 'self':this });">
-                                <label for="is_cmu_n" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<span class="underline-3 style-3 text-red red">Not</span> CMU Account' : '<span class="underline-3 style-3 text-red red">ไม่ใช่</span>บัญชี CMU' )?></label>
+                                <label for="is_cmu_n" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> CMU Account' : '<u class="text-red">ไม่ใช่</u>บัญชี CMU' )?></label>
                             </div>
                         </div>
                     </div>
                     <div class="form-floating mb-1">
                         <input id="email_cmu" name="email_cmu" value="" type="email" class="form-control" placeholder="...">
                         <label for="email_cmu">CMU Mail <span class="text-red">*</span></label>
+                    </div>
+                </div>
+                <div class="alert alert-secondary alert-icon mb-2">
+                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('Data')?></p>
+                    <div class="row gx-1">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2">
+                            <div class="form-floating mb-1">
+                                <input id="title" name="title" value="" type="text" class="form-control" placeholder="...">
+                                <label for="title"><?=Lang::get('NameTitle')?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-4">
+                            <div class="form-floating mb-1">
+                                <input id="name" name="name" value="" type="text" class="form-control" placeholder="...">
+                                <label for="name"><?=Lang::get('NameFirst')?> <span class="text-red">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input id="surname" name="surname" value="" type="text" class="form-control" placeholder="...">
+                                <label for="surname"><?=Lang::get('NameLast')?></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating form-select-wrapper mb-1">
+                        <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption(null, '<option value="">'.Lang::get('Empty').'...</option>')?></select>
+                        <label for="shop_id"><?=Lang::get('Shop')?></label>
                     </div>
                 </div>
             </div>

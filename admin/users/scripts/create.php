@@ -47,18 +47,15 @@
             Status::error( Lang::get('Exist').' !!!', array('onfocus'=>"email_cmu") );
         }
     }
+    $fields .= ',`shop_id`';
+    $values .= ",:shop_id";
+    $parameters['shop_id'] = ( (isset($_POST['shop_id'])&&$_POST['shop_id']) ? $_POST['shop_id'] : null );
     $fields .= ',`date_create`';
     $values .= ",NOW()";
     $fields .= ',`user_create`';
     $values .= ",:user_create";
     $parameters['user_create'] = User::get('email');
     if( User::create("INSERT INTO `member` ($fields) VALUES ($values)", $parameters) ){
-        $logs = array();
-        $logs['member_id'] = $parameters['id'];
-        $logs['mode'] = "CREATE";
-        $logs['title'] = "Create user";
-        $logs['remark'] = $parameters['email'].( $parameters['email_cmu'] ? '|'.$parameters['email_cmu']: null );
-        //User::log($logs);
         Status::success( Lang::get('SuccessCreate') );
     }
     Status::error( Lang::get('ErrorAdd').', <em>'.Lang::get('PleaseTryAgain').'</em> !!!' );

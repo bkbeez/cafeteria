@@ -55,7 +55,7 @@
         margin-right: 3px;
     }
 </style>
-<div class="modal-dialog modal-dialog-centered">
+<div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content modal-manage">
         <form name="RecordForm" action="<?=$form?>/scripts/update.php" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
             <input type="hidden" name="id" value="<?=((isset($data['id'])&&$data['id'])?$data['id']:null)?>"/>
@@ -65,25 +65,16 @@
             </div>
             <div class="modal-body">
                 <div class="alert alert-primary alert-icon mb-2">
-                    <?=$rolehtmls?>
-                    <div class="form-floating mb-1">
-                        <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
-                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*<?=((isset($data['id'])&&$data['id'])?' <sup>( '.$data['id'].' )</sup>':null)?></span></label>
-                    </div>
-                </div>
-                <div class="alert alert-primary alert-icon mb-2">
-                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=( (App::lang()=='en') ? 'Information' : 'ข้อมูล' )?></p>
-                    <div class="form-floating mb-1">
-                        <input id="title" name="title" value="<?=((isset($data['title'])&&$data['title'])?$data['title']:null)?>" type="text" class="form-control" placeholder="...">
-                        <label for="title"><?=Lang::get('NameTitle')?></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input id="name" name="name" value="<?=((isset($data['name'])&&$data['name'])?$data['name']:null)?>" type="text" class="form-control" placeholder="...">
-                        <label for="name"><?=Lang::get('NameFirst')?> <span class="text-red">*</span></label>
-                    </div>
-                    <div class="form-floating mb-1">
-                        <input id="surname" name="surname" value="<?=((isset($data['surname'])&&$data['surname'])?$data['surname']:null)?>" type="text" class="form-control" placeholder="...">
-                        <label for="surname"><?=Lang::get('NameLast')?></label>
+                    <div class="row gx-1">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <?=$rolehtmls?>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
+                                <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
+                            </div>
+                        </div>
                     </div>
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
@@ -95,7 +86,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="is_cmu_n" class="form-check-input" type="radio" name="is_cmu" value="N"<?=((isset($data['is_cmu'])&&$data['is_cmu']=='N')?' checked':null)?> onchange="record_events('cmu', { 'self':this });">
-                                <label for="is_cmu_n" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<span class="underline-3 style-3 text-red red">Not</span> CMU Account' : '<span class="underline-3 style-3 text-red red">ไม่ใช่</span>บัญชี CMU' )?></label>
+                                <label for="is_cmu_n" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> CMU Account' : '<u class="text-red">ไม่ใช่</u>บัญชี CMU' )?></label>
                             </div>
                         </div>
                     </div>
@@ -105,6 +96,33 @@
                     </div>
                 </div>
                 <div class="alert alert-primary alert-icon mb-2">
+                    <p class="lead text-dark mb-1 text-start on-text-oneline"><?=( (App::lang()=='en') ? 'Information' : 'ข้อมูล' )?></p>
+                    <div class="row gx-1">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-2">
+                            <div class="form-floating mb-1">
+                                <input id="title" name="title" value="<?=((isset($data['title'])&&$data['title'])?$data['title']:null)?>" type="text" class="form-control" placeholder="...">
+                                <label for="title"><?=Lang::get('NameTitle')?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-4">
+                            <div class="form-floating mb-1">
+                                <input id="name" name="name" value="<?=((isset($data['name'])&&$data['name'])?$data['name']:null)?>" type="text" class="form-control" placeholder="...">
+                                <label for="name"><?=Lang::get('NameFirst')?> <span class="text-red">*</span></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input id="surname" name="surname" value="<?=((isset($data['surname'])&&$data['surname'])?$data['surname']:null)?>" type="text" class="form-control" placeholder="...">
+                                <label for="surname"><?=Lang::get('NameLast')?></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating form-select-wrapper mb-1">
+                        <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption(((isset($data['shop_id'])&&$data['shop_id'])?$data['shop_id']:null), '<option value="">'.Lang::get('Empty').'...</option>')?></select>
+                        <label for="shop_id"><?=Lang::get('Shop')?></label>
+                    </div>
+                </div>
+                <div class="alert alert-danger alert-icon mb-2">
                     <p class="lead text-dark mb-1 text-start on-text-oneline"><?=Lang::get('Status')?></p>
                     <div class="row gx-1">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
@@ -116,7 +134,7 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="status_2" class="form-check-input" type="radio" name="status_id" value="2"<?=((isset($data['status_id'])&&$data['status_id']==2)?' checked':null)?>>
-                                <label for="status_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<span class="underline-3 style-3 text-red red">Not</span> available' : '<span class="underline-3 style-3 text-red red">ระงับ</span>ใช้งาน' )?></label>
+                                <label for="status_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? '<u class="text-red">Not</u> available' : '<u class="text-red">ระงับ</u>ใช้งาน' )?></label>
                             </div>
                         </div>
                     </div>
