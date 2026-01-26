@@ -22,28 +22,10 @@
                         LIMIT 1;"
                         , array('id'=>$shop_id)
         );
-        /*$shopmaillists = Shop::sql("SELECT email FROM shop_user WHERE shop_id=:id ORDER BY date_create;", array('id'=>$shop_id));
-        if( isset($shopmaillists)&&count($shopmaillists)>0 ){
-            $shopmailhtmls = '';
-            foreach($shopmaillists as $seq => $item){
-                if( $seq>0 ){ $shopmailhtmls .= '<br>'; }
-                $shopmailhtmls .= $item['email'];
-            }
-        }
-        <div class="d-flex flex-row">
-            <div><div class="icon me-4 mt-n3" style="font-size:32px;"><i class="uil uil-envelopes"></i></div></div>
-            <div>
-                <h5 class="mb-0">
-                    <?=Lang::get('Email')?>
-                </h5>
-                <p class="set-shop-email"><?=( isset($shopmailhtmls) ? $shopmailhtmls : '-' )?></p>
-            </div>
-        </div>
-        */
     }
 ?>
 <?php include(APP_HEADER);?>
-<style>
+<style type="text/css">
     .card-profile .tax-number {
         margin: 0;
         padding-top: 0;
@@ -61,7 +43,7 @@
 <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 text-white" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
     <div class="container pt-18 pb-8"></div>
 </section>
-<section class="wrapper angled upper-end">
+<section class="wrapper">
     <div class="container pb-11">
         <div class="row">
             <div class="col-xl-12 mx-auto mt-n19">
@@ -130,6 +112,7 @@
                                         <p class="set-user-email"><?=User::get('email', '-').( (User::get('is_cmu')=='Y') ? '<br>'.User::get('email_cmu') : null )?></p>
                                     </div>
                                 </div>
+                                <button type="button" class="btn btn-primary rounded w-100" onclick="document.location='<?=APP_HOME?>/request';">BOOKING &rarr;</button>
                             </div>
                         </div>
                     </div>
