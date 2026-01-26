@@ -37,7 +37,7 @@ class App {
                             $htmls .= '<div class="edit-box"><i class="uil uil-pen"></i></div>';
                             $htmls .= '<div class="img-box"><img src="'.User::get('image').'" onerror="this.onerror=null;this.src=\''.THEME_IMG.'/avatar.png\';" alt="Avatar"/></div>';
                             $htmls .= '<div class="info-box">';
-                                $htmls .= '<font class="text-primary">'.User::get('name').'</font>';
+                                $htmls .= '<font class="text-primary">'.User::get('fullname').'</font>';
                                 $htmls .= '<div><i class="uil uil-envelopes"></i> '.User::get('email').'</div>';
                             $htmls .= '</div>';
                         $htmls .= '</a>';
