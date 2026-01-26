@@ -215,6 +215,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'FromDate'                                 => array('th'=>'จากวันที่'
                                                                 ,'en'=>'From Date'
                                                         )
+            ,'GrandTotal'                               => array('th'=>'ยอดเงินรวม'
+                                                                ,'en'=>'Grand Total'
+                                                        )
             ,'Gender'                                   => array('th'=>'เพศ'
                                                                 ,'en'=>'Gender'
                                                         )
@@ -518,7 +521,7 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Time'                                     => array('th'=>'เวลา'
                                                                 ,'en'=>'Time'
                                                         )
-            ,'Total'                                    => array('th'=>'จำนวน'
+            ,'Total'                                    => array('th'=>'ยอดรวม'
                                                                 ,'en'=>'Total'
                                                         )
             ,'Type'                                     => array('th'=>'ประเภท'
