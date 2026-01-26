@@ -31,70 +31,138 @@
 ?>
 <?php include(APP_HEADER);?>
 <style type="text/css">
-    form[name='RequestForm'] table {
+    form[name='ManageForm'] table {
         margin:0;
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
     }
-    form[name='RequestForm'] table .no {
+    form[name='ManageForm'] table .no {
         width: 50px;
         text-align: center;
     }
-    form[name='RequestForm'] table .name {
+    form[name='ManageForm'] table .name {
         width: auto;
     }
-    form[name='RequestForm'] table .price {
+    form[name='ManageForm'] table .price {
         width: 100px;
         text-align: center;
     }
-    form[name='RequestForm'] table .quantity {
+    form[name='ManageForm'] table .quantity {
         width: 125px;
     }
-    form[name='RequestForm'] table .amount {
+    form[name='ManageForm'] table .amount {
         width: 125px;
     }
-
-
-    form[name='RequestForm'] table thead tr th {
+    form[name='ManageForm'] table thead tr th {
         text-align: center;
-        vertical-align: middle;
+        vertical-align: top;
     }
-    form[name='RequestForm'] table tbody tr td {
-        padding: 0 0 0 0;
-        vertical-align: middle;
+    form[name='ManageForm'] table tbody tr td {
+        padding: 14px 0 0 0;
+        vertical-align: top;
     }
-    form[name='RequestForm'] table tbody tr td.quantity,
-    orm[name='RequestForm'] table tbody tr td.amount {
+    form[name='ManageForm'] table tbody tr td.quantity {
         padding-top: 2px;
         padding-bottom: 2px;
     }
+    form[name='ManageForm'] table tbody tr td.amount {
+        text-align: right;
+        padding-right: 25px;
+    }
+    form[name='ManageForm'] table tbody tr td.quantity>input {
+        text-align: right;
+    }
+    form[name='ManageForm'] table tfoot tr td {
+        font-weight: bold;
+        vertical-align: top;
+        padding: 14px 0 25px 0;
+        border-bottom-color: white;
+    }
+    form[name='ManageForm'] table tfoot tr td.name {
+        text-align: right;
+    }
+    form[name='ManageForm'] table tfoot tr td.quantity {
+        text-align: right;
+        padding-right: 36px;
+    }
+    form[name='ManageForm'] table tfoot tr td.amount {
+        text-align: right;
+        padding-right: 25px;
+    }
+    form[name='ManageForm'] .manage-footer {
+        width: 100%;
+        height: 120px;
+        padding-top: 12px;
+        text-align: center;
+    }
+    form[name='ManageForm'] .manage-footer .confirm-btn {
+        padding-top: 25px;
+    }
+    form[name='ManageForm'] .manage-footer button>i {
+        float: left;
+        font-size: 28px;
+        line-height: 28px;
+        margin-right: 3px;
+    }
+    @media only all and (max-width: 667px) {
+        form[name='ManageForm'] table .no {
+            width: 5%;
+        }
+        form[name='ManageForm'] table .price {
+            width: 70px;
+        }
+        form[name='ManageForm'] table .quantity {
+            width: 20%;
+        }
+        form[name='ManageForm'] table .amount {
+            width: 20%;
+        }
+        form[name='ManageForm'] table thead tr th {
+            padding-left: 3px;
+            padding-right: 3px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        form[name='ManageForm'] table tbody tr td.name {
+            padding-top: 0;
+            vertical-align: middle;
+        }
+        form[name='ManageForm'] .manage-footer .confirm-btn>.btn {
+            width: 48%;
+        }
+        form[name='ManageForm'] .manage-footer .confirm-btn>.btn:first-chlid {
+            float: left;
+            position: absolute;
+        }
+    }
 </style>
-<form name="RequestForm" action="<?=$form?>" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
+<form name="ManageForm" action="<?=$form?>" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
     <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 text-white" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
         <div class="container text-center pt-4 pb-16">
             <div class="row">
                 <div class="col-md-10 col-xl-8 mx-auto">
                     <div class="post-header">
                         <h1 class="display-1 text-white mb-2"><?=((isset($shop['shop_name'])&&$shop['shop_name'])?$shop['shop_name']:Lang::get('Shop'))?></h1>
-                        <ul class="post-meta fs-17 mb-5">
-                            <li><i class="uil uil-calendar-alt"></i> <?=Helper::dateDisplay(new datetime())?></li>
+                        <ul class="post-meta text-white fs-17 mb-5">
                             <li><i class="uil uil-building"></i> <?=( (App::lang()=='en') ? APP_FACT_EN : APP_FACT_TH )?></li>
+                            <li><i class="uil uil-calendar-alt"></i> <?=Helper::dateDisplay(new datetime())?></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="wrapper bg-light">
-        <div class="container pb-14 pb-md-16">
+    <section class="wrapper">
+        <div class="container pb-2">
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <div class="blog single mt-n16">
                         <div class="card shadow-lg">
-                            <div class="card-body">
+                            <div class="card-body p-1">
                             <?php if( isset($lists)&&count($lists)>0 ){ ?>
-                                <table class="table table-hover">
+                                <table border="0" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="no">#</th>
@@ -102,28 +170,43 @@
                                             <th scope="col" class="price"><?=Lang::get('Price')?></th>
                                             <th scope="col" class="quantity"><?=Lang::get('Quantity')?></th>
                                             <th scope="col" class="amount"><?=Lang::get('Amount')?></th>
-                                            <th scope="col" class="actions">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php foreach($lists as $seq => $item){ ?>
-                                        <tr>
+                                        <tr class="AT-<?=$item['id']?>">
                                             <td class="no"><?=($seq+1)?></td>
                                             <td class="name"><?=$item['name']?></td>
-                                            <td class="price"><?=( (isset($item['charge'])&&$item['charge']>0) ? number_format($item['charge'],2) : '-' )?></td>
+                                            <td class="price"><?=(($item['charge']>0)?number_format($item['charge'],2).'฿':'-')?></td>
                                             <td class="quantity">
-                                                <input name="quantity" value="0" type="text" class="form-control" placeholder="..." style="text-align:right!important;">
+                                                <input type="hidden" name="list[<?=$seq?>][stock_id]" value="<?=$item['id']?>"/>
+                                                <input type="hidden" name="list[<?=$seq?>][name]" value="<?=$item['name']?>"/>
+                                                <input type="number" name="list[<?=$seq?>][quantity]" value="0" min="0" class="form-control set-quantity" placeholder="..." onchange="manage_events('change', { 'at':'<?=$item['id']?>' });"/>
+                                                <input type="hidden" name="list[<?=$seq?>][unit]" value="<?=$item['unit']?>" class="set-unit"/>
+                                                <input type="hidden" name="list[<?=$seq?>][price]" value="<?=$item['charge']?>" class="set-price"/>
+                                                <input type="hidden" name="list[<?=$seq?>][amount]" value="0" class="set-amount"/>
                                             </td>
-                                            <td class="amount">
-                                                <input name="amount" value="0" type="text" class="form-control" placeholder="..." readonly style="text-align:right!important;background:none;">
-                                            </td>
-                                            <td class="actions act-3">&nbsp;</td>
+                                            <td class="amount">0.00</td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td class="name" colspan="3"><?=Lang::get('Total')?></td>
+                                            <td class="quantity">0</td>
+                                            <td class="amount">0.00</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             <?php } ?>
                             </div>
+                        </div>
+                    </div>
+                    <div class="manage-footer">
+                        <div class="confirm-box"></div>
+                        <div class="confirm-btn">
+                            <button type="button" class="btn btn-lg btn-blue rounded" onclick="manage_events('confirm');"><i class="uil uil-check-circle"></i><?=Lang::get('Save')?></button>
+                            <button type="button" class="btn btn-lg btn-outline-danger rounded"><i class="uil uil-times-circle"></i><?=Lang::get('Cancel')?></button>
                         </div>
                     </div>
                 </div>
@@ -131,29 +214,103 @@
         </div>
     </section>
 </form>
-<div id="ManageDialog" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="false" aria-modal="true"></div>
 <script type="text/javascript">
-    function profile_events(action, params){
-        if(action=='shop'){
-            params['shop_id'] = '<?=$shop_id?>';
-            params['form_as'] = '<?=$form.'/shop'?>';
-            $("#ManageDialog").load("<?=$form?>/shop/"+params.on+".php", params, function(response, status, xhr){
-                if(status=="error"){
-                    $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
-                }else{
-                    $("#ManageDialog").modal('show');
+    function manage_events(action, params){
+        if(action=='change'){
+            var price = parseFloat($("form[name='ManageForm'] .AT-"+params.at+" .set-price").val());
+            if( !isNaN(price) ){
+                var quantity = parseFloat($("form[name='ManageForm'] .AT-"+params.at+" .set-quantity").val());
+                var amount = quantity*price;
+                $("form[name='ManageForm'] .AT-"+params.at+" .set-amount").val(amount);
+                $("form[name='ManageForm'] .AT-"+params.at+" .amount").html(amount.format(2));
+                manage_events('summary');
+            }
+        }else if(action=='summary'){
+            var quantitys = $("form[name='ManageForm'] table tbody .set-quantity");
+            var total = 0;
+            if(quantitys.length>0){
+                for(var i=0;i<quantitys.length;i++){
+                    var quantity = parseFloat($(quantitys[i]).val());
+                    if(!isNaN(quantity)){ total += quantity; }
                 }
-            });
-        }else if(action=='user'){
-            params['form_as'] = '<?=$form.'/user'?>';
-            $("#ManageDialog").load("<?=$form?>/user/"+params.on+".php", params, function(response, status, xhr){
-                if(status=="error"){
-                    $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
-                }else{
-                    $("#ManageDialog").modal('show');
+            }
+            $("form[name='ManageForm'] table tfoot .quantity").html(total.format(0));
+            var amounts = $("form[name='ManageForm'] table tbody .set-amount");
+            var grand_total = 0;
+            if(amounts.length>0){
+                for(var i=0;i<amounts.length;i++){
+                    var amount = parseFloat($(amounts[i]).val());
+                    if(!isNaN(amount)){ grand_total += amount; }
                 }
-            });
+            }
+            $("form[name='ManageForm'] table tfoot .amount").html(grand_total.format(2));
+        }else if(action=="confirm"){
+            if( params!=undefined ){
+                $("form[name='ManageForm'] .confirm-box").html('');
+                $("form[name='ManageForm'] .confirm-btn").show();
+            }else{
+                var htmls  = '<div class="fs-20 mb-2 text-center on-text-normal on-text-oneline"><?=( (App::lang()=='en') ? 'Confirm to create new order ?' : 'ยืนยันขอเบิกภาชนะเหล่านี้ ใช่ หรือ ไม่ ?' )?></div>';                    
+                    htmls += '<button type="submit" class="btn btn-icon btn-icon-start btn-success rounded-pill"><i class="uil uil-check-circle"></i><?=Lang::get('Yes')?></button>';
+                    htmls += '&nbsp;';
+                    htmls += '<button type="button" class="btn btn-icon btn-icon-start btn-outline-danger rounded-pill" onclick="manage_events(\'confirm\', { \'on\':\'N\' });"><i class="uil uil-times-circle"></i><?=Lang::get('No')?></button>';
+                $("form[name='ManageForm'] .confirm-box").html(htmls);
+                $("form[name='ManageForm'] .confirm-btn").hide();
+            }
         }
     }
+    $(document).ready(function() {
+        $("form[name='ManageForm'] input[name='login_email']").change(function(){
+            if(this.value){
+                $("form[name='ManageForm'] button[type='submit']").click();
+            }else{
+                login_events('email', {'on':'clear'});
+            }
+        });
+        $("form[name='ManageForm']").ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                $("form[name='ManageForm'] label>span").remove();
+            },
+            success: function(rs) {
+                var data = JSON.parse(rs);
+                if(data.status=='success'){
+                    if(data.shop!=undefined&&data.shop=='Y'){
+                        login_events('email', {'on':'show'});
+                    }else{
+                        $("body").fadeOut('slow', function(){
+                            document.location = data.url;
+                        });
+                    }
+                }else{
+                    if( data.onfocus!=undefined&&data.onfocus ){
+                        $("form[name='ManageForm'] label[for='"+data.onfocus+"']").append("<span class=text-red><sup> * <em>"+data.text+"</em></sup></span>");
+                        $("form[name='ManageForm'] input[name='"+data.onfocus+"']").focus();
+                    }else{
+                        swal({
+                            'type' : data.status,
+                            'title': data.title,
+                            'html' : data.text,
+                            'showCloseButton': false,
+                            'showCancelButton': false,
+                            'focusConfirm': false,
+                            'allowEscapeKey': false,
+                            'allowOutsideClick': false,
+                            'confirmButtonClass': 'btn btn-outline-danger',
+                            'confirmButtonText':'<span><?=Lang::get('Understand')?></span>',
+                            'buttonsStyling': false
+                        }).then(
+                            function () {
+                                swal.close();
+                            },
+                            function (dismiss) {
+                                if (dismiss === 'cancel') {
+                                    swal.close();
+                                }
+                            }
+                        );
+                    }
+                }
+            }
+        });
+    });
 </script>
 <?php include(APP_FOOTER);?>
