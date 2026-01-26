@@ -26,6 +26,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'All'                                      => array('th'=>'ทั้งหมด'
                                                                 ,'en'=>'All'
                                                         )
+            ,'Amount'                                   => array('th'=>'จำนวนเงิน'
+                                                                ,'en'=>'Amount'
+                                                        )
             ,'AutoReplyMsg'                             => array('th'=>'ข้อความอัตโนมัติ'
                                                                 ,'en'=>'Automatic mail'
                                                         )
@@ -421,6 +424,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'Prev'                                     => array('th'=>'ก่อนหน้า'
                                                                 ,'en'=>'Prev'
+                                                        )
+            ,'Price'                                    => array('th'=>'ราคา'
+                                                                ,'en'=>'Price'
                                                         )
             ,'Print'                                    => array('th'=>'พิมพ์'
                                                                 ,'en'=>'Print'
