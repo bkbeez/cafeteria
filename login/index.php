@@ -61,6 +61,26 @@
             @media screen and (max-height:435px) {
                 .login .login-cafeteria { display:none; }
             }
+
+            form[name='LoginForm'] .email-clear {
+                top: 50%;
+                display: none;
+                color: #959ca9;
+                right: 0.25rem;
+                cursor: pointer;
+                font-size: 0.9rem;
+                position: absolute;
+                transform: translateY(-50%);
+            }
+            form[name='LoginForm'] .email-clear .btn,
+            form[name='LoginForm'] .email-clear .btn:hover {
+                margin: 0;
+                width: 45px;
+                padding-left: 0;
+                padding-right: 0;
+                transform: translateY(0);
+            }
+
         </style>
     </head>
     <body>
@@ -81,7 +101,8 @@
                                             </h1>
                                         </center>
                                         <div class="form-floating mb-2">
-                                            <input id="login_email" name="login_email" type="email" class="form-control" placeholder="..." onchange="login_events('check');">
+                                            <input id="login_email" name="login_email" type="email" class="form-control" placeholder="...">
+                                            <span class="email-clear"><span class="btn btn-sm btn-soft-red text-red rounded" onclick="login_events('email', {'on':'clear'});">&#10005;</span></span>
                                             <label for="login_email">Email</label>
                                         </div>
                                         <div class="form-floating password-field mb-2">
@@ -110,8 +131,15 @@
         <script type="text/javascript">
             function login_events(action, params){
                 $("form[name='LoginForm'] label>span").remove();
-                if(action=='check'){
-                    $("form[name='LoginForm'] button[type='submit']").click();
+                if(action=='email'){
+                    if(params.on=='show'){
+                        $("form[name='LoginForm'] .email-clear").fadeIn();
+                        $("form[name='LoginForm'] input[name='login_password']").removeAttr('disabled').focus();
+                    }else{
+                        $("form[name='LoginForm'] .email-clear").fadeOut();
+                        $("form[name='LoginForm'] input[name='login_email']").val(null);
+                        $("form[name='LoginForm'] input[name='login_password']").val(null).attr('disabled',true);
+                    }
                 }else if(action=='google'){
                     $("body").fadeOut('slow', function(){
                         $(this).fadeIn(3000);
@@ -120,17 +148,22 @@
                 }
             }
             $(document).ready(function() {
+                $("form[name='LoginForm'] input[name='login_email']").change(function(){
+                    if(this.value){
+                        $("form[name='LoginForm'] button[type='submit']").click();
+                    }else{
+                        login_events('email', {'on':'clear'});
+                    }
+                });
                 $("form[name='LoginForm']").ajaxForm({
                     beforeSubmit: function (formData, jqForm, options) {
                         $("form[name='LoginForm'] label>span").remove();
-                        runStart();
                     },
                     success: function(rs) {
-                        runStop();
                         var data = JSON.parse(rs);
                         if(data.status=='success'){
                             if(data.shop!=undefined&&data.shop=='Y'){
-                                $("form[name='LoginForm'] input[name='login_password']").removeAttr('disabled');
+                                login_events('email', {'on':'show'});
                             }else{
                                 $("body").fadeOut('slow', function(){
                                     document.location = data.url;

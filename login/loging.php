@@ -18,17 +18,22 @@
                 Status::success( Lang::get('LoginSuccess'), array('url'=>$redirect) );
             }
         }
+        Status::error( ( (App::lang()=='en') ? 'Password is incorrect' : 'รหัสผ่านไม่ถูกต้อง' ).' !!!', array('onfocus'=>'login_password') );
     }else{
         if( Helper::isLocal() ){
-            $check = DB::one("SELECT email FROM member WHERE email=:email AND role='ADMIN' LIMIT 1;", $parameters);
+            $check = DB::one("SELECT email,shop_id,role FROM member WHERE email=:email LIMIT 1;", $parameters);
             if( isset($check['email'])&&$check['email'] ){
-                if( Auth::login($check['email']) ){
-                    $redirect = APP_HOME;
-                    if( isset($_SESSION['login_redirect']) ){
-                        $redirect = $_SESSION['login_redirect'];
-                        unset($_SESSION['login_redirect']);
+                if( isset($check['shop_id'])&&$check['shop_id'] ){
+                    Status::success( Lang::get('Success'), array('shop'=>'Y') );
+                }else if( isset($check['role'])&&$check['role']=='ADMIN' ){
+                    if( Auth::login($check['email']) ){
+                        $redirect = APP_HOME;
+                        if( isset($_SESSION['login_redirect']) ){
+                            $redirect = $_SESSION['login_redirect'];
+                            unset($_SESSION['login_redirect']);
+                        }
+                        Status::success( Lang::get('LoginSuccess'), array('url'=>$redirect) );
                     }
-                    Status::success( Lang::get('LoginSuccess'), array('url'=>$redirect) );
                 }
             }else if( $parameters['email']=='admin@mail.com' ){
                 $member = array();
