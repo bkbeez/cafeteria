@@ -75,19 +75,19 @@
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="pass_1" class="form-check-input" type="radio" name="is_pass" value="A" checked onchange="record_events('password', { 'self':this });">
-                                <label for="pass_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Login with normally' : 'เข้าสู่ระบบด้วยวิธีปกติ' )?></label>
+                                <label for="pass_1" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Login normally' : 'เข้าสู่ระบบแบบปกติ' )?></label>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="pass_2" class="form-check-input" type="radio" name="is_pass" value="N" onchange="record_events('password', { 'self':this });">
-                                <label for="pass_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Reset the password.' : 'รีเซตรหัสที่กำหนดไว้' )?></label>
+                                <label for="pass_2" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Revoke password' : 'ยกเลิกรหัสผ่าน' )?></label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="pass_3" class="form-check-input" type="radio" name="is_pass" value="Y" onchange="record_events('password', { 'self':this });">
-                                <label for="pass_3" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Login with this password' : 'กำหนดให้บัญชีนี้เข้าสู่ระบบด้วยรหัสผ่าน &darr;' )?></label>
+                                <label for="pass_3" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Set default password' : 'ตั้งรหัสผ่านเริ่มต้น' )?> &darr;<?=((isset($data['phone'])&&$data['phone'])?' ( '.str_replace(array(' ','-'), '', $data['phone']).' )':null)?></label>
                             </div>
                         </div>
                     </div>

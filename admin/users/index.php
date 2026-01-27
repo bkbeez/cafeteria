@@ -245,9 +245,9 @@
                     $("#ManageDialog").modal('show');
                 }
             });
-        }else if(action=='login'){
+        }else if(action=='setup'){
             params['form_as'] = '<?=$form?>';
-            $("#ManageDialog").load("<?=$form?>/filter/login.php", params, function(response, status, xhr){
+            $("#ManageDialog").load("<?=$form?>/filter/setup.php", params, function(response, status, xhr){
                 if(status=="error"){
                     $(this).html('<div class="modal-dialog modal-dialog-centered modal-sm"><div class="modal-content text-center">'+xhr.status + "<br>" + xhr.statusText+'<div class="modal-body"></div></div></div>');
                 }else{

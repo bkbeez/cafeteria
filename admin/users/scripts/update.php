@@ -28,6 +28,9 @@
     $datas .= ',`surname`';
     $datas .= "=:surname";
     $parameters['surname'] = ( (isset($_POST['surname'])&&$_POST['surname']) ? Helper::stringSave($_POST['surname']) : null );
+    $datas .= ',`phone`';
+    $datas .= "=:phone";
+    $parameters['phone'] = ( (isset($_POST['phone'])&&$_POST['phone']) ? Helper::stringSave($_POST['phone']) : null );
     $datas .= ',`is_cmu`';
     $datas .= "=:is_cmu";
     $parameters['is_cmu'] = ( (isset($_POST['is_cmu'])&&$_POST['is_cmu']) ? $_POST['is_cmu'] : 'N' );

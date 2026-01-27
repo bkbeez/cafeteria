@@ -116,10 +116,18 @@
                                 <label for="surname"><?=Lang::get('NameLast')?></label>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-floating form-select-wrapper mb-1">
-                        <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption(((isset($data['shop_id'])&&$data['shop_id'])?$data['shop_id']:null), '<option value="">'.Lang::get('Empty').'...</option>')?></select>
-                        <label for="shop_id"><?=Lang::get('Shop')?></label>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input id="phone" name="phone" value="<?=((isset($data['phone'])&&$data['phone'])?$data['phone']:null)?>" type="text" class="form-control" placeholder="...">
+                                <label for="phone"><?=Lang::get('Phone')?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-floating form-select-wrapper mb-1">
+                                <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption(((isset($data['shop_id'])&&$data['shop_id'])?$data['shop_id']:null), '<option value="">'.Lang::get('Empty').'...</option>')?></select>
+                                <label for="shop_id"><?=Lang::get('Shop')?></label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="alert alert-danger alert-icon mb-2">
