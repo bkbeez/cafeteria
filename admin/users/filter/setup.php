@@ -5,34 +5,13 @@
     $rolehtmls = '';
     if( (isset($_POST['id'])&&$_POST['id'])&&(isset($_POST['email'])&&$_POST['email']) ){
         $data = DB::one("SELECT member.*
+                        , shop.shop_name
                         FROM member
+                        LEFT JOIN shop ON member.shop_id=shop.id
                         WHERE member.id=:id AND member.email=:email
                         LIMIT 1;"
                         , array('id'=>$_POST['id'], 'email'=>$_POST['email'])
         );
-    }
-    if( Auth::admin() ){
-        $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
-            $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
-                $rolehtmls .= Util::memberRoleOption(true, ((isset($data['role'])&&$data['role'])?$data['role']:null));
-            $rolehtmls .= '</select>';
-            $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
-        $rolehtmls .= '</div>';
-    }else{
-        if(isset($data['role'])&&$data['role']=='ADMIN'){
-            $rolehtmls .= '<div class="form-floating mb-1">';
-                $rolehtmls .= '<input type="hidden" name="role" value="'.((isset($data['role'])&&$data['role'])?$data['role']:null).'"/>';
-                $rolehtmls .= '<input id="role" value="'.Util::memberRoleName($data['role']).'" type="text" class="form-control" placeholder="..." disabled>';
-                $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
-            $rolehtmls .= '</div>';
-        }else{
-            $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
-                $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
-                    $rolehtmls .= Util::memberRoleOption(false, ((isset($data['role'])&&$data['role'])?$data['role']:null));
-                $rolehtmls .= '</select>';
-                $rolehtmls .= '<label for="role">'.Lang::get('UserAccount').' <span class="text-red">*</span></label>';
-            $rolehtmls .= '</div>';
-        }
     }
 ?>
 <style type="text/css">
@@ -88,9 +67,13 @@
                         <label for="email"><?=Lang::get('Email')?></label>
                     </div>
                     <div class="form-floating mb-1">
-                        <input id="phone" name="phone" value="<?=((isset($data['phone'])&&$data['phone'])?$data['phone']:null)?>" type="text" class="form-control" placeholder="..." readonly>
+                        <input value="<?=((isset($data['shop_name'])&&$data['shop_name'])?$data['shop_name']:null)?>" type="text" class="form-control" placeholder="..." readonly>
+                        <label><?=Lang::get('Shop')?></label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input value="<?=((isset($data['phone'])&&$data['phone'])?$data['phone']:null)?>" type="text" class="form-control" placeholder="..." readonly>
                         <?php if(isset($data['phone'])&&$data['phone']){ ?><span class="phone-copy"><span class="btn btn-sm btn-orange text-white rounded" onclick="record_events('copy', {'on':'<?=str_replace(array(' ','-'), '', $data['phone'])?>'});">COPY</span></span><?php } ?>
-                        <label for="phone"><?=Lang::get('Phone')?></label>
+                        <label><?=Lang::get('Phone')?></label>
                     </div>
                 </div>
                 <div class="alert alert-danger alert-icon mb-2 pt-3">
