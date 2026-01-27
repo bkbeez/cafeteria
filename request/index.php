@@ -45,7 +45,7 @@
         width: auto;
     }
     form[name='ManageForm'] table .price {
-        width: 100px;
+        width: 70px;
         text-align: center;
     }
     form[name='ManageForm'] table .quantity {
@@ -53,6 +53,9 @@
     }
     form[name='ManageForm'] table .amount {
         width: 125px;
+    }
+    form[name='ManageForm'] table .baht {
+        width: 45px;
     }
     form[name='ManageForm'] table thead tr th {
         text-align: center;
@@ -170,6 +173,7 @@
                                             <th scope="col" class="price"><?=Lang::get('Price')?></th>
                                             <th scope="col" class="quantity"><?=Lang::get('Quantity')?></th>
                                             <th scope="col" class="amount"><?=Lang::get('Amount')?></th>
+                                            <th scope="col" class="baht">&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -177,7 +181,7 @@
                                         <tr class="AT-<?=$item['id']?>">
                                             <td class="no"><?=($seq+1)?></td>
                                             <td class="name"><?=$item['name']?></td>
-                                            <td class="price"><?=(($item['charge']>0)?number_format($item['charge'],2).'฿':'-')?></td>
+                                            <td class="price"><?=(($item['charge']>0)?number_format($item['charge'],2):'-')?></td>
                                             <td class="quantity">
                                                 <input type="hidden" name="list[<?=$seq?>][stock_id]" value="<?=$item['id']?>"/>
                                                 <input type="hidden" name="list[<?=$seq?>][name]" value="<?=$item['name']?>"/>
@@ -187,14 +191,15 @@
                                                 <input type="hidden" name="list[<?=$seq?>][amount]" value="0" class="set-amount"/>
                                             </td>
                                             <td class="amount">0.00</td>
+                                            <td class="baht"><?=Lang::get('Baht')?></td>
                                         </tr>
                                     <?php } ?>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td class="name" colspan="3"><?=Lang::get('Total')?></td>
-                                            <td class="quantity">0</td>
+                                            <td class="name" colspan="4"><?=Lang::get('GrandTotal')?></td>
                                             <td class="amount">0.00</td>
+                                            <td class="baht"><?=Lang::get('Baht')?></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -226,15 +231,6 @@
                 manage_events('summary');
             }
         }else if(action=='summary'){
-            var quantitys = $("form[name='ManageForm'] table tbody .set-quantity");
-            var total = 0;
-            if(quantitys.length>0){
-                for(var i=0;i<quantitys.length;i++){
-                    var quantity = parseFloat($(quantitys[i]).val());
-                    if(!isNaN(quantity)){ total += quantity; }
-                }
-            }
-            $("form[name='ManageForm'] table tfoot .quantity").html(total.format(0));
             var amounts = $("form[name='ManageForm'] table tbody .set-amount");
             var grand_total = 0;
             if(amounts.length>0){
@@ -266,7 +262,7 @@
                 login_events('email', {'on':'clear'});
             }
         });
-        $("form[name='ManageForm']").ajaxForm({
+        /*$("form[name='ManageForm']").ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 $("form[name='ManageForm'] label>span").remove();
             },
@@ -310,7 +306,7 @@
                     }
                 }
             }
-        });
+        });*/
     });
 </script>
 <?php include(APP_FOOTER);?>
