@@ -43,25 +43,6 @@
             .login .login-logo { height:72px; }
             .login .login-cafeteria>img { width:100%;  }
             .login .btn-google>span { padding:0 5px;}
-            @media only all and (max-width: 495px) {
-                .login h1 { font-size:30px; }
-                .login .login-logo { height:62px; }
-            }
-            @media only all and (max-width: 435px) {
-                .login h1 { font-size:25px; }
-                .login .login-logo { height:55px; }
-            }
-            @media only all and (max-width: 414px) {
-                .login .btn-google>span { display:none; }
-            }
-            @media only all and (max-width: 400px) {
-                .login .login-logo { height:72px;display:block; }
-                .login .btn-google>span { display:none; }
-            }
-            @media screen and (max-height:435px) {
-                .login .login-cafeteria { display:none; }
-            }
-
             form[name='LoginForm'] .email-clear {
                 top: 50%;
                 display: none;
@@ -80,7 +61,24 @@
                 padding-right: 0;
                 transform: translateY(0);
             }
-
+            @media only all and (max-width: 495px) {
+                .login h1 { font-size:30px; }
+                .login .login-logo { height:62px; }
+            }
+            @media only all and (max-width: 435px) {
+                .login h1 { font-size:25px; }
+                .login .login-logo { height:55px; }
+            }
+            @media only all and (max-width: 414px) {
+                .login .btn-google>span { display:none; }
+            }
+            @media only all and (max-width: 400px) {
+                .login .login-logo { height:72px;display:block; }
+                .login .btn-google>span { display:none; }
+            }
+            @media screen and (max-height:435px) {
+                .login .login-cafeteria { display:none; }
+            }
         </style>
     </head>
     <body>
