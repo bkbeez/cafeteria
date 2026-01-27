@@ -112,13 +112,13 @@
                 <div class="shop-menu-list mt-4">
                     <div class="row gx-md-5 gy-5">
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/request'?>';">
+                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/request/?new'?>';">
                                 <div class="shape rounded bg-soft-yellow rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
                                 <div class="card bg-yellow">
                                     <div class="card-body">
                                         <i class="uil uil-file-edit-alt uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'New Request' : 'ขอเบิกภาชนะ' )?></h4>
-                                        <a href="<?=APP_HOME.'/request'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
+                                        <a href="<?=APP_HOME.'/request/?new'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                     <div class="card-body">
                                         <i class="uil uil-file-copy-alt uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'Requests' : 'รายการเบิกภาชนะ' )?></h4>
-                                        <a href="<?=APP_HOME.'/requests'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
+                                        <a href="<?=APP_HOME.'/request'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                     <div class="card-body">
                                         <i class="uil uil-invoice uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'Receipts' : 'ใบเสร็จรับเงิน' )?></h4>
-                                        <a href="<?=APP_HOME.'/rceipts'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
+                                        <a href="<?=APP_HOME.'/rceipt'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                     <div class="card-body">
                                         <i class="uil uil-chart-pie uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'Reports' : 'รายงานสรุป' )?></h4>
-                                        <a href="<?=APP_HOME.'/reports'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
+                                        <a href="<?=APP_HOME.'/report'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
                                     </div>
                                 </div>
                             </div>
