@@ -100,6 +100,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <button type="button" class="btn btn-lg btn-primary rounded" onclick="document.location='<?=APP_HOME?>/request';">BOOKING &rarr;</button>
                     <?php }else{ ?>
                         <div class="row gx-0">
                             <div class="col-lg-6 image-wrapper bg-image bg-cover rounded-top rounded-lg-start d-md-block" data-image-src="<?=THEME_IMG?>/cafeteria.jpg"></div>
