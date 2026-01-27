@@ -54,6 +54,24 @@
         line-height: 28px;
         margin-right: 3px;
     }
+    form[name='RecordForm'] .phone-copy {
+        top: 50%;
+        display: none;
+        color: #959ca9;
+        right: 0.25rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        position: absolute;
+        transform: translateY(-50%);
+    }
+    form[name='RecordForm'] .phone-copy .btn,
+    form[name='RecordForm'] .phone-copy .btn:hover {
+        margin: 0;
+        width: 60px;
+        padding-left: 0;
+        padding-right: 0;
+        transform: translateY(0);
+    }
 </style>
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-manage">
@@ -67,7 +85,12 @@
                 <div class="alert alert-primary alert-icon mb-2">
                     <div class="form-floating mb-1">
                         <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
-                        <label for="email"><?=Lang::get('Email')?> <span class="text-red">*</span></label>
+                        <label for="email"><?=Lang::get('Email')?></label>
+                    </div>
+                    <div class="form-floating mb-1">
+                        <input id="phone" name="phone" value="<?=((isset($data['phone'])&&$data['phone'])?$data['phone']:null)?>" type="text" class="form-control" placeholder="..." readonly>
+                        <?php if(isset($data['phone'])&&$data['phone']){ ?><span class="phone-copy"><span class="btn btn-sm btn-orange text-white rounded" onclick="record_events('copy', {'on':'<?=str_replace(array(' ','-'), '', $data['phone'])?>'});">COPY</span></span><?php } ?>
+                        <label for="phone"><?=Lang::get('Phone')?></label>
                     </div>
                 </div>
                 <div class="alert alert-danger alert-icon mb-2 pt-3">
@@ -87,7 +110,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
                             <div class="form-check mb-2">
                                 <input id="pass_3" class="form-check-input" type="radio" name="is_pass" value="Y" onchange="record_events('password', { 'self':this });">
-                                <label for="pass_3" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Set default password' : 'ตั้งรหัสผ่านเริ่มต้น' )?> &darr;<?=((isset($data['phone'])&&$data['phone'])?' ( '.str_replace(array(' ','-'), '', $data['phone']).' )':null)?></label>
+                                <label for="pass_3" class="form-check-label form-payslip-select text-dark"><?=( (App::lang()=='en') ? 'Set default password' : 'ตั้งรหัสผ่านเริ่มต้น' )?> &darr;</label>
                             </div>
                         </div>
                     </div>
@@ -114,8 +137,12 @@
 <script type="text/javascript">
     function record_events(action, params){
         $("form[name='RecordForm'] label>em").remove();
-        if(action=='password'){
+        if(action=='copy'){
+            $("form[name='RecordForm'] input[name='password_default']").val(params.on);
+        }else if(action=='password'){
+            $("form[name='RecordForm'] .phone-copy").fadeIn();
             if( params.self.value=='Y' ){
+                $("form[name='RecordForm'] .phone-copy").fadeIn();
                 $("form[name='RecordForm'] input[name='password_default']").removeAttr('disabled').focus();
             }else{
                 $("form[name='RecordForm'] input[name='password_default']").val(null).attr('disabled', true);
