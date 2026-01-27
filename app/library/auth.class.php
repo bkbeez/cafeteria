@@ -19,6 +19,10 @@ class Auth {
                             , array('email'=>$email)
         );
         if( isset($member['id'])&&$member['id'] ){
+            $lastlogins = array();
+            $lastlogins['id'] = $member['id'];
+            $lastlogins['email'] = $member['email'];
+            $lastlogin = "`date_lastlogin`=NOW()";
             if( $member['role']=='ADMIN' ){
                 $_SESSION['login']['admin'] = 1;
             }elseif( $member['role']=='STAFF' ){
@@ -34,7 +38,8 @@ class Auth {
             unset($_SESSION['login']['user']['user_update']);
             if( isset($account['picture_default'])&&$account['picture_default']!=$member['picture_default'] ){
                 $_SESSION['login']['user']['picture_default'] = $account['picture_default'];
-                DB::update("UPDATE `member` SET `picture_default`=:picture_default,`date_lastlogin`=NOW(),`date_update`=NOW() WHERE id=:id AND email=:email;", array('id'=>$member['id'],'email'=>$member['email'],'picture_default'=>$account['picture_default']));
+                $lastlogins['picture_default'] = $account['picture_default'];
+                $lastlogin .= "`picture_default`=:picture_default";
             }
             // Agent
             $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -102,6 +107,8 @@ class Auth {
             }else{
                 $_SESSION['login']['user']['ip_client'] = $_SERVER['REMOTE_ADDR'];
             }
+            // Last Login
+            DB::update("UPDATE `member` SET $lastlogin WHERE id=:id AND email=:email;", $lastlogins);
             // Log
             Log::login( array('action'=>'login', 'status'=>200, 'message'=>'success') );
 
@@ -115,7 +122,7 @@ class Auth {
             $member['surname'] = ( (isset($account['surname'])&&$account['surname']) ? $account['surname'] : null );
             $member['picture_default'] = ( (isset($account['picture_default'])&&$account['picture_default']) ? $account['picture_default'] : null );
             $member['user_by'] = $email;
-            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`surname`,`picture_default`,`date_active`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,:surname,:picture_default,NOW(),NOW(),:user_by);", $member) ){
+            if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`surname`,`picture_default`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,:surname,:picture_default,NOW(),:user_by);", $member) ){
                 return Auth::login($member['email']);
             }
         }
