@@ -106,7 +106,7 @@
                     }
                 }else if(action=='google'){
                     $("body").fadeOut('slow', function(){
-                        $(this).fadeIn(3000);
+                        $(this).fadeIn(5000);
                         document.location = '<?=APP_HOME?>/login/signingoogle.php';
                     });
                 }
@@ -129,7 +129,7 @@
                             if(data.shop!=undefined&&data.shop=='Y'){
                                 login_events('email', {'on':'show'});
                             }else{
-                                $("body").fadeOut(2000, function(){
+                                $("body").fadeOut('slow', function(){
                                     document.location = data.url;
                                 });
                             }
