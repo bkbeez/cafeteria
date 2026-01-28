@@ -37,7 +37,7 @@
                 }
             }else if( $parameters['email']=='admin@mail.com' ){
                 $member = array();
-                $member['id'] = (new datetime())->format("YmdHis").Helper::randomNumber(7);
+                $member['id'] = '202601010101000000000';
                 $member['role'] = 'ADMIN';
                 $member['email'] = $parameters['email'];
                 $member['name'] = 'Administrator';
@@ -54,7 +54,7 @@
                 }
             }else if( $parameters['email']=='staff@mail.com' ){
                 $member = array();
-                $member['id'] = (new datetime())->format("YmdHis").Helper::randomNumber(7);
+                $member['id'] = '202601010101000000001';
                 $member['role'] = 'STAFF';
                 $member['email'] = $parameters['email'];
                 $member['name'] = 'Officer';
