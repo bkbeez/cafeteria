@@ -41,12 +41,12 @@
         </div>
         <div class="row gx-0 gy-10 align-items-center mt-10 mt-lg-3">
             <div class="col-lg-6 site-intro" data-cues="slideInDown" data-group="page-title" data-delay="600">
-                <h1 class="display-2 on-bold-primary text-yellow pt-14 mb-4">
-                    <?=( (App::lang()=='en') ? APP_NAME_EN : APP_NAME_TH )?><br/>
+                <h1 class="display-1 on-font-primary text-yellow pt-14 mb-4">
+                    <b class="on-bold-primary"><?=APP_CODE?></b><br/>
                     <span class="fs-36 on-font-primary typer text-sky text-nowrap" data-delay="100" data-words="<?=( (App::lang()=='en') ? 'Faculty of Education,Chiang Mai University' : 'คณะศึกษาศาสตร์,มหาวิทยาลัยเชียงใหม่' )?>"></span><span class="cursor fs-36 text-sky" data-owner="typer"></span>
                 </h1>
                 <p class="lead fs-24 lh-sm text-white mb-7 pe-lg-0 pe-xxl-15"><?=( (App::lang()=='en') ? 'Management System for restaurants and cafes selling located within the Faculty of Education, Chiang Mai University.' : 'ระบบบริหารจัดการร้านค้า สำหรับให้บริการร้านอาหารและร้านกาแฟ ที่ค้าขายภายในพื้นที่คณะศึกษาศาสตร์ มหาวิทยาลัยเชียงใหม่' )?></p>
-                <div><a href="<?=APP_HOME?>/profile" class="btn btn-lg btn-soft-primary rounded-pill"><?=( (App::lang()=='en') ? 'For Restaurant' : 'สำหรับร้านค้า' )?> &rarr;</a></div>
+                <div><a href="<?=APP_HOME?>/request/?new" class="btn btn-lg btn-soft-primary rounded-pill"><i class="uil uil-file-edit-alt" style="float:left;font-size:28px;line-height:28px;margin-right:3px;"></i> <?=( (App::lang()=='en') ? 'Request Form' : 'ขอเบิกภาชนะ' )?></a></div>
             </div>
             <div class="col-lg-5 offset-lg-1" data-cues="slideInDown">
                 <div class="swiper-container dots-over shadow-lg" data-margin="0" data-autoplay="true" data-autoplaytime="3000" data-nav="true" data-dots="false" data-items="1">
