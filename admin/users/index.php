@@ -121,19 +121,20 @@
         .table-filter .filter-result .name>.mail-o {
             display: inline;
         }
-        .table-filter .filter-result .actions.act-2 {
-            width: 45px;
-        }
-        .table-filter .filter-result .actions .btn-box.delete {
-            margin-top: -4px;
-        }
     }
     @media only all and (max-width: 450px) {
+
         .table-filter .filter-result .type {
             display: none;
         }
         .table-filter .filter-result .name>.type-o {
             display: inline;
+        }
+        .table-filter .filter-result .actions.act-3 {
+            width: 75px;
+        }
+        .table-filter .filter-result .actions .btn-box.delete {
+            margin-top: -4px;
         }
     }
 </style>
