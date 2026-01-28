@@ -467,6 +467,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Remove'                                   => array('th'=>'ลบออก'
                                                                 ,'en'=>'Remove'
                                                         )
+            ,'Requester'                                => array('th'=>'ผู้ทำรายการ'
+                                                                ,'en'=>'Requester'
+                                                        )
             ,'Require'                                  => array('th'=>'ต้องการ'
                                                                 ,'en'=>'Require'
                                                         )
