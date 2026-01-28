@@ -658,6 +658,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Please'                                   => array('th'=>'โปรด'
                                                                 ,'en'=>'Please'
                                                         )
+            ,'PleaseCheckAgain'                         => array('th'=>'โปรดตรวจสอบข้อมูลและลองใหม่อีกครั้ง'
+                                                                ,'en'=>'Please check your data and try Again'
+                                                        )
             ,'PleaseCorrectlyAndCompletely'             => array('th'=>'โปรดกรอกข้อมูลให้ถูกต้องและครบถ้วน'
                                                                 ,'en'=>'Please fill in the information correctly and completely.'
                                                         )
