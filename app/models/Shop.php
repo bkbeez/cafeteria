@@ -37,6 +37,16 @@ class Shop extends DB {
     }
 
     /**
+     *  Get Name
+     *  @return string
+     */
+    static function getName($id)
+    {
+        $check = Shop::one("SELECT shop_name FROM shop WHERE id=:id;", array('id'=>$id));
+        return ( (isset($check['shop_name'])&&$check['shop_name']) ? $check['shop_name'] : null );
+    }
+
+    /**
      *  Get Option
      *  @param  $selected, $addon
      *  @return htmls
