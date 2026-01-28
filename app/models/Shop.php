@@ -46,6 +46,29 @@ class Shop extends DB {
         $lang = App::lang();
         $status_n = Lang::get('NotAvailable');
         $htmls = ( $addon ? $addon : '' );
+        $lists = Shop::sql("SELECT id,shop_name FROM shop WHERE status_id>0 ORDER BY sequence;");
+        if( isset($lists)&&count($lists)>0 ){
+            foreach($lists as $item){
+                $htmls .= '<option value="'.$item['id'].'">'.$item['shop_name'].'</option>';
+            }
+            if( $selected ){
+                $htmls = str_replace('value="'.$selected.'"', 'value="'.$selected.'" selected', $htmls);
+            }
+        }
+
+        return $htmls;
+    }
+
+    /**
+     *  Get Option All
+     *  @param  $selected, $addon
+     *  @return htmls
+     */
+    static function getOptionAll($selected=null, $addon=null)
+    {
+        $lang = App::lang();
+        $status_n = Lang::get('NotAvailable');
+        $htmls = ( $addon ? $addon : '' );
         $lists = Shop::sql("SELECT id,shop_name,status_id FROM shop ORDER BY sequence;");
         if( isset($lists)&&count($lists)>0 ){
             foreach($lists as $item){
