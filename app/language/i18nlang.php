@@ -137,6 +137,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Delete'                                   => array('th'=>'ลบออก'
                                                                 ,'en'=>'Delete'
                                                         )
+            ,'Deleted'                                  => array('th'=>'ถูกลบออก'
+                                                                ,'en'=>'Deleted'
+                                                        )
             ,'Discard'                                  => array('th'=>'ละทิ้ง'
                                                                 ,'en'=>'Discard'
                                                         )
@@ -470,6 +473,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Restaurants'                              => array('th'=>'ร้านอาหาร'
                                                                 ,'en'=>'Restaurants'
                                                         )
+            ,'Restore'                                  => array('th'=>'คืนค่าเดิม'
+                                                                ,'en'=>'Restore'
+                                                        )
             ,'Save'                                     => array('th'=>'บันทึก'
                                                                 ,'en'=>'Save'
                                                         )
@@ -607,6 +613,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'ConfirmToDelete'                          => array('th'=>'ยืนยันลบข้อมูลนี้ ใช่ หรือ ไม่ ?'
                                                                 ,'en'=>'Confirm to delete this ?'
                                                         )
+            ,'ConfirmToRestore'                          => array('th'=>'ยืนยันคืนค่าข้อมูลนี้ ใช่ หรือ ไม่ ?'
+                                                                ,'en'=>'Confirm to restore this ?'
+                                                        )
             ,'ConfirmToUpdate'                          => array('th'=>'ยืนยันบันทึกข้อมูลนี้ ใช่ หรือ ไม่ ?'
                                                                 ,'en'=>'Confirm to update this ?'
                                                         )
@@ -696,6 +705,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'SuccessDelete'                            => array('th'=>'ข้อมูลถูกลบเรียบร้อยแล้ว'
                                                                 ,'en'=>'Data has been deleted.'
+                                                        )
+            ,'SuccessRestore'                           => array('th'=>'ข้อมูลถูกคืนค่าเรียบร้อยแล้ว'
+                                                                ,'en'=>'Data has been restored.'
                                                         )
             ,'SuccessSave'                              => array('th'=>'ข้อมูลถูกบันทึกเรียบร้อยแล้ว'
                                                                 ,'en'=>'Data has been saved.'
