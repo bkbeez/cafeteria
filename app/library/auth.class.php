@@ -19,10 +19,6 @@ class Auth {
                             , array('email'=>$email)
         );
         if( isset($member['id'])&&$member['id'] ){
-            $lastlogins = array();
-            $lastlogins['id'] = $member['id'];
-            $lastlogins['email'] = $member['email'];
-            $lastlogin = "`date_lastlogin`=NOW()";
             if( $member['role']=='ADMIN' ){
                 $_SESSION['login']['admin'] = 1;
             }elseif( $member['role']=='STAFF' ){
@@ -38,8 +34,7 @@ class Auth {
             unset($_SESSION['login']['user']['user_update']);
             if( isset($account['picture_default'])&&$account['picture_default']!=$member['picture_default'] ){
                 $_SESSION['login']['user']['picture_default'] = $account['picture_default'];
-                $lastlogins['picture_default'] = $account['picture_default'];
-                $lastlogin .= "`picture_default`=:picture_default";
+                DB::update("UPDATE `member` SET `picture_default`=:picture_default WHERE id=:id;", array('id'=>$member['id'], 'picture_default'=>$account['picture_default']));
             }
             // Agent
             $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -107,8 +102,6 @@ class Auth {
             }else{
                 $_SESSION['login']['user']['ip_client'] = $_SERVER['REMOTE_ADDR'];
             }
-            // Last Login
-            DB::update("UPDATE `member` SET $lastlogin WHERE id=:id AND email=:email;", $lastlogins);
             // Log
             Log::login( array('action'=>'login', 'status'=>200, 'message'=>'success') );
 
