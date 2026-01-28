@@ -106,8 +106,8 @@
                     }
                 }else if(action=='google'){
                     $("body").fadeOut('slow', function(){
-                        $(this).fadeIn(5000);
                         document.location = '<?=APP_HOME?>/login/signingoogle.php';
+                        $(this).fadeIn(5000);
                     });
                 }
             }
