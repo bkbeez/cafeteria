@@ -18,6 +18,8 @@
                 $account['surname'] = (isset($infocheck->family_name) ? preg_replace('/[^a-zA-Z0-9]/s', '', $infocheck->family_name) : '');
                 $account['picture_default'] = ( (isset($infocheck->picture)&&$infocheck->picture) ? $infocheck->picture : null );
                 if( Auth::login($infocheck->email, $account) ){
+                    // Last Login
+                    DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$infocheck->email));
                     $redirect = APP_HOME;
                     if( isset($_SESSION['login_redirect']) ){
                         $redirect = $_SESSION['login_redirect'];

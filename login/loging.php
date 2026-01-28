@@ -10,6 +10,8 @@
         $check = DB::one("SELECT email,password FROM member WHERE email=:email LIMIT 1;", $parameters);
         if( isset($check['email'])&&$check['email']&&password_verify(Helper::stringSave($_POST['login_password']), $check['password']) ){
             if( Auth::login($check['email']) ){
+                // Last Login
+                DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$check['email']));
                 $redirect = APP_HOME;
                 if( isset($_SESSION['login_redirect']) ){
                     $redirect = $_SESSION['login_redirect'];
@@ -27,6 +29,8 @@
                     Status::success( Lang::get('Success'), array('shop'=>'Y') );
                 }else if( isset($check['role'])&&$check['role']=='ADMIN' ){
                     if( Auth::login($check['email']) ){
+                        // Last Login
+                        DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$check['email']));
                         $redirect = APP_HOME;
                         if( isset($_SESSION['login_redirect']) ){
                             $redirect = $_SESSION['login_redirect'];
@@ -44,6 +48,8 @@
                 $member['user_by'] = $parameters['email'];
                 if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,NOW(),:user_by);", $member) ){
                     if( Auth::login($member['email']) ){
+                        // Last Login
+                        DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$member['email']));
                         $redirect = APP_HOME;
                         if( isset($_SESSION['login_redirect']) ){
                             $redirect = $_SESSION['login_redirect'];
@@ -61,6 +67,8 @@
                 $member['user_by'] = $parameters['email'];
                 if( DB::create("INSERT INTO `member` (`id`,`role`,`email`,`name`,`date_create`,`user_create`) VALUES (:id,:role,:email,:name,NOW(),:user_by);", $member) ){
                     if( Auth::login($member['email']) ){
+                        // Last Login
+                        DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$member['email']));
                         $redirect = APP_HOME;
                         if( isset($_SESSION['login_redirect']) ){
                             $redirect = $_SESSION['login_redirect'];
