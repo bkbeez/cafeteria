@@ -2,7 +2,6 @@
 <?php Auth::ajax(APP_PATH.'/admin'); ?>
 <?php
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
-    $rolehtmls = '';
     if( (isset($_POST['date_at'])&&$_POST['date_at'])&&(isset($_POST['email'])&&$_POST['email']) ){
         $data = DB::one("SELECT xlg_login.*
                         , CONCAT(DATE_FORMAT(xlg_login.date_at,'%d/%m/'), (YEAR(xlg_login.date_at)+543),' ',DATE_FORMAT(xlg_login.date_at, '%H:%i:%s')) AS date_display

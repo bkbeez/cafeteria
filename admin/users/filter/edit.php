@@ -2,7 +2,6 @@
 <?php Auth::ajax(APP_PATH.'/admin'); ?>
 <?php
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
-    $rolehtmls = '';
     if( (isset($_POST['id'])&&$_POST['id'])&&(isset($_POST['email'])&&$_POST['email']) ){
         $data = DB::one("SELECT member.*
                         FROM member
@@ -11,6 +10,7 @@
                         , array('id'=>$_POST['id'], 'email'=>$_POST['email'])
         );
     }
+    $rolehtmls = '';
     if( Auth::admin() ){
         $rolehtmls .= '<div class="form-floating form-select-wrapper mb-1">';
             $rolehtmls .= '<select id="role" name="role" class="form-select" aria-label="..." required>';
