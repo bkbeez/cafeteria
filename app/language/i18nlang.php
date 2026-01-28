@@ -467,6 +467,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Remove'                                   => array('th'=>'ลบออก'
                                                                 ,'en'=>'Remove'
                                                         )
+            ,'RequestDate'                              => array('th'=>'วันที่ทำรายการ'
+                                                                ,'en'=>'Request Date'
+                                                        )
             ,'Requester'                                => array('th'=>'ผู้ทำรายการ'
                                                                 ,'en'=>'Requester'
                                                         )
@@ -669,6 +672,15 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'LoginSuccess'                             => array('th'=>'เข้าสู่ระบบเรียบร้อยแล้ว'
                                                                 ,'en'=>'Logged in successfully'
+                                                        )
+            ,'OnAccepted'                               => array('th'=>'ตรวจแล้ว'
+                                                                ,'en'=>'Accepted'
+                                                        )
+            ,'OnReceived'                               => array('th'=>'รับของแล้ว'
+                                                                ,'en'=>'Received'
+                                                        )
+            ,'OnWaiting'                                => array('th'=>'รอตรวจ'
+                                                                ,'en'=>'Waiting'
                                                         )
             ,'Please'                                   => array('th'=>'โปรด'
                                                                 ,'en'=>'Please'
