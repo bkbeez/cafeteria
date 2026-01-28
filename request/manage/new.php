@@ -1,11 +1,14 @@
 <?php if(!isset($index['page'])||$index['page']!='request'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
 <?php
+    if( Auth::staff()||User::get('shop_id') ){
+        // Allowed
+    }else{
+        $_SESSION['deny'] = array();
+        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For shop only' : 'ขออภัย! สำหรับร้านค้าเท่านั้น' );
+        header('Location: '.APP_HOME.'/deny');
+        exit;
+    }
     $shop_id = User::get('shop_id');
-    $lists = Stock::sql("SELECT stock.*
-                    FROM stock
-                    WHERE stock.status_id=1;
-                    ORDER BY stock.sequence, stock.id;"
-    );
     if( $shop_id ){
         $shop = Shop::one("SELECT shop.*
                         , TRIM(CONCAT(COALESCE(shop.title,''),shop.name,' ',COALESCE(shop.surname,''))) AS owner_name
@@ -15,6 +18,11 @@
                         , array('id'=>$shop_id)
         );
     }
+    $lists = Stock::sql("SELECT stock.*
+                    FROM stock
+                    WHERE stock.status_id=1;
+                    ORDER BY stock.sequence, stock.id;"
+    );
 ?>
 <?php include(APP_HEADER);?>
 <style type="text/css">
@@ -367,7 +375,7 @@
                         function () {},
                         function (dismiss) {
                             if (dismiss === 'timer') {
-                                document.location = '<?=APP_HOST?>/request';
+                                document.location = data.url;
                             }
                         }
                     );

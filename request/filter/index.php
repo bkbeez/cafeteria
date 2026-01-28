@@ -1,5 +1,13 @@
 <?php if(!isset($index['page'])||$index['page']!='request'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
 <?php
+    if( Auth::admin()||User::get('shop_id') ){
+        // Allowed
+    }else{
+        $_SESSION['deny'] = array();
+        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For shop only' : 'ขออภัย! สำหรับร้านค้าเท่านั้น' );
+        header('Location: '.APP_HOME.'/deny');
+        exit;
+    }
     // Filter
     $filter_as = strtolower($index['page'].'_list_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );

@@ -60,7 +60,11 @@
     }
     if( Request::create("INSERT INTO `request` ($fields) VALUES ($values)", $parameters) ){
         if( Request::create($list, $lists) ){
-            Status::success( ( (App::lang()=='en') ? 'Requisition form was saved.' : 'รายการเบิกภาชนะของท่านถูกบันทึกแล้ว' ), array('id'=>$parameters['id']) );
+            $url = APP_HOST.'/request';
+            if( Auth::staff() ){
+                $url = APP_HOST.'/order/?'.$parameters['id'];
+            }
+            Status::success( ( (App::lang()=='en') ? 'Requisition form was saved.' : 'รายการเบิกภาชนะของท่านถูกบันทึกแล้ว' ), array('id'=>$parameters['id'], 'url'=>$url) );
         }else{
             Request::delete("DELETE FROM `request` WHERE id=:id;", array('id'=>$parameters['id']));
         }

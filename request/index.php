@@ -12,14 +12,6 @@
         header('Location: '.APP_HOME.'/login');
         exit;
     }
-    if( Auth::staff()||User::get('shop_id') ){
-        // Allowed
-    }else{
-        $_SESSION['deny'] = array();
-        $_SESSION['deny']['title'] = ( (App::lang()=='en') ? 'Oops! For shop only' : 'ขออภัย! สำหรับร้านค้าเท่านั้น' );
-        header('Location: '.APP_HOME.'/deny');
-        exit;
-    }
     if( isset($_GET['new']) ){
         include(APP_ROOT.'/'.$index['page'].'/manage/new.php');
     }else{
