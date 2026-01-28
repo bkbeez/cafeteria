@@ -129,7 +129,7 @@
                             if(data.shop!=undefined&&data.shop=='Y'){
                                 login_events('email', {'on':'show'});
                             }else{
-                                $("body").fadeOut('slow', function(){
+                                $("body").fadeOut(2000, function(){
                                     document.location = data.url;
                                 });
                             }
