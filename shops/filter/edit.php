@@ -156,7 +156,7 @@
                     htmls += '<button type="submit" class="btn btn-lg btn-icon btn-icon-start btn-success rounded-pill"><i class="uil uil-check-circle"></i><?=Lang::get('Yes')?></button>';
                     htmls += '&nbsp;';
                     htmls += '<button type="button" class="btn btn-lg btn-icon btn-icon-start btn-outline-danger rounded-pill" onclick="record_events(\'restore\', { \'on\':\'N\' });"><i class="uil uil-times-circle"></i><?=Lang::get('No')?></button>';
-                    htmls += '<input type="hidden" name="restore" value="Y"/>'
+                    htmls += '<input type="hidden" name="restore" value="Y"/>';
                 $("form[name='RecordForm'] .confirm-box").html(htmls).css('margin-top','-15px');
                 $("form[name='RecordForm'] .restore-click, form[name='RecordForm'] .row-button").hide();
             }
