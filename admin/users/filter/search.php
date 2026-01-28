@@ -148,11 +148,7 @@
                 $htmls .= '</td>';
                 $htmls .= '<td class="actions act-3">';
                     $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
-                    if( $row['shop_id'] ){
-                        $htmls .= '<div class="btn-box"><button onclick="manage_events(\'setup\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-lock-alt"></i></button><small class=b-tip>'.$lang_login.'</small></div>';
-                    }else{
-                        $htmls .= '<div class="btn-box disabled"><button type="button" class="btn btn-sm btn-circle btn-soft-ash text-ash" style="cursor:default;"><i class="uil uil-lock-alt"></i></button><small class=b-tip>'.$lang_login.'</small></div>';
-                    }
+                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'setup\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-lock-alt"></i></button><small class=b-tip>'.$lang_login.'</small></div>';
                     if( $admin_as||$row['role']!='ADMIN' ){
                         $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\', \'email\':\''.$row['email'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
                     }else{

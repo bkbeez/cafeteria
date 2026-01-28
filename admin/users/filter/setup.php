@@ -33,6 +33,23 @@
         line-height: 28px;
         margin-right: 3px;
     }
+    form[name='RecordForm'] .login-user {
+        top: 50%;
+        color: #959ca9;
+        right: 0.25rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        position: absolute;
+        transform: translateY(-50%);
+    }
+    form[name='RecordForm'] .login-user .btn,
+    form[name='RecordForm'] .login-user .btn:hover {
+        margin: 0;
+        width: 60px;
+        padding-left: 0;
+        padding-right: 0;
+        transform: translateY(0);
+    }
     form[name='RecordForm'] .phone-copy {
         top: 50%;
         display: none;
@@ -64,6 +81,7 @@
                 <div class="alert alert-primary alert-icon mb-2">
                     <div class="form-floating mb-1">
                         <input id="email" name="email" value="<?=((isset($data['email'])&&$data['email'])?$data['email']:null)?>" type="email" class="form-control" placeholder="..." readonly>
+                        <?php if(Auth::admin()){ ?><span class="login-user"><span class="btn btn-sm btn-blue text-white rounded" onclick="record_events('login');">LOGIN</span></span><?php } ?>
                         <label for="email"><?=Lang::get('Email')?></label>
                     </div>
                     <div class="form-floating mb-1">
@@ -130,6 +148,19 @@
             }else{
                 $("form[name='RecordForm'] input[name='password_default']").val(null).attr('disabled', true);
             }
+        }else if(action=="login"){
+            if( params!=undefined ){
+                $("form[name='RecordForm'] .confirm-box").html('').css('margin-top','0');
+                $("form[name='RecordForm'] .login-user, form[name='RecordForm'] .row-button").show();
+            }else{
+                var htmls  = '<div class="fs-19 mb-2 text-center on-text-normal"><?=Lang::get('ConfirmToLogin')?></div>';                    
+                    htmls += '<button type="submit" class="btn btn-lg btn-icon btn-icon-start btn-success rounded-pill"><i class="uil uil-check-circle"></i><?=Lang::get('Yes')?></button>';
+                    htmls += '&nbsp;';
+                    htmls += '<button type="button" class="btn btn-lg btn-icon btn-icon-start btn-outline-danger rounded-pill" onclick="record_events(\'login\', { \'on\':\'N\' });"><i class="uil uil-times-circle"></i><?=Lang::get('No')?></button>';
+                    htmls += '<input type="hidden" name="login" value="Y"/>';
+                $("form[name='RecordForm'] .confirm-box").html(htmls).css('margin-top','-15px');
+                $("form[name='RecordForm'] .login-user, form[name='RecordForm'] .row-button").hide();
+            }
         }else if(action=="confirm"){
             if( params!=undefined ){
                 $("form[name='RecordForm'] .confirm-box").html('').css('margin-top','0');
@@ -165,8 +196,12 @@
                     $("form[name='RecordForm'] .modal-footer").html(htmls);
                     $("form[name='RecordForm'] .modal-footer").fadeOut(1000, function(){
                         $("#ManageDialog").modal('hide');
-                        $("form[name='filter'] input[name='state']").val(null);
-                        $("form[name='filter'] button[type='submit']").click();
+                        if( data.login!=undefined ){
+                            document.location = data.login;
+                        }else{
+                            $("form[name='filter'] input[name='state']").val(null);
+                            $("form[name='filter'] button[type='submit']").click();
+                        }
                     });
                 }else{
                     if(data.onfocus!=undefined&&data.onfocus){
