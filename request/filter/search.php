@@ -14,48 +14,54 @@
     }else if( isset($_SESSION['login']['filter'][$filter_as]['keyword'])&&$_SESSION['login']['filter'][$filter_as]['keyword']!=$keyword ){
         $page = 1;
     }
-    // Permission
-    $admin_as = Auth::admin();
     // Condition
+    $condition = "";
     $parameters = array();
-    //$condition = " AND request.date_delete IS NULL";
-    //if( $admin_as ){
-        $condition = "";
-    //}
-    $_SESSION['login']['filter'][$filter_as]['keyword'] = null;
-    if( $keyword ){
-        $_SESSION['login']['filter'][$filter_as]['keyword'] = $keyword;
-        //$parameters['keynum'] = $keyword."%";
-        $parameters['keyword'] = "%".$keyword."%";
-        $condition .= " AND ( request.shop_name LIKE :keyword";
-            $condition .= " OR request.requester LIKE :keyword";
-        $condition .= " )";
-    }
-    $_SESSION['login']['filter'][$filter_as]['condition'] = array();
-    /*if( isset($_POST['condition']) ){
-        foreach($_POST['condition'] as $key => $value ){
-            if($value){
-                if($key=="type"){
-                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
-                    if($value!='ALL'){
-                        $parameters['type'] = $value;
-                        $condition .= " AND request.type_id=:type";
+    if( User::get('shop_id') ){
+        $parameters['shop_id'] = User::get('shop_id');
+        $condition = " AND request.shop_id=:shop_id";
+        $_SESSION['login']['filter'][$filter_as]['keyword'] = null;
+        if( $keyword ){
+            $_SESSION['login']['filter'][$filter_as]['keyword'] = $keyword;
+            $parameters['keynum'] = $keyword."%";
+            $parameters['keyword'] = "%".$keyword."%";
+            $condition .= " AND ( request.shop_name LIKE :keyword";
+                $condition .= " OR request.requester LIKE :keyword";
+                $condition .= " OR request.amount LIKE :keynum";
+            $condition .= " )";
+        }
+        $_SESSION['login']['filter'][$filter_as]['condition'] = array();
+        if( isset($_POST['condition']) ){
+            foreach($_POST['condition'] as $key => $value ){
+                if($value){
+                    if($key=="start_date"){
+                        $_SESSION['login']['filter'][$filter_as]['condition'][$key] = Helper::dateSave($value);
+                        $parameters[$key] = $_SESSION['login']['filter'][$filter_as]['condition'][$key].' 00:00:00';
+                        $condition .= " AND request.request_date>=:".$key;
+                    }else if($key=="end_date"){
+                        $_SESSION['login']['filter'][$filter_as]['condition'][$key] = Helper::dateSave($value);
+                        $parameters[$key] = $_SESSION['login']['filter'][$filter_as]['condition'][$key].' 23:59:59';
+                        $condition .= " AND request.request_date>=:".$key;
+                    }else if($key=="status"){
+                        $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
+                        if($value=='ST1'){
+                            $condition .= " AND request.status_id=1";
+                        }else if($value=='ST2'){
+                            $condition .= " AND request.status_id=2";
+                        }else if($value=='ST3'){
+                            $condition .= " AND request.status_id=3";
+                        }
+                    }else{
+                        $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
+                        $parameters[$key] = $value;
+                        $condition .= " AND request.".$key."=:".$key;
                     }
-                }else if($key=="status"){
-                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
-                    if($value=='ST1'){
-                        $condition .= " AND request.status_id=1";
-                    }else if($value=='ST2'){
-                        $condition .= " AND request.status_id=2";
-                    }
-                }else{
-                    $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
-                    $parameters[$key] = $value;
-                    $condition .= " AND request.".$key."=:".$key;
                 }
             }
         }
-    }*/
+    }else{
+        $condition = " AND request.shop_id='NONE'";
+    }
     // Total and Pages
     $sql = "SELECT COUNT(request.id) AS total
             FROM request
@@ -87,6 +93,13 @@
     // Run
     $start = (($page-1)*$limit);
     $sql = "SELECT request.*
+            , IF(request.date_cancel IS NOT NULL, 'Cancelled'
+                ,IF(request.status_id=3, 'OnReceived'
+                    ,IF(request.status_id=2, 'OnAccepted'
+                        , 'OnWaiting'
+                    )
+                ) 
+            ) AS status_key
             , IF(request.date_cancel IS NOT NULL, 'cancelled'
                 ,IF(request.status_id<0, 'not-available', 'available') 
             ) AS status
@@ -98,35 +111,41 @@
     $htmls = '';
     $lists = Request::sql($sql, $parameters);
     if( isset($lists)&&count($lists)>0 ){
-        $lang_edit = Lang::get('Edit');
-        $lang_delete = Lang::get('Del');
-        $lang_owner = Lang::get('ShopOwner');
-        $lang_address = Lang::get('Address');
+        $lang_view = Lang::get('View');
         foreach($lists as $no => $row){
             $row_no = (($start+1)+$no);
+            $date_display = Helper::date($row['request_date']);
+            $status_class = 'warning';
+            $status = Lang::get($row['status_key']);
+            if( $row['status_key']=='OnReceived' ){
+                $status_class = 'success';
+                $status = '<span class="fs-sm text-green"><i class="uil uil-check-circle"></i>'.$status.'</span>';
+            }else if( $row['status_key']=='OnAccepted' ){
+                $status_class = 'primary';
+                $status = '<span class="fs-sm text-blue"><i class="uil uil-check-circle"></i>'.$status.'</span>';
+            }else if( $row['status_key']=='OnWaiting' ){
+                $status = '<em class="fs-sm text-yellow"><i class="uil uil-circle"></i>'.$status.'... .. .</em>';
+            }
             $htmls .= '<tr class="'.$row['status'].'">';
                 $htmls .= '<td class="no" scope="row">'.$row_no.'</td>';
-                $htmls .= '<td class="date">'.Helper::date($row['request_date']).'</td>';
+                $htmls .= '<td class="date">'.$date_display.'</td>';
                 $htmls .= '<td class="shop">';
-                    //$htmls .= '<font class="type-o">'.$row['type_'.$lang].'</font>';
-                    //$htmls .= ( $row['tax_number'] ? '<span class="tax-o"><mark class="doc tax-number"><span class="text-white bg-primary">TAX</span>'.$row['tax_number'].'</mark></span>' : null );
-                    $htmls .= '<font><i class="uil uil-shop"></i>'.$row['shop_name'].'</font>';
-                    /*$htmls .= '<span class="fs-sm owner-o">';
-                        $htmls .= '<i class="uil uil-user"></i> '.$row['owner_name'];
-                        $htmls .= '<br><i class="uil uil-phone-volume"></i> '.$row['phone'];
-                    $htmls .= '</span>';*/
-                    //$htmls .= ( $row['fulladdress'] ? '<span class="fs-sm remark-o"><i class="uil uil-map-marker-alt"></i> '.$row['fulladdress'].'</span>' : null );
+                    $htmls .= '<span class="date-o"><i class="uil uil-calendar-alt"></i> '.$date_display.'</span>';
+                    $htmls .= '<font>'.$row['shop_name'].'</font>';
+                    $htmls .= '<span class="fs-sm name-o"><i class="uil uil-user"></i> '.$row['requester'].'</span>';
+                    $htmls .= '<span class="fs-sm amount-o"><i class="uil uil-invoice"></i> '.number_format($row['amount'], 2).'฿</span>';
+                    $htmls .= '<span class="fs-sm remark-o">'.$status.'</span>';
                 $htmls .= '</td>';
-                $htmls .= '<td class="name">';
-                    $htmls .= '<font>'.$row['requester'].'</font>';
-                $htmls .= '</td>';
-                $htmls .= '<td class="amount">';
-                    $htmls .= '<font>'.number_format($row['amount'], 2).'฿</font>';
-                $htmls .= '</td>';
-                $htmls .= '<td class="actions act-3">';
-                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
-                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'address\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-file-edit-alt"></i></button><small class=b-tip>'.$lang_address.'</small></div>';
-                    $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
+                $htmls .= '<td class="name"><font>'.$row['requester'].'</font></td>';
+                $htmls .= '<td class="amount"><font>'.number_format($row['amount'], 2).'฿</font></td>';
+                $htmls .= '<td class="remark"><font>'.$status.'</font></td>';
+                $htmls .= '<td class="actions">';
+                    $htmls .= '<div class="btn-box '.$status_class.'">';
+                        $htmls .= '<button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-'.$status_class.'">';
+                            $htmls .= '<i class="uil uil-file-alt"></i>';
+                        $htmls .= '</button>';
+                        $htmls .= '<small class=b-tip>'.$lang_view.'</small>';
+                    $htmls .= '</div>';
                 $htmls .= '</td>';
             $htmls .= '</tr>';
         }
