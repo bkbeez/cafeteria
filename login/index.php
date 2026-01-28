@@ -38,47 +38,17 @@
         <script type="text/javascript" src="<?=THEME_JS?>/index.js"></script>
         <style type="text/css">
             .login .card {width:480px;overflow:hidden;}
-            .login .card .card-body { padding-top:5px;padding-bottom:5px; }
-            .login h1 { font-size:36px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
-            .login .login-logo { height:72px; }
+            .login .card .card-body { padding-top:0;padding-bottom:35px; }
+            .login h1 { font-size:48px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; }
+            .login .login-logo { left:0;width:72px;float:left;position:absolute;margin:-3px 0 0 5px; }
             .login .login-cafeteria>img { width:100%;  }
             .login .btn-google>span { padding:0 5px;}
-            form[name='LoginForm'] .email-clear {
-                top: 50%;
-                display: none;
-                color: #959ca9;
-                right: 0.25rem;
-                cursor: pointer;
-                font-size: 0.9rem;
-                position: absolute;
-                transform: translateY(-50%);
-            }
-            form[name='LoginForm'] .email-clear .btn,
-            form[name='LoginForm'] .email-clear .btn:hover {
-                margin: 0;
-                width: 45px;
-                padding-left: 0;
-                padding-right: 0;
-                transform: translateY(0);
-            }
-            @media only all and (max-width: 495px) {
-                .login h1 { font-size:30px; }
-                .login .login-logo { height:62px; }
-            }
-            @media only all and (max-width: 435px) {
-                .login h1 { font-size:25px; }
-                .login .login-logo { height:55px; }
-            }
-            @media only all and (max-width: 414px) {
-                .login .btn-google>span { display:none; }
-            }
-            @media only all and (max-width: 400px) {
-                .login .login-logo { height:72px;display:block; }
-                .login .btn-google>span { display:none; }
-            }
-            @media screen and (max-height:435px) {
-                .login .login-cafeteria { display:none; }
-            }
+            form[name='LoginForm'] .email-clear {top:50%;display:none;color:#959ca9;right:0.25rem;cursor:pointer;font-size:0.9rem;position:absolute;transform:translateY(-50%);}form[name='LoginForm'] .email-clear .btn,
+            form[name='LoginForm'] .email-clear .btn:hover {margin:0;width:45px;padding-left:0;padding-right:0;transform:translateY(0);}
+            @media only all and (max-width: 480px) { .login .card .card-body { padding:0 10px 10px 10px; } }
+            @media only all and (max-width: 414px) { .login h1 { font-size:42px; } }
+            @media only all and (max-width: 300px) { .login .btn-google>span { display:none; } }
+            @media screen and (max-height:435px) { .login .login-logo,.login .login-cafeteria { display:none; } }
         </style>
     </head>
     <body>
@@ -87,17 +57,13 @@
             <div class="row">
                 <div class="col d-flex justify-content-center align-items-center" style="height:100vh;">
                     <div class="card">
-                        <center class="login-cafeteria"><img src="<?=THEME_IMG?>/cafeteria.jpg" style="width:100%;"/></center>
+                        <img class="login-logo" src="<?=THEME_IMG?>/logo/logo.png" alt="login-logo"/>
+                        <img class="login-cafeteria" src="<?=THEME_IMG?>/cafeteria.jpg" style="width:100%;"/>
                         <div class="row gx-0">
-                            <div class="col-lg-12 p-2">
+                            <div class="col-lg-12">
                                 <div class="card-body">
                                     <form name="LoginForm" action="<?=APP_PATH?>/login/loging.php" method="POST" enctype="multipart/form-data" class="form-manage">
-                                        <center>
-                                            <h1 class="text-sky on-bold-primary mb-0">
-                                                <img class="login-logo" src="<?=THEME_IMG?>/logo/logo.png" alt="login-logo"/>
-                                                <?=APP_CODE?>
-                                            </h1>
-                                        </center>
+                                        <center><h1 class="text-sky on-bold-primary"><span class="underline"><?=APP_CODE?></span></h1></center>
                                         <div class="form-floating mb-2">
                                             <input id="login_email" name="login_email" type="email" class="form-control" placeholder="...">
                                             <span class="email-clear"><span class="btn btn-sm btn-soft-red text-red rounded" onclick="login_events('email', {'on':'clear'});">&#10005;</span></span>
@@ -109,12 +75,12 @@
                                             <label for="login_password">Password</label>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary rounded w-100">LOGIN &rarr;</button>
+                                            <button type="submit" class="btn btn-primary rounded w-100"><i class="uil uil-signout" style="float:left;font-size:28px;line-height:28px;margin-right:3px;"></i> LOGIN</button>
                                         </div>
                                     </form>
                                     <div class="form-manage text-center">
                                         <div class="divider-icon my-2"><?=Lang::get('Or')?></div>
-                                        <button type="button" class="btn btn-google btn-red rounded w-100" style="line-height:28px;" onclick="login_events('google');"><img class="img-fluid for-light" src="<?=THEME_IMG?>/google.png" alt="google" style="height:28px;padding:2px;background:white;margin:0 5px 0 0;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;"/> Sign in <span>with</span> Google <span>Account</span></button>
+                                        <button type="button" class="btn btn-google btn-red rounded w-100" style="line-height:28px;" onclick="login_events('google');"><img class="img-fluid for-light" src="<?=THEME_IMG?>/google.png" alt="google" style="height:28px;padding:2px;background:white;margin:0 5px 0 0;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;"/> Login <span>with</span> Google <span>Account</span></button>
                                     </div>
                                 </div>
                             </div>
