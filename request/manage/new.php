@@ -1,26 +1,28 @@
-<?php if(!isset($shop_id)||!isset($index['page'])||$index['page']!='request'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
+<?php if(!isset($index['page'])||$index['page']!='request'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
 <?php
+    $shop_id = User::get('shop_id');
+    $lists = Stock::sql("SELECT stock.*
+                    FROM stock
+                    WHERE stock.status_id=1;
+                    ORDER BY stock.sequence, stock.id;"
+    );
     if( $shop_id ){
         $shop = Shop::one("SELECT shop.*
                         , TRIM(CONCAT(COALESCE(shop.title,''),shop.name,' ',COALESCE(shop.surname,''))) AS owner_name
-                        , IF(shop.address IS NOT NULL
-                            ,TRIM(CONCAT(shop.address,' ',COALESCE(shop.province,''),' ',COALESCE(shop.zipcode,'')))
-                            ,NULL
-                        ) AS fulladdress
                         FROM shop
                         WHERE shop.id=:id
                         LIMIT 1;"
                         , array('id'=>$shop_id)
         );
-        $lists = Stock::sql("SELECT stock.*
-                        FROM stock
-                        WHERE stock.status_id=1;
-                        ORDER BY stock.sequence, stock.id;"
-        );
     }
 ?>
 <?php include(APP_HEADER);?>
 <style type="text/css">
+    .display-1 {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
     form[name='ManageForm'] table {
         width: 100%;
         margin: 0 0 15px 0;
@@ -34,6 +36,11 @@
     form[name='ManageForm'] table .name {
         width: auto;
         text-align: left;
+    }
+    form[name='ManageForm'] table .name mark {
+        margin: 0;
+        display: none;
+        font-size: 12px;
     }
     form[name='ManageForm'] table .price {
         width: 70px;
@@ -49,6 +56,9 @@
     }
     form[name='ManageForm'] table .baht {
         width: 45px;
+    }
+    form[name='ManageForm'] table .baht .baht-sm {
+        display: none;
     }
     form[name='ManageForm'] table thead tr th {
         padding-left: 0;
@@ -94,6 +104,14 @@
         text-align: right;
         padding-right: 25px;
     }
+    form[name='ManageForm'] table tfoot tr td.last {
+        padding: 15px 0 0 0;
+        text-align: left;
+    }
+    form[name='ManageForm'] table tfoot tr td.last>i {
+        font-size: 28px;
+        line-height: 24px;
+    }
     form[name='ManageForm'] .manage-footer {
         width: 100%;
         height: 120px;
@@ -110,17 +128,34 @@
         margin-right: 3px;
     }
     @media only all and (max-width: 667px) {
+        .display-shop>span {
+            width: 100%;
+            display: block;
+            text-align: left;
+            padding-left: 15%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
         form[name='ManageForm'] table .no {
-            width: 5%;
+            display: none;
+        }
+        form[name='ManageForm'] table .name mark {
+            display: inline-block;
         }
         form[name='ManageForm'] table .price {
-            width: 70px;
+            width: 40px;
         }
         form[name='ManageForm'] table .quantity {
             width: 20%;
+            padding-right: 0!important;
         }
         form[name='ManageForm'] table .amount {
             width: 20%;
+            padding-right: 5px!important;
+        }
+        form[name='ManageForm'] table .baht {
+            width: 5%;
         }
         form[name='ManageForm'] table thead tr th {
             padding-left: 3px;
@@ -139,10 +174,19 @@
             padding-top: 0;
             vertical-align: middle;
         }
+        form[name='ManageForm'] table .baht .baht-lg {
+            display: none;
+        }
+        form[name='ManageForm'] table .baht .baht-sm {
+            display: block;
+        }
         form[name='ManageForm'] table tfoot tr td {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+        }
+        form[name='ManageForm'] table tfoot tr td.last>i {
+            font-size: 16px;
         }
         form[name='ManageForm'] .manage-footer .confirm-btn>.btn {
             width: 48%;
@@ -152,19 +196,22 @@
             position: absolute;
         }
     }
+    @media only all and (max-width: 414px) {
+        .display-shop>span {
+            padding-left: 0;
+        }
+    }
 </style>
 <form name="ManageForm" action="<?=$form?>/scripts/create.php" method="POST" enctype="multipart/form-data" class="form-manage" target="_blank">
-    <input type="hidden" name="shop_id" value="<?=((isset($data['id'])&&$data['id'])?$data['id']:null)?>"/>
     <section class="wrapper image-wrapper bg-image bg-overlay bg-overlay-400 text-white" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
         <div class="container text-center pt-4 pb-16">
             <div class="row">
                 <div class="col-md-10 col-xl-8 mx-auto">
                     <div class="post-header">
                         <h1 class="display-1 text-white mb-2"><?=( (App::lang()=='en') ? 'Cafeteria Requisition Form' : 'รายการเบิกภาชนะโรงอาหาร' )?></h1>
-                        <ul class="post-meta text-white fs-20 mb-5">
-                            <li><i class="uil uil-shop"></i> <?=((isset($shop['shop_name'])&&$shop['shop_name'])?$shop['shop_name']:Lang::get('Shop'))?></li>
-                            <li><i class="uil uil-calendar-alt"></i> <?=Helper::dateDisplay(new datetime(), App::lang())?></li>
-                        </ul>
+                        <div class="display-shop text-white fs-20 mb-5">
+                            <span><i class="uil uil-university"></i> <?=( (App::lang()=='en') ? APP_FACT_EN : APP_FACT_TH )?></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -177,51 +224,78 @@
                     <div class="blog single mt-n16">
                         <div class="card shadow-lg">
                             <div class="card-body p-1">
-                            <?php if( isset($lists)&&count($lists)>0 ){ ?>
-                                <table border="0" class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="no">#</th>
-                                            <th scope="col" class="name"><?=Lang::get('List')?></th>
-                                            <th scope="col" class="price"><?=Lang::get('Price')?></th>
-                                            <th scope="col" class="quantity"><?=Lang::get('Quantity')?></th>
-                                            <th scope="col" class="amount"><?=Lang::get('Amount')?></th>
-                                            <th scope="col" class="baht">&nbsp;</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach($lists as $seq => $item){ ?>
-                                        <tr class="AT-<?=$item['id']?>">
-                                            <td class="no"><?=($seq+1)?></td>
-                                            <td class="name"><?=$item['name']?></td>
-                                            <td class="price"><?=(($item['charge']>0)?number_format($item['charge'],2):'-')?></td>
-                                            <td class="quantity">
-                                                <input type="hidden" name="list[<?=$seq?>][stock_id]" value="<?=$item['id']?>"/>
-                                                <input type="hidden" name="list[<?=$seq?>][name]" value="<?=$item['name']?>"/>
-                                                <input type="number" name="list[<?=$seq?>][quantity]" value="0" min="0" class="form-control set-quantity" placeholder="..." onchange="manage_events('change', { 'at':'<?=$item['id']?>' });"/>
-                                                <input type="hidden" name="list[<?=$seq?>][unit]" value="<?=$item['unit']?>" class="set-unit"/>
-                                                <input type="hidden" name="list[<?=$seq?>][price]" value="<?=$item['charge']?>" class="set-price"/>
-                                                <input type="hidden" name="list[<?=$seq?>][amount]" value="0" class="set-amount"/>
-                                            </td>
-                                            <td class="amount">0.00</td>
-                                            <td class="baht"><?=Lang::get('Baht')?></td>
-                                        </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td class="name" colspan="3"><?=Lang::get('GrandTotal')?></td>
-                                            <td class="amount total-amount" colspan="2">0.00</td>
-                                            <td class="baht"><?=Lang::get('Baht')?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="name" colspan="3"><?=( (App::lang()=='en') ? 'Requester' : 'ผู้ทำรายการ' )?></td>
-                                            <td class="amount" colspan="2"><?=User::get('fullname')?></td>
-                                            <td class="baht" style="padding-top:0;"><i class="uil uil-file-edit-alt fs-32"></i></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            <?php } ?>
+                                <div class="alert alert-primary alert-icon" style="padding: 5px;">
+                                    <div class="row gx-1">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                        <?php if( isset($shop['id'])&&$shop['id'] ){ ?>
+                                            <input type="hidden" name="shop_id" value="<?=((isset($shop['id'])&&$shop['id'])?$shop['id']:null)?>"/>
+                                            <div class="form-floating">
+                                                <input value="<?=((isset($shop['shop_name'])&&$shop['shop_name'])?$shop['shop_name']:null)?>" type="text" class="form-control" placeholder="..." disabled style="background:white;">
+                                                <label><?=Lang::get('Shop')?></label>
+                                            </div>
+                                        <?php }else{ ?>
+                                            <input type="hidden" name="request_by" value="STAFF"/>
+                                            <div class="form-floating form-select-wrapper">
+                                                <select id="shop_id" name="shop_id" class="form-select" aria-label="..."><?=Shop::getOption()?></select>
+                                                <label for="shop_id"><?=Lang::get('Shop')?></label>
+                                            </div>
+                                        <?php } ?>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                            <div class="form-floating">
+                                                <input value="<?=Helper::dateDisplay(new datetime(), App::lang())?>" type="text" class="form-control" placeholder="..." disabled style="background:white;">
+                                                <label><?=Lang::get('Date')?></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php if( isset($lists)&&count($lists)>0 ){ ?>
+                                    <table border="0" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="no">#</th>
+                                                <th scope="col" class="name"><?=Lang::get('List')?></th>
+                                                <th scope="col" class="price"><?=Lang::get('Price')?></th>
+                                                <th scope="col" class="quantity"><?=Lang::get('Quantity')?></th>
+                                                <th scope="col" class="amount"><?=Lang::get('Amount')?></th>
+                                                <th scope="col" class="baht">&nbsp;</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($lists as $seq => $item){ ?>
+                                            <tr class="AT-<?=$item['id']?>">
+                                                <td class="no"><?=($seq+1)?></td>
+                                                <td class="name"><mark class="doc"><?=($seq+1)?></mark><?=$item['name']?></td>
+                                                <td class="price"><?=(($item['charge']>0)?number_format($item['charge'],2):'-')?></td>
+                                                <td class="quantity">
+                                                    <input type="hidden" name="list[<?=$seq?>][stock_id]" value="<?=$item['id']?>"/>
+                                                    <input type="hidden" name="list[<?=$seq?>][name]" value="<?=$item['name']?>"/>
+                                                    <input type="number" name="list[<?=$seq?>][quantity]" value="0" min="0" class="form-control set-quantity" placeholder="..." onchange="manage_events('change', { 'at':'<?=$item['id']?>' });"/>
+                                                    <input type="hidden" name="list[<?=$seq?>][unit]" value="<?=$item['unit']?>" class="set-unit"/>
+                                                    <input type="hidden" name="list[<?=$seq?>][price]" value="<?=$item['charge']?>" class="set-price"/>
+                                                    <input type="hidden" name="list[<?=$seq?>][amount]" value="0" class="set-amount"/>
+                                                </td>
+                                                <td class="amount">0.00</td>
+                                                <td class="baht"><span class="baht-lg"><?=Lang::get('Baht')?></span><span class="baht-sm">฿</span></td>
+                                            </tr>
+                                        <?php } ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="no"></td>
+                                                <td class="name" colspan="2"><?=Lang::get('GrandTotal')?></td>
+                                                <td class="amount total-amount" colspan="2">0.00</td>
+                                                <td class="baht"><span class="baht-lg"><?=Lang::get('Baht')?></span><span class="baht-sm">฿</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="no"></td>
+                                                <td class="name" colspan="2"><?=Lang::get('Requester')?></td>
+                                                <td class="amount" colspan="2"><?=User::get('fullname')?></td>
+                                                <td class="baht last"><i class="uil uil-file-edit-alt"></i></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -298,6 +372,7 @@
                         }
                     );
                 }else{
+                    manage_events('confirm', { 'on':'N' });
                     swal({
                         'type' : data.status,
                         'title': '<span class="on-font-primary">'+data.title+'</span>',
