@@ -14,8 +14,6 @@
     }else if( isset($_SESSION['login']['filter'][$filter_as]['keyword'])&&$_SESSION['login']['filter'][$filter_as]['keyword']!=$keyword ){
         $page = 1;
     }
-    // Permission
-    $admin_as = ((isset($_POST['admin_as'])&&$_POST['admin_as'])?intval($_POST['admin_as']):false);
     // Condition
     $parameters = array();
     $condition = " AND stock.status_id=1";

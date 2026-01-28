@@ -3,18 +3,25 @@
 <?php
     $lang = App::lang();
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
+    $sql = "SELECT stock.*
+            FROM stock
+            WHERE stock.status_id>=0
+            ";
+    $admin_as = Auth::admin();
+    if( $admin_as ){
+        $sql .= " AND stock.id IS NOT NULL";
+    }else{
+        $sql .= " AND stock.date_delete IS NULL";
+    }
+    $sql .= " ORDER BY stock.sequence, stock.id;";
+    $lists = Stock::sql($sql);
     $htmls = '';
-    $lists = Stock::sql("SELECT stock.*
-                        FROM stock
-                        WHERE stock.status_id>=0
-                        ORDER BY stock.sequence, stock.id;"
-    );
     if( isset($lists)&&count($lists)>0 ){
         foreach($lists as $seq => $item){
             $htmls .= '<form name="saving" class="form-manage AT-'.$item['id'].'" action="'.$form.'/scripts/inventory/update.php" method="POST" enctype="multipart/form-data" target="_blank">';
                 $htmls .= '<input type="hidden" name="id" value="'.$item['id'].'"/>';
                 $htmls .= '<div class="card mb-2 lift">';
-                    $htmls .= '<div class="card-body p-1">';
+                    $htmls .= '<div class="card-body p-1'.( $item['date_delete'] ? ' deleted' : null ).'">';
                         $htmls .= '<div class="row gx-1">';
                             $htmls .= '<div class="col-3 col-type">';
                                 $htmls .= '<div class="seq-box">';
@@ -40,8 +47,13 @@
                                 $htmls .= '</div>';
                             $htmls .= '</div>';
                             $htmls .= '<div class="col-1 col-btns text-center toggle">';
+                            if( $item['date_delete'] ){
+                                $htmls .= '<i class="uil uil-exchange" onclick="record_events(\'restore\', { \'id\':\''.$item['id'].'\', \'self\':this });" style="color:red;font-size:32px;"></i>';
+                                $htmls .= '<div class="toggle-label">RESTORE</div>';
+                            }else{
                                 $htmls .= '<i class="uil uil-toggle-'.( ($item['status_id']>0) ? 'on' : 'off' ).'" onclick="record_events(\'status\', { \'id\':\''.$item['id'].'\', \'self\':this });"></i>';
                                 $htmls .= '<div class="toggle-label">OFF/ON</div>';
+                            }
                             $htmls .= '</div>';
                             $htmls .= '<div class="col-1 col-btns text-center save">';
                                 $htmls .= '<button type="submit" class="btn btn-icon btn-outline-success w-100"><i class="uil uil-save"></i><span>'.Lang::get('Save').'</span></button>';
@@ -124,6 +136,12 @@
     .modal-dialog .modal-body.formlists .form-control,
     .modal-dialog .modal-body.formlists .form-floating>label {
         padding-right: 3px!important;
+    }
+    .modal-dialog .modal-body.formlists .deleted,
+    .modal-dialog .modal-body.formlists .deleted select,
+    .modal-dialog .modal-body.formlists .deleted input,
+    .modal-dialog .modal-body.formlists .deleted label {
+        color: red;
     }
     .modal-dialog .modal-footer {
         min-height: 60px;
@@ -290,6 +308,18 @@
                     }
                 });
             }
+        }else if(action=="restore"){
+            if( params.no!=undefined ){
+                $("form[name='saving'].AT-"+params.id+" .on-form-status").remove();
+            }else{
+                var htmls = '<div class="on-form-status text-end text-red">';
+                        htmls += '<font class="fs-sm"><?=Lang::get('ConfirmToRestore')?></font>';                    
+                        htmls += '<button type="submit" class="btn btn-sm btn-success rounded" style="padding:0 10px;margin-left:3px;"><?=Lang::get('Yes')?></button>';
+                        htmls += '<button type="button" class="btn btn-sm btn-outline-danger rounded" onclick="record_events(\'restore\', { \'on\':\'N\' });" style="padding:0 10px;margin-left:3px;"><?=Lang::get('No')?></button>';
+                        htmls += '<input type="hidden" name="restore" value="Y"/>';
+                    htmls += '</div>';
+                $("form[name='saving'].AT-"+params.id+" .card-body").append(htmls);
+            }
         }else if(action=="delete"){
             if( params.no!=undefined ){
                 $("form[name='saving'].AT-"+params.id+" .on-form-status").remove();
@@ -327,7 +357,10 @@
                         success: function(rs) {
                             var data = JSON.parse(rs);
                             if(data.status=='success'){
-                                if(data.delete!=undefined){
+                                if(data.restore!=undefined){
+                                    $("form[name='saving'].AT-"+data.id+" .card-body").removeClass('deleted');
+                                    $("form[name='saving'].AT-"+data.id+" .col-btns.toggle").html(data.htmls);
+                                }else if(data.delete!=undefined){
                                     $("form[name='saving'].AT-"+data.id).fadeOut(function(){
                                         $(this).remove();
                                     });
@@ -368,7 +401,11 @@
             success: function(rs) {
                 var data = JSON.parse(rs);
                 if(data.status=='success'){
-                    if(data.delete!=undefined){
+                    if(data.restore!=undefined){
+                        $("form[name='saving'].AT-"+data.id+" .card-body").removeClass('deleted');
+                        $("form[name='saving'].AT-"+data.id+" .col-btns.toggle").html(data.htmls);
+                        $("form[name='saving'].AT-"+data.id+" button[type='submit']").html('<i class="uil uil-save"></i>');
+                    }else if(data.delete!=undefined){
                         $("form[name='saving'].AT-"+data.id).fadeOut(function(){
                             $(this).remove();
                         });

@@ -15,8 +15,6 @@
         header('Location: '.APP_HOME.'/deny');
         exit;
     }
-    // Permission
-    $admin_as = Auth::admin();
     // Filter
     $filter_as = strtolower($index['page'].'_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
@@ -144,7 +142,6 @@
     <form name="filter" action="<?=$form?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="state" value="loading" />
         <input type="hidden" name="filter_as" value="<?=$filter_as?>" />
-        <input type="hidden" name="admin_as" value="<?=$admin_as?>" />
         <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
             <div class="container">
                 <div class="filter-search">
