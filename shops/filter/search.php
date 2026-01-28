@@ -15,10 +15,13 @@
         $page = 1;
     }
     // Permission
-    $admin_as = ((isset($_POST['admin_as'])&&$_POST['admin_as'])?intval($_POST['admin_as']):false);
+    $admin_as = Auth::admin();
     // Condition
     $parameters = array();
-    $condition = "";
+    $condition = " AND shop.date_delete IS NULL";
+    if( $admin_as ){
+        $condition = "";
+    }
     $_SESSION['login']['filter'][$filter_as]['keyword'] = null;
     if( $keyword ){
         $_SESSION['login']['filter'][$filter_as]['keyword'] = $keyword;
@@ -93,7 +96,9 @@
                 ,TRIM(CONCAT(shop.address,' ',COALESCE(shop.province,''),' ',COALESCE(shop.zipcode,'')))
                 ,NULL
             ) AS fulladdress
-            , IF(shop.status_id<0, 'not-available', 'available') AS status
+            , IF(shop.date_delete IS NOT NULL, 'deleted'
+                ,IF(shop.status_id<0, 'not-available', 'available') 
+            ) AS status
             FROM shop
             INNER JOIN shop_type ON shop.type_id=shop_type.id
             WHERE shop.id IS NOT NULL";
@@ -130,12 +135,10 @@
                     $htmls .= ( $row['tax_number'] ? '<mark class="doc tax-number"><span class="text-white bg-primary">TAX</span>'.$row['tax_number'].'</mark>' : null );
                     $htmls .= ( $row['fulladdress'] ? '<span class="fs-sm"><i class="uil uil-map-marker-alt"></i> '.$row['fulladdress'].'</span>' : null );
                 $htmls .= '</td>';
-                $htmls .= '<td class="actions act-'.($admin_as?'3':'2').'">';
+                $htmls .= '<td class="actions act-3">';
                     $htmls .= '<div class="btn-box"><button onclick="manage_events(\'edit\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-edit-alt"></i></button><small class=b-tip>'.$lang_edit.'</small></div>';
                     $htmls .= '<div class="btn-box"><button onclick="manage_events(\'address\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-outline-primary"><i class="uil uil-file-edit-alt"></i></button><small class=b-tip>'.$lang_address.'</small></div>';
-                    if( $admin_as ){
-                        $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\', \'display\':\''.$row['shop_name'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
-                    }
+                    $htmls .= '<div class="btn-box delete"><button type="button" onclick="manage_events(\'delete\', { \'id\':\''.$row['id'].'\', \'display\':\''.$row['shop_name'].'\' });" class="btn btn-sm btn-circle btn-outline-danger"><i class="uil uil-trash-alt"></i></button><small class=b-tip>'.$lang_delete.'</small></div>';
                 $htmls .= '</td>';
             $htmls .= '</tr>';
         }

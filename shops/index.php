@@ -15,8 +15,6 @@
         header('Location: '.APP_HOME.'/deny');
         exit;
     }
-    // Permission
-    $admin_as = Auth::admin();
     // Filter
     $filter_as = strtolower($index['page'].'_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
@@ -103,6 +101,11 @@
         color: #CCC!important;
         font-style: italic !important;
     }
+    .table-filter .filter-result .deleted {
+        color: #e2626b !important;
+        text-decoration: line-through;
+        font-style: italic !important;
+    }
     @media only all and (max-width: 991px) {
         .table-filter .filter-result .name {
             width: auto;
@@ -148,7 +151,7 @@
         .table-filter .filter-result .name>.remark-o {
             display: inline;
         }
-        .table-filter .filter-result .actions.act-<?=($admin_as?'3':'2')?> {
+        .table-filter .filter-result .actions.act-3 {
             width: 45px;
             text-align: left;
         }
@@ -161,7 +164,6 @@
     <form name="filter" action="<?=$form?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="state" value="loading" />
         <input type="hidden" name="filter_as" value="<?=$filter_as?>" />
-        <input type="hidden" name="admin_as" value="<?=$admin_as?>" />
         <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
             <div class="container">
                 <div class="filter-search">
@@ -220,7 +222,7 @@
                                 <th scope="col" class="name"><?=Lang::get('ShopName')?></th>
                                 <th scope="col" class="owner"><?=Lang::get('ShopOwner')?></th>
                                 <th scope="col" class="remark">&nbsp;</th>
-                                <th scope="col" class="actions col-last act-<?=($admin_as?'3':'2')?>">&nbsp;</th>
+                                <th scope="col" class="actions col-last act-3">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody></tbody>

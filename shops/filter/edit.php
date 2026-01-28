@@ -95,6 +95,28 @@
                         </div>
                     </div>
                 </div>
+                <?php if(isset($data['date_delete'])&&$data['date_delete']){ ?>
+                <div class="alert alert-danger alert-icon mb-2">
+                    <p class="lead text-red mb-1 text-start on-text-oneline">
+                        <mark class="restore-click fs-sm text-white bg-red" style="right:15px;float:right;position:absolute;cursor:pointer;" onclick="record_events('restore');"><?=Lang::get('Restore')?></mark>
+                        <?=Lang::get('Deleted')?>  
+                    </p>
+                    <div class="row gx-1">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input value="<?=((isset($data['user_delete'])&&$data['user_delete'])?$data['user_delete']:null)?>" type="text" class="form-control" placeholder="..." readonly style="background:white;">
+                                <label><?=Lang::get('By')?></label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-floating mb-1">
+                                <input value="<?=((isset($data['date_delete'])&&$data['date_delete'])?$data['date_delete']:null)?>" type="text" class="form-control" placeholder="..." readonly style="background:white;">
+                                <label><?=Lang::get('Date')?></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
             </div>
             <div class="modal-footer text-center">
                 <div class="confirm-box"></div>
@@ -124,6 +146,19 @@
                     htmls += '<button type="button" class="btn btn-lg btn-icon btn-icon-start btn-outline-danger rounded-pill" onclick="record_events(\'confirm\', { \'on\':\'N\' });"><i class="uil uil-times-circle"></i><?=Lang::get('No')?></button>';
                 $("form[name='RecordForm'] .confirm-box").html(htmls).css('margin-top','-15px');
                 $("form[name='RecordForm'] .row-button").hide();
+            }
+        }else if(action=="restore"){
+            if( params!=undefined ){
+                $("form[name='RecordForm'] .confirm-box").html('').css('margin-top','0');
+                $("form[name='RecordForm'] .restore-click, form[name='RecordForm'] .row-button").show();
+            }else{
+                var htmls  = '<div class="fs-19 mb-2 text-center on-text-normal"><?=Lang::get('ConfirmToRestore')?></div>';                    
+                    htmls += '<button type="submit" class="btn btn-lg btn-icon btn-icon-start btn-success rounded-pill"><i class="uil uil-check-circle"></i><?=Lang::get('Yes')?></button>';
+                    htmls += '&nbsp;';
+                    htmls += '<button type="button" class="btn btn-lg btn-icon btn-icon-start btn-outline-danger rounded-pill" onclick="record_events(\'restore\', { \'on\':\'N\' });"><i class="uil uil-times-circle"></i><?=Lang::get('No')?></button>';
+                    htmls += '<input type="hidden" name="restore" value="Y"/>'
+                $("form[name='RecordForm'] .confirm-box").html(htmls).css('margin-top','-15px');
+                $("form[name='RecordForm'] .restore-click, form[name='RecordForm'] .row-button").hide();
             }
         }
     }
