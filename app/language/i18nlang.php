@@ -38,6 +38,12 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Back'                                     => array('th'=>'กลับ'
                                                                 ,'en'=>'Back'
                                                         )
+            ,'BackToHome'                               => array('th'=>'กลับหน้าหลัก'
+                                                                ,'en'=>'Back To Home'
+                                                        )
+            ,'BackToList'                               => array('th'=>'กลับหน้ารายการ'
+                                                                ,'en'=>'Back To List'
+                                                        )
             ,'Baht'                                     => array('th'=>'บาท'
                                                                 ,'en'=>'Baht'
                                                         )
@@ -458,13 +464,16 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Read'                                     => array('th'=>'อ่าน'
                                                                 ,'en'=>'Read'
                                                         )
+            ,'Received'                                 => array('th'=>'รับของแล้ว'
+                                                                ,'en'=>'Received'
+                                                        )
             ,'Regards'                                  => array('th'=>'ขอแสดงความนับถือ'
                                                                 ,'en'=>'Regards'
                                                         )
             ,'Reject'                                   => array('th'=>'ปฏิเสธ'
                                                                 ,'en'=>'Reject'
                                                         )
-            ,'Rejected'                                 => array('th'=>'ถูกปฏิเสธ'
+            ,'Rejected'                                 => array('th'=>'ปฏิเสธแล้ว'
                                                                 ,'en'=>'Rejected'
                                                         )
             ,'Remark'                                   => array('th'=>'หมายเหตุ'
@@ -575,6 +584,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Visits'                                   => array('th'=>'ผู้เยี่ยมชม'
                                                                 ,'en'=>'Visits'
                                                         )
+            ,'Waiting'                                  => array('th'=>'รอตรวจ'
+                                                                ,'en'=>'Waiting'
+                                                        )
             ,'Warning'                                  => array('th'=>'คำเตือน'
                                                                 ,'en'=>'Warning'
                                                         )
@@ -682,15 +694,6 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'LoginSuccess'                             => array('th'=>'เข้าสู่ระบบเรียบร้อยแล้ว'
                                                                 ,'en'=>'Logged in successfully'
                                                         )
-            ,'OnAccepted'                               => array('th'=>'ตรวจแล้ว'
-                                                                ,'en'=>'Accepted'
-                                                        )
-            ,'OnReceived'                               => array('th'=>'รับของแล้ว'
-                                                                ,'en'=>'Received'
-                                                        )
-            ,'OnWaiting'                                => array('th'=>'รอตรวจ'
-                                                                ,'en'=>'Waiting'
-                                                        )
             ,'Please'                                   => array('th'=>'โปรด'
                                                                 ,'en'=>'Please'
                                                         )
@@ -718,6 +721,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Success'                                  => array('th'=>'สำเร็จ'
                                                                 ,'en'=>'Success'
                                                         )
+            ,'SuccessAccept'                            => array('th'=>'ข้อมูลถูกยอมรับเรียบร้อยแล้ว'
+                                                                ,'en'=>'Data has been accepted.'
+                                                        )
             ,'SuccessAdd'                               => array('th'=>'ข้อมูลถูกเพิ่มเรียบร้อยแล้ว'
                                                                 ,'en'=>'Data has been added.'
                                                         )
@@ -732,6 +738,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                         )
             ,'SuccessDelete'                            => array('th'=>'ข้อมูลถูกลบเรียบร้อยแล้ว'
                                                                 ,'en'=>'Data has been deleted.'
+                                                        )
+            ,'SuccessReject'                            => array('th'=>'ข้อมูลถูกปฏิเสธเรียบร้อยแล้ว'
+                                                                ,'en'=>'Data has been rejected.'
                                                         )
             ,'SuccessRestore'                           => array('th'=>'ข้อมูลถูกคืนค่าเรียบร้อยแล้ว'
                                                                 ,'en'=>'Data has been restored.'
