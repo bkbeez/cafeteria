@@ -50,6 +50,10 @@
                             $condition .= " AND request.status_id=2";
                         }else if($value=='ST3'){
                             $condition .= " AND request.status_id=3";
+                        }else if($value=='ST4'){
+                            $condition .= " AND request.status_id=4";
+                        }else if($value=='ST5'){
+                            $condition .= " AND request.status_id=5";
                         }
                     }else{
                         $_SESSION['login']['filter'][$filter_as]['condition'][$key] = $value;
@@ -93,12 +97,14 @@
     // Run
     $start = (($page-1)*$limit);
     $sql = "SELECT request.*
-            , IF(request.date_cancel IS NOT NULL, 'Cancelled'
-                ,IF(request.status_id=3, 'OnReceived'
-                    ,IF(request.status_id=2, 'OnAccepted'
-                        , 'OnWaiting'
+            ,IF(request.status_id=5, 'Cancelled'
+                ,IF(request.status_id=4, 'Rejected'
+                    ,IF(request.status_id=3, 'Received'
+                        ,IF(request.status_id=2, 'Confirmed'
+                            , 'Waiting'
+                        )
                     )
-                ) 
+                )
             ) AS status_key
             , IF(request.date_cancel IS NOT NULL, 'cancelled'
                 ,IF(request.status_id<0, 'not-available', 'available') 
@@ -115,17 +121,16 @@
         foreach($lists as $no => $row){
             $row_no = (($start+1)+$no);
             $date_display = Helper::date($row['request_date']);
-            $status_class = 'warning';
-            $status = Lang::get($row['status_key']);
-            if( $row['status_key']=='OnReceived' ){
-                $status_class = 'success';
-                $status = '<span class="fs-sm text-green"><i class="uil uil-check-circle"></i>'.$status.'</span>';
+            $status = '<em class="fs-sm text-yellow"><i class="uil uil-circle"></i>'.Lang::get($row['status_key']).'... .. .</em>';
+            if( $row['status_id']>=4 ){
+                $status = '<span class="fs-sm text-red"><i class="uil uil-times-circle"></i>'.Lang::get($row['status_key']).'</span>';
+            }else if( $row['status_id']==3 ){
+                $status = '<span class="fs-sm text-green"><i class="uil uil-check-circle"></i>'.Lang::get($row['status_key']).'</span>';
+            }else if( $row['status_id']==2 ){
+                $status = '<span class="fs-sm text-blue"><i class="uil uil-check-circle"></i>'.Lang::get($row['status_key']).'</span>';
             }else if( $row['status_key']=='OnAccepted' ){
-                $status_class = 'primary';
                 $status = '<span class="fs-sm text-blue"><i class="uil uil-check-circle"></i>'.$status.'</span>';
-            }else if( $row['status_key']=='OnWaiting' ){
-                $status = '<em class="fs-sm text-yellow"><i class="uil uil-circle"></i>'.$status.'... .. .</em>';
-            }
+            } 
             $htmls .= '<tr class="'.$row['status'].'">';
                 $htmls .= '<td class="no" scope="row">'.$row_no.'</td>';
                 $htmls .= '<td class="date">'.$date_display.'</td>';
@@ -140,12 +145,15 @@
                 $htmls .= '<td class="amount"><font>'.number_format($row['amount'], 2).'฿</font></td>';
                 $htmls .= '<td class="remark"><font>'.$status.'</font></td>';
                 $htmls .= '<td class="actions">';
-                    $htmls .= '<div class="btn-box '.$status_class.'">';
-                        $htmls .= '<button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-'.$status_class.'">';
-                            $htmls .= '<i class="uil uil-file-alt"></i>';
-                        $htmls .= '</button>';
-                        $htmls .= '<small class=b-tip>'.$lang_view.'</small>';
-                    $htmls .= '</div>';
+                if( $row['status_id']>=4 ){
+                    $htmls .= '<div class="btn-box delete"><button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-soft-red"><i class="uil uil-file-alt"></i></button><small class=b-tip>'.$lang_view.'</small></div>';
+                }else if( $row['status_id']==3 ){
+                    $htmls .= '<div class="btn-box green"><button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-soft-green"><i class="uil uil-file-alt"></i></button><small class=b-tip>'.$lang_view.'</small></div>';
+                }else if( $row['status_id']==2 ){
+                    $htmls .= '<div class="btn-box"><button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-soft-primary"><i class="uil uil-file-alt"></i></button><small class=b-tip>'.$lang_view.'</small></div>';
+                }else{
+                    $htmls .= '<div class="btn-box warning"><button onclick="manage_events(\'detail\', { \'id\':\''.$row['id'].'\' });" type="button" class="btn btn-sm btn-circle btn-warning"><i class="uil uil-file-edit-alt"></i></button><small class=b-tip>'.$lang_view.'</small></div>';
+                }
                 $htmls .= '</td>';
             $htmls .= '</tr>';
         }

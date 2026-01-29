@@ -171,9 +171,11 @@
                             <div class="form-floating form-select-wrapper mb-1">
                                 <select name="condition[status]" class="form-select">
                                     <option value="ALL"<?=((!isset($filter['condition']['status'])||$filter['condition']['status']=='ALL')?' selected':null)?>><?=Lang::get('All')?></option>
-                                    <option value="ST1"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST1')?' selected':null)?>><?=Lang::get('OnWaiting')?></option>
-                                    <option value="ST2"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST2')?' selected':null)?>><?=Lang::get('OnAccepted')?></option>
-                                    <option value="ST3"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST3')?' selected':null)?>><?=Lang::get('OnReceived')?></option>
+                                    <option value="ST1"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST1')?' selected':null)?>><?=Lang::get('Waiting')?></option>
+                                    <option value="ST2"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST2')?' selected':null)?>><?=Lang::get('Confirmed')?></option>
+                                    <option value="ST3"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST3')?' selected':null)?>><?=Lang::get('Received')?></option>
+                                    <option value="ST4"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST4')?' selected':null)?>><?=Lang::get('Rejected')?></option>
+                                    <option value="ST5"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST5')?' selected':null)?>><?=Lang::get('Cancelled')?></option>
                                 </select>
                                 <label><?=Lang::get('Status')?></label>
                             </div>
