@@ -137,7 +137,10 @@ class App {
                                     $htmls .= '<a class="nav-link" href="'.APP_HOME.'/shops"><span class="nav-name"><div class="m-box-top"><i class="uil uil-shop"></i></div><div class="m-box"><i class="uil uil-shop"></i></div>'.( (App::lang()=='en') ? 'Shop' : 'ร้านค้า' ).'</span></a>';
                                 $htmls .= '</li>';
                                 $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='stock') ? ' active':null).' dropdown">';
-                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/stock"><span class="nav-name"><div class="m-box-top"><i class="uil uil-money-bill-stack"></i></div><div class="m-box"><i class="uil uil-money-bill-stack"></i></div>'.( (App::lang()=='en') ? 'Stock' : 'คลังสินค้า' ).'</span></a>';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/stock"><span class="nav-name"><div class="m-box-top"><i class="uil uil-create-dashboard"></i></div><div class="m-box"><i class="uil uil-create-dashboard"></i></div>'.( (App::lang()=='en') ? 'Stock' : 'คลังสินค้า' ).'</span></a>';
+                                $htmls .= '</li>';
+                                $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='order') ? ' active':null).' dropdown">';
+                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/order"><span class="nav-name"><div class="m-box-top"><i class="uil uil-basketball-hoop"></i></div><div class="m-box"><i class="uil uil-basketball-hoop"></i></div>'.( (App::lang()=='en') ? 'Order' : 'รายการเบิก' ).'</span></a>';
                                 $htmls .= '</li>';
                             }
                             $htmls .= '</ul>';
