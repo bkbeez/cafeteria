@@ -27,7 +27,7 @@
             if( isset($check['email'])&&$check['email'] ){
                 if( isset($check['shop_id'])&&$check['shop_id'] ){
                     Status::success( Lang::get('Success'), array('shop'=>'Y') );
-                }else if( isset($check['role'])&&$check['role']=='ADMIN' ){
+                }else if( isset($check['role'])&&in_array($check['role'], array('ADMIN','STAFF')) ){
                     if( Auth::login($check['email']) ){
                         // Last Login
                         DB::update("UPDATE `member` SET `date_lastlogin`=NOW() WHERE email=:email;", array('email'=>$check['email']));
