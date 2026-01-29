@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/requests'?>';">
+                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/request'?>';">
                                 <div class="shape rounded bg-soft-blue rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
                                 <div class="card bg-blue">
                                     <div class="card-body">
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/rceipts'?>';">
+                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/rceipt'?>';">
                                 <div class="shape rounded bg-soft-green rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
                                 <div class="card bg-green">
                                     <div class="card-body">
@@ -148,7 +148,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/reports'?>';">
+                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/report'?>';">
                                 <div class="shape rounded bg-soft-purple rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
                                 <div class="card bg-purple">
                                     <div class="card-body">
