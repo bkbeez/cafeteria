@@ -371,10 +371,23 @@ header.custom-wrapper:before {
 .navbar-nav .nav-link-icon:hover {
     padding: 3px;
 }
+.mainsite-dropdown>.nav-item>a>.nav-name,
+.mainsite-dropdown>.nav-item>a>.nav-name {
+    padding-left: 5px;
+    padding-right: 5px;
+}
 .mainsite-dropdown>.nav-item:hover>a>.nav-name,
 .mainsite-dropdown>.nav-item.active>a>.nav-name {
-    text-decoration-line: underline;
+    color: #343f52;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px; 
+    background-color: #f3fafe;
     text-decoration-thickness: 2px;
+}
+.mainsite-dropdown>.nav-item:hover>a>.nav-name>div,
+.mainsite-dropdown>.nav-item.active>a>.nav-name>div {
+    color: white;
 }
 .mainsite-dropdown .nav-item .nav-name .m-box {
     width: 30px;
