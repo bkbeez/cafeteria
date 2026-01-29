@@ -23,6 +23,7 @@
                     WHERE stock.status_id=1;
                     ORDER BY stock.sequence, stock.id;"
     );
+    $index['hidefooter'] = true;
 ?>
 <?php include(APP_HEADER);?>
 <style type="text/css">
