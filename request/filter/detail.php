@@ -34,6 +34,13 @@
         padding-right: 35px;
         padding-bottom: 15px;
     }
+    .modal-dialog .modal-body .bill-label {
+        width: 50px;
+        color:white;
+        text-align: center;
+        background:#343f53;
+        display: inline-block;
+    }
     .modal-dialog .modal-body>.alert {
         padding: 10px 15px 5px 15px;
     }
@@ -149,17 +156,13 @@
             <div class="modal-body">
                 <div class="alert alert-secondary alert-icon mb-2">
                     <div class="row gx-1">
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="form-floating mb-1">
-                                <div class="form-control on-text-display"><?=((isset($data['shop_name'])&&$data['shop_name'])?$data['shop_name']:'-')?></div>
-                                <label><?=Lang::get('Shop')?></label>
-                            </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pb-1">
+                            <mark class="bill-label"><?=Lang::get('Shop')?></mark>
+                            <?=((isset($data['shop_name'])&&$data['shop_name'])?$data['shop_name']:'-')?>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="form-floating">
-                                <input value="<?=((isset($data['request_date'])&&$data['request_date'])?Helper::dateDisplay($data['request_date'], App::lang()):'-')?>" type="text" class="form-control" placeholder="..." disabled style="background:white;">
-                                <label><?=Lang::get('Date')?></label>
-                            </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pb-1">
+                            <mark class="bill-label"><?=Lang::get('Date')?></mark>
+                            <?=((isset($data['request_date'])&&$data['request_date'])?Helper::dateDisplay($data['request_date'], App::lang()):'-')?>
                         </div>
                     </div>
                 </div>

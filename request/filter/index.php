@@ -123,7 +123,7 @@
     <form name="filter" action="<?=$form?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="state" value="loading" />
         <input type="hidden" name="filter_as" value="<?=$filter_as?>" />
-        <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
+        <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image pt-3" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
             <div class="container">
                 <div class="filter-search">
                     <div class="row">
@@ -143,7 +143,6 @@
                                 <label for="keyword"><?=Lang::get('Keyword')?></label>
                                 <button type="submit" class="btn btn-soft-sky btn-search" title="<?=Lang::get('Search')?>"><i class="uil uil-search"></i></button>
                                 <button type="button" class="btn btn-soft-red text-red btn-clear"><i class="uil uil-filter-slash"></i><sup class="fs-10"><?=Lang::get('Clear')?></sup></button>
-                                <button type="button" class="btn btn-primary btn-adding" onclick="manage_events('new', { 'link':'<?=$link?>' });"><i class="uil uil-plus"></i><span> <?=( (App::lang()=='en') ? 'New Request' : 'ขอเบิกใหม่' )?></span></button>
                             </div>
                         </div>
                     </div>
@@ -210,9 +209,7 @@
 <div id="ManageDialog" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="false" aria-modal="true"></div>
 <script type="text/javascript">
     function manage_events(action, params){
-        if(action=='new'){
-            document.location = '<?=APP_HOME?>/request/?new';
-        }else if(action=='detail'){
+        if(action=='detail'){
             params['form_as'] = '<?=$form?>';
             $("#ManageDialog").load("<?=$form?>/filter/detail.php", params, function(response, status, xhr){
                 if(status=="error"){
