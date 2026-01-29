@@ -261,6 +261,7 @@
     }
     .table-filter .filter-search .row>div.filter-keyword {
         width: 75%;
+        padding-left: 10px;
     }
 }
 @media only all and (max-width: 500px) {
