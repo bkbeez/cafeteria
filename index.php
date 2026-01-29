@@ -52,6 +52,7 @@
                 <div class="swiper-container dots-over shadow-lg" data-margin="0" data-autoplay="true" data-autoplaytime="3000" data-nav="true" data-dots="false" data-items="1">
                     <div class="swiper">
                         <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="<?=THEME_IMG?>/slide/photo-0.png" srcset="<?=THEME_IMG?>/slide/photo-0.png 2x" class="rounded" alt="slide-photo" /></div>
                             <div class="swiper-slide"><img src="<?=THEME_IMG?>/slide/photo-1.png" srcset="<?=THEME_IMG?>/slide/photo-1.png 2x" class="rounded" alt="slide-photo" /></div>
                             <div class="swiper-slide"><img src="<?=THEME_IMG?>/slide/photo-2.png" srcset="<?=THEME_IMG?>/slide/photo-2.png 2x" class="rounded" alt="slide-photo" /></div>
                             <div class="swiper-slide"><img src="<?=THEME_IMG?>/slide/photo-3.png" srcset="<?=THEME_IMG?>/slide/photo-3.png 2x" class="rounded" alt="slide-photo" /></div>
