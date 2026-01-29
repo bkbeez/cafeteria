@@ -140,7 +140,19 @@ class App {
                                     $htmls .= '<a class="nav-link" href="'.APP_HOME.'/stock"><span class="nav-name"><div class="m-box-top"><i class="uil uil-create-dashboard"></i></div><div class="m-box"><i class="uil uil-create-dashboard"></i></div>'.( (App::lang()=='en') ? 'Stock' : 'คลังสินค้า' ).'</span></a>';
                                 $htmls .= '</li>';
                                 $htmls .= '<li class="nav-item'.((isset($index['page'])&&$index['page']=='order') ? ' active':null).' dropdown">';
-                                    $htmls .= '<a class="nav-link" href="'.APP_HOME.'/order"><span class="nav-name"><div class="m-box-top"><i class="uil uil-basketball-hoop"></i></div><div class="m-box"><i class="uil uil-basketball-hoop"></i></div>'.( (App::lang()=='en') ? 'Order' : 'รายการเบิก' ).'</span></a>';
+                                    $htmls .= '<a class="nav-link dropdown-toggle'.((isset($index['page'])&&$index['page']=='order') ? ' show':null).'" href="javascript:void(0);" data-bs-toggle="dropdown"'.((isset($index['page'])&&$index['page']=='order') ? ' aria-expanded="true"':null).'><span class="nav-name"><div class="m-box-top"><i class="uil uil-file-copy-alt"></i></div><div class="m-box"><i class="uil uil-file-copy-alt"></i></div>'.( (App::lang()=='en') ? 'Order' : 'รายการเบิก' ).'</span></a>';
+                                    $htmls .= '<ul class="dropdown-menu mainsite-dropdown'.((isset($index['page'])&&$index['page']=='order') ? ' show':null).'">';
+                                        $htmls .= '<li class="nav-item'.((isset($index['view'])&&$index['view']=='lists') ? ' active':null).'">';
+                                            $htmls .= '<a class="dropdown-item" href="'.APP_HOME.'/order/?lists">';
+                                                $htmls .= '<span class="nav-name"><div class="m-box"><i class="uil uil-calendar-alt"></i></div>'.( (App::lang()=='en') ? 'Order Lists' : 'รายการเบิกภาชนะ' ).'</span>';
+                                            $htmls .= '</a>';
+                                        $htmls .= '</li>';
+                                        $htmls .= '<li class="nav-item'.((isset($index['view'])&&$index['view']=='user_register') ? ' active':null).'">';
+                                            $htmls .= '<a class="dropdown-item" href="'.APP_HOME.'/order/?daily">';
+                                                $htmls .= '<span class="nav-name"><div class="m-box"><i class="uil uil-chart"></i></div>'.( (App::lang()=='en') ? 'Daily Order ' : 'สรุปยอดเบิกประจำวัน' ).'</span>';
+                                            $htmls .= '</a>';
+                                        $htmls .= '</li>';
+                                    $htmls .= '</ul>';
                                 $htmls .= '</li>';
                             }
                             $htmls .= '</ul>';
