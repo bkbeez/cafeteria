@@ -1,10 +1,11 @@
 <?php if(!isset($index['page'])||$index['page']!='order'){ header("location:".((isset($_SERVER['SERVER_PORT'])&&$_SERVER['SERVER_PORT']==443)?'https://':'http://').$_SERVER["HTTP_HOST"]); exit(); } ?>
 <?php
+    $index['view'] = 'lists';
     // Filter
-    $filter_as = strtolower($index['page'].'_list_as');
+    $filter_as = strtolower($index['page'].'_'.$index['view'].'_as');
     $filter = ( isset($_SESSION['login']['filter'][$filter_as]) ? $_SESSION['login']['filter'][$filter_as] : null );
     // Footer
-    $filterfooter_as = 'footer-'.$index['page'];
+    $filterfooter_as = 'footer-'.$index['page'].'-'.$index['view'];
     $filterfooter = '<div class="container table-container pb-6">';
         $filterfooter .= '<div id="'.$filterfooter_as.'" class="table-footer">';
             $filterfooter .= '<div class="filter-display"><span class="badge bg-pale-ash text-dark rounded-pill">- '.Lang::get('NotFoundResult').' -</span></div>';
@@ -163,9 +164,11 @@
                             <div class="form-floating form-select-wrapper mb-1">
                                 <select name="condition[status]" class="form-select">
                                     <option value="ALL"<?=((!isset($filter['condition']['status'])||$filter['condition']['status']=='ALL')?' selected':null)?>><?=Lang::get('All')?></option>
-                                    <option value="ST1"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST1')?' selected':null)?>><?=Lang::get('OnWaiting')?></option>
-                                    <option value="ST2"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST2')?' selected':null)?>><?=Lang::get('OnAccepted')?></option>
-                                    <option value="ST3"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST3')?' selected':null)?>><?=Lang::get('OnReceived')?></option>
+                                    <option value="ST1"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST1')?' selected':null)?>><?=Lang::get('Waiting')?></option>
+                                    <option value="ST2"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST2')?' selected':null)?>><?=Lang::get('Confirmed')?></option>
+                                    <option value="ST3"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST3')?' selected':null)?>><?=Lang::get('Received')?></option>
+                                    <option value="ST4"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST4')?' selected':null)?>><?=Lang::get('Rejected')?></option>
+                                    <option value="ST5"<?=((isset($filter['condition']['status'])&&$filter['condition']['status']=='ST5')?' selected':null)?>><?=Lang::get('Cancelled')?></option>
                                 </select>
                                 <label><?=Lang::get('Status')?></label>
                             </div>
@@ -201,7 +204,9 @@
 <div id="ManageDialog" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="false" aria-modal="true"></div>
 <script type="text/javascript">
     function manage_events(action, params){
-        if(action=='detail'){
+        if(action=='check'){
+            document.location = '<?=$form?>/?'+params.id;
+        }else if(action=='detail'){
             params['form_as'] = '<?=$form?>';
             $("#ManageDialog").load("<?=$form?>/filter/detail.php", params, function(response, status, xhr){
                 if(status=="error"){

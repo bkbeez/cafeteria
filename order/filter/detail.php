@@ -198,7 +198,7 @@
                             </tr>
                             <tr>
                                 <td class="name" colspan="2"><?=Lang::get('Requester')?></td>
-                                <td class="amount" colspan="3"><?=User::get('fullname')?></td>
+                                <td class="amount" colspan="3"><?=((isset($data['requester'])&&$data['requester'])?$data['requester']:'-')?></td>
                                 <td class="baht">&nbsp;</td>
                             </tr>
                         </tfoot>
