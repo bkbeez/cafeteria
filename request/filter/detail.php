@@ -205,6 +205,11 @@
                     </table>
                 <?php } ?>
             </div>
+            <div class="modal-footer">
+                <div class="alert alert-primary alert-icon" role="alert">
+                <i class="uil uil-star"></i> A simple primary alert with <a href="#" class="alert-link hover">an example link</a>.
+                </div>
+            </div>
         </div>
     </div>
 </div>
