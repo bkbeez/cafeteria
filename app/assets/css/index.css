@@ -276,17 +276,28 @@ header.custom-wrapper:before {
 }
 #mainsite-navbar .navbar-nav .nav-item .nav-link .nav-name {
     color: white;
+    padding-left: 5px;
+    padding-right: 5px;
     font-family: 'CMU Light';
     border-bottom:2px solid transparent;
 }
 #mainsite-navbar .navbar-nav>.nav-item:hover>.nav-link>.nav-name,
 #mainsite-navbar .navbar-nav>.nav-item.active>.nav-link>.nav-name {
-    text-decoration-line: underline;
+    color: #343f52;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px; 
+    background-color: #f3fafe;
     text-decoration-thickness: 2px;
+}
+#mainsite-navbar .navbar-nav>.nav-item:hover>.nav-link>.nav-name>div,
+#mainsite-navbar .navbar-nav>.nav-item.active>.nav-link>.nav-name>div {
+    color: white;
 }
 #mainsite-navbar .navbar-nav .nav-item .nav-link .nav-name .m-box-top {
     width: 28px;
     float: left;
+    margin-right:-3px;
     font-size: 22px;
     line-height: 28px;
     text-align:center;
