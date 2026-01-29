@@ -26,7 +26,7 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'All'                                      => array('th'=>'ทั้งหมด'
                                                                 ,'en'=>'All'
                                                         )
-            ,'Amount'                                   => array('th'=>'จำนวนเงิน'
+            ,'Amount'                                   => array('th'=>'ยอดเงิน'
                                                                 ,'en'=>'Amount'
                                                         )
             ,'AutoReplyMsg'                             => array('th'=>'ข้อความอัตโนมัติ'
@@ -534,6 +534,9 @@ return array('Accept'                                   => array('th'=>'ยอ�
                                                                 ,'en'=>'Time'
                                                         )
             ,'Total'                                    => array('th'=>'ยอดรวม'
+                                                                ,'en'=>'Total'
+                                                        )
+            ,'TotalAmount'                              => array('th'=>'เป็นเงิน'
                                                                 ,'en'=>'Total'
                                                         )
             ,'Type'                                     => array('th'=>'ประเภท'
