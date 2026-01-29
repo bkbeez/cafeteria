@@ -92,6 +92,7 @@
         padding-right: 25px;
     }
     form[name='ManageForm'] table tbody tr td.quantity>input {
+        padding-left: 0;
         text-align: right;
     }
     form[name='ManageForm'] table tfoot tr td {
@@ -278,7 +279,7 @@
                                                 <td class="quantity">
                                                     <input type="hidden" name="list[<?=$seq?>][stock_id]" value="<?=$item['id']?>"/>
                                                     <input type="hidden" name="list[<?=$seq?>][name]" value="<?=$item['name']?>"/>
-                                                    <input type="number" name="list[<?=$seq?>][quantity]" value="0" min="0" class="form-control set-quantity" placeholder="..." onchange="manage_events('change', { 'at':'<?=$item['id']?>' });"/>
+                                                    <input type="number" name="list[<?=$seq?>][quantity]" value="0" min="0" max="999" step="1" class="form-control set-quantity" placeholder="..." onkeyup="manage_events('change', { 'at':'<?=$item['id']?>' });" onchange="manage_events('change', { 'at':'<?=$item['id']?>' });"/>
                                                     <input type="hidden" name="list[<?=$seq?>][unit]" value="<?=$item['unit']?>" class="set-unit"/>
                                                     <input type="hidden" name="list[<?=$seq?>][price]" value="<?=$item['charge']?>" class="set-price"/>
                                                     <input type="hidden" name="list[<?=$seq?>][amount]" value="0" class="set-amount"/>
@@ -325,6 +326,7 @@
             var price = parseFloat($("form[name='ManageForm'] .AT-"+params.at+" .set-price").val());
             if( !isNaN(price) ){
                 var quantity = parseFloat($("form[name='ManageForm'] .AT-"+params.at+" .set-quantity").val());
+                if( isNaN(quantity) ){ quantity=0; }
                 var amount = quantity*price;
                 $("form[name='ManageForm'] .AT-"+params.at+" .set-amount").val(amount);
                 $("form[name='ManageForm'] .AT-"+params.at+" .amount").html(amount.format(2));
