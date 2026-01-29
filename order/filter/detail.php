@@ -1,5 +1,5 @@
 <?php include($_SERVER["DOCUMENT_ROOT"].'/app/autoload.php'); ?>
-<?php Auth::ajax(APP_PATH.'/admin'); ?>
+<?php Auth::ajax(APP_PATH.'/order'); ?>
 <?php
     $form = ( (isset($_POST['form_as'])&&$_POST['form_as']) ? $_POST['form_as'] : null );
     if( isset($_POST['id'])&&$_POST['id'] ){
@@ -45,7 +45,7 @@
         border-collapse: collapse;
     }
     .modal-dialog .modal-body table .no {
-        width: 50px;
+        width: 40px;
         text-align: center;
     }
     .modal-dialog .modal-body table .name {
@@ -77,7 +77,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        border-bottom:1px solid #f6f6f7;
+        border-bottom:1px solid #343f53;
     }
     .modal-dialog .modal-body table tbody tr td {
         vertical-align: top;
@@ -90,11 +90,10 @@
         border-bottom-color: white;
     }
     .modal-dialog .modal-body table tfoot tr:first-child td{
-        border-top:1px solid #f6f6f7;
+        border-top:1px solid #343f53;
     }
     .modal-dialog .modal-body table tfoot tr td.name {
         text-align: right;
-        padding-right: 20px;
     }
     .modal-dialog .modal-body table tfoot tr td.last {
         padding: 15px 0 0 0;
@@ -126,6 +125,15 @@
         }
         .modal-dialog .modal-body table .baht .baht-sm {
             display: block;
+        }
+    }
+    @media only all and (max-width: 500px) {
+        .modal-dialog .modal-body table .no {
+            width: 20px;
+        }
+        .modal-dialog .modal-body table tfoot tr td.name {
+            text-align: left;
+            padding-left: 3px;
         }
     }
 </style>
@@ -181,15 +189,13 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td class="no"></td>
                                 <td class="name" colspan="2"><?=Lang::get('GrandTotal')?></td>
-                                <td class="amount" colspan="2"><?=((isset($data['amount'])&&$data['amount']>0)?number_format($data['amount'],2):'0.00')?></td>
+                                <td class="amount" colspan="3"><?=((isset($data['amount'])&&$data['amount']>0)?number_format($data['amount'],2):'0.00')?></td>
                                 <td class="baht"><span class="baht-lg"><?=Lang::get('Baht')?></span><span class="baht-sm">฿</span></td>
                             </tr>
                             <tr>
-                                <td class="no"></td>
                                 <td class="name" colspan="2"><?=Lang::get('Requester')?></td>
-                                <td class="amount" colspan="2"><?=User::get('fullname')?></td>
+                                <td class="amount" colspan="3"><?=User::get('fullname')?></td>
                                 <td class="baht">&nbsp;</td>
                             </tr>
                         </tfoot>
