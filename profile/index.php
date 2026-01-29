@@ -136,21 +136,21 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/rceipt'?>';">
-                                <div class="shape rounded bg-soft-green rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
-                                <div class="card bg-green">
+                            <div class="position-relative lift">
+                                <div class="shape rounded bg-soft-ash rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
+                                <div class="card bg-ash">
                                     <div class="card-body">
                                         <i class="uil uil-invoice uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'Receipts' : 'ใบเสร็จรับเงิน' )?></h4>
-                                        <a href="<?=APP_HOME.'/rceipt'?>" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
+                                        <a href="#" class="more hover text-white link-primary"><?=Lang::get('Click')?></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-3">
-                            <div class="position-relative lift" onclick="document.location='<?=APP_HOME.'/report'?>';">
-                                <div class="shape rounded bg-soft-purple rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
-                                <div class="card bg-purple">
+                            <div class="position-relative lift">
+                                <div class="shape rounded bg-soft-ash rellax d-md-block" data-rellax-speed="0" style="bottom:-0.75rem;right:-0.75rem;width:98%;height:98%;z-index:0;transform:translate3d(0px, 0px, 0px);"></div>
+                                <div class="card bg-ash">
                                     <div class="card-body">
                                         <i class="uil uil-chart-pie uil-custom"></i>
                                         <h4 class="text-white"><?=( (App::lang()=='en') ? 'Reports' : 'รายงานสรุป' )?></h4>
