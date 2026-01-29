@@ -106,9 +106,13 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;    
 }
+.table-filter .filter-result .actions .btn-box.green .b-tip {
+    color: #45c4a0;
+    background: #e1f6f0;
+}
 .table-filter .filter-result .actions .btn-box.blue .b-tip {
-    color: white;
-    background: #3f78e0;
+    color: #3f78e0;
+    background: #e0e9fa;
 }
 .table-filter .filter-result .actions .btn-box.warning .b-tip {
     color: #fab758;
