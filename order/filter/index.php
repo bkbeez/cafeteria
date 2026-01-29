@@ -115,7 +115,7 @@
     <form name="filter" action="<?=$form?>/filter/search.php" method="POST" enctype="multipart/form-data" target="_blank">
         <input type="hidden" name="state" value="loading" />
         <input type="hidden" name="filter_as" value="<?=$filter_as?>" />
-        <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
+        <section class="wrapper image-wrapper bg-overlay bg-overlay-400 bg-image pt-3" data-image-src="<?=THEME_IMG?>/bg-blue.jpg">
             <div class="container">
                 <div class="filter-search">
                     <div class="row">
