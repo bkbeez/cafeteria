@@ -103,7 +103,7 @@
     }
     form[name='ManageForm'] table tfoot tr td.name {
         text-align: right;
-        padding-right: 20px;
+        padding-right: 0;
     }
     form[name='ManageForm'] table tfoot tr td.quantity {
         text-align: right;
@@ -150,7 +150,9 @@
             display: none;
         }
         form[name='ManageForm'] table .name mark {
+            color: white;
             display: inline-block;
+            background-color: #0d2987;
         }
         form[name='ManageForm'] table .price {
             width: 40px;
@@ -173,11 +175,15 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
-        form[name='ManageForm'] table thead tr th.quantity,
-        form[name='ManageForm'] table thead tr th.amount {
-            padding-left: 0;
-            padding-right: 0;
+        form[name='ManageForm'] table thead tr th.quantity {
             text-align: center;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        form[name='ManageForm'] table thead tr th.amount {
+            text-align: right;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
         }
         form[name='ManageForm'] table tbody tr td.name {
             padding-top: 0;
@@ -193,6 +199,11 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+        }
+        form[name='ManageForm'] table tfoot tr td.name,
+        form[name='ManageForm'] table tfoot tr td.quantity {
+            text-align: left;
+            padding-left: 5px;
         }
         form[name='ManageForm'] table tfoot tr td.last>i {
             font-size: 16px;
@@ -292,14 +303,14 @@
                                         <tfoot>
                                             <tr>
                                                 <td class="no"></td>
-                                                <td class="name" colspan="2"><?=Lang::get('GrandTotal')?></td>
-                                                <td class="amount total-amount" colspan="2">0.00</td>
+                                                <td class="name"><?=Lang::get('GrandTotal')?></td>
+                                                <td class="amount total-amount" colspan="3">0.00</td>
                                                 <td class="baht"><span class="baht-lg"><?=Lang::get('Baht')?></span><span class="baht-sm">฿</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="no"></td>
-                                                <td class="name" colspan="2"><?=Lang::get('Requester')?></td>
-                                                <td class="amount" colspan="2"><?=User::get('fullname')?></td>
+                                                <td class="name"><?=Lang::get('Requester')?></td>
+                                                <td class="amount" colspan="3"><?=User::get('fullname')?></td>
                                                 <td class="baht last"><i class="uil uil-file-edit-alt"></i></td>
                                             </tr>
                                         </tfoot>

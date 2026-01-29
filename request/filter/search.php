@@ -1,5 +1,5 @@
 <?php include($_SERVER["DOCUMENT_ROOT"].'/app/autoload.php'); ?>
-<?php Auth::ajax(APP_PATH.'/shops'); ?>
+<?php Auth::ajax(APP_PATH.'/request'); ?>
 <?php
     // Init
     $lang = App::lang();
