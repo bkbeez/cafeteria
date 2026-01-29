@@ -449,6 +449,12 @@ return array('Accept'                                   => array('th'=>'ยอ�
             ,'Quantity'                                 => array('th'=>'จำนวน'
                                                                 ,'en'=>'Quantity'
                                                         )
+            ,'QuantityActual'                           => array('th'=>'เบิกจริง'
+                                                                ,'en'=>'Act-Qty.'
+                                                        )
+            ,'QuantityRequest'                          => array('th'=>'ขอเบิก'
+                                                                ,'en'=>'Req-Qty.'
+                                                        )
             ,'Read'                                     => array('th'=>'อ่าน'
                                                                 ,'en'=>'Read'
                                                         )
